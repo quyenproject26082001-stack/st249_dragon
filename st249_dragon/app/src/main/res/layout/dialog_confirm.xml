@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--    flOutSide-->
+    <FrameLayout
+        android:id="@+id/flOutSide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--        layoutMain-->
+        <FrameLayout
+            android:id="@+id/layoutMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/containerDialog"
+                android:layout_width="328dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_dialog_delete_exit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    style="@style/single_marquee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="70dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/copperplategothic_bold"
+                    android:gravity="center"
+                    android:paddingVertical="5dp"
+                    android:text="@string/delete"
+                    android:textColor="@color/app"
+                    android:textSize="28sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <!--            tvDescription-->
+                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                    android:id="@+id/tvDescription"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/copperplategothic_bold"
+                    android:paddingHorizontal="24dp"
+                    android:text="@string/are_you_sure_want_to_delete_this_item"
+                    android:textSize="18sp"
+                    app:outerStrokeWidth="2dp"
+                    android:gravity="center"
+                    app:outerStrokeColor="@color/app"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                    tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="29dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="23dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="30dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDescription">
+
+                    <!--                    btnNo-->
+
+                    <!--                    btnYes-->
+                    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                        android:id="@+id/btnNo"
+                        style="@style/DialogConfirmStrokeText"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/frame_item"
+                        android:text="@string/no"
+                        android:textSize="20sp"
+                        android:paddingVertical="6dp" />
+
+                    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                        android:id="@+id/btnYes"
+                        style="@style/DialogConfirmStrokeText"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/frame_item"
+                        android:text="@string/yes"
+                        android:textSize="20sp"
+                        android:paddingVertical="9dp" />
+                </LinearLayout>
+
+                <!--            ConstraintLayout bọc tvTitle (Bottom)-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content">
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
+</layout>

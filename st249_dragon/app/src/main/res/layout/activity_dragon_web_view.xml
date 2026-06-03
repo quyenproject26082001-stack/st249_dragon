@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dragon_webview.DragonWebViewActivity">
+
+
+    <FrameLayout
+        android:id="@+id/layoutActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <include
+            android:id="@+id/actionBar"
+            layout="@layout/layout_actionbar"/>
+    </FrameLayout>
+
+  <WebView
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toTopOf="@id/lnlBottom"
+      app:layout_constraintTop_toBottomOf="@id/layoutActionBar"
+      android:id="@+id/webView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/lnlBottom"
+        app:layout_constraintEnd_toEndOf="@+id/lnlBottom"
+        app:layout_constraintStart_toStartOf="@+id/lnlBottom"
+        app:layout_constraintTop_toTopOf="@+id/lnlBottom" />
+
+    <!--    lnlBottom-->
+    <LinearLayout
+        android:id="@+id/lnlBottom"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#F1E2AF"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/btnTabHead"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_selected"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:id="@+id/icHead"
+                android:src="@drawable/head" />
+            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/head"
+                android:textColor="@color/app"
+                app:outerStrokeColor="#2B1A00"
+                app:outerStrokeWidth="1dp"
+                android:fontFamily="@font/copperplategothic_bold"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnTabTorso"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_selected"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:id="@+id/icTorso"
+                android:src="@drawable/torso" />
+            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/copperplategothic_bold"
+                android:text="@string/torso"
+                android:textColor="@color/app"
+                app:outerStrokeColor="#2B1A00"
+                app:outerStrokeWidth="1dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnTabLegs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_selected"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:id="@+id/icLegs"
+                android:src="@drawable/legs" />
+            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/legs"
+                android:textColor="@color/app"
+                app:outerStrokeColor="#2B1A00"
+                app:outerStrokeWidth="1dp"
+                android:fontFamily="@font/copperplategothic_bold"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnTabWings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_selected"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:id="@+id/icWings"
+                android:src="@drawable/wing" />
+            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wings"
+                android:textColor="@color/app"
+                app:outerStrokeColor="#2B1A00"
+                app:outerStrokeWidth="1dp"
+                android:fontFamily="@font/copperplategothic_bold"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnTabTail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_selected"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:id="@+id/icTail"
+                android:src="@drawable/tail" />
+            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TAIL"
+                android:textColor="@color/app"
+                app:outerStrokeColor="#2B1A00"
+                app:outerStrokeWidth="1dp"
+                android:fontFamily="@font/copperplategothic_bold"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

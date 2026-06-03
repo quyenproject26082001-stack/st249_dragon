@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dragon Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div id="app">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <button class="top-btn back-btn" id="backBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="top-btn rand-btn" id="topRandBtn"><i class="fas fa-dice"></i></button>
+        <button class="top-btn next-btn" id="nextBtn">NEXT <i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <!-- PREVIEW AREA -->
+    <div class="preview-area">
+        <canvas id="dragonCanvas" width="1500" height="1500"></canvas>
+        <div id="loadingOverlay" class="hidden">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-row">
+        <button class="action-btn random-traits-btn" id="randomTraitsBtn">
+          <p> RANDOM TRAITS</p>
+        </button>
+        <button class="action-btn random-color-btn" id="randomColorBtn">
+        <p>  RANDOM COLOR</p>
+        </button>
+        <button class="action-btn add-btn" id="addBtn">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+
+    <!-- PANEL AREA -->
+    <div class="panel-area">
+        <div id="panelContent" class="panel-content">
+            <!-- Injected dynamically -->
+        </div>
+    </div>
+
+    <!-- BOTTOM TABS -->
+    <nav class="bottom-tabs">
+        <button class="btab active" data-tab="head">
+            <div class="btab-icon">
+                <img src="assets/topbar/head.png" alt="" width="28px" height="28px">
+            </div>
+            <span>HEAD</span>
+        </button>
+        <button class="btab" data-tab="torso">
+            <div class="btab-icon">
+               <img src="assets/topbar/torso.png" alt="" width="28px" height="28px">
+            </div>
+            <span>Torso</span>
+        </button>
+        <button class="btab" data-tab="legs">
+            <div class="btab-icon">
+                  <img src="assets/topbar/legs.png" alt="" width="28px" height="28px">
+            </div>
+            <span>LEGS</span>
+        </button>
+        <button class="btab" data-tab="wings">
+            <div class="btab-icon">
+                <img src="assets/topbar/wing.png" alt="" width="28px" height="28px">
+            </div>
+            <span>WINGS</span>
+        </button>
+        <button class="btab" data-tab="tail">
+            <div class="btab-icon">
+               <img src="assets/topbar/tail.png" alt="" width="28px" height="28px">
+            </div>
+            <span>TAIL</span>
+        </button>
+    </nav>
+
+</div>
+<script src="builder.js"></script>
+</body>
+</html>

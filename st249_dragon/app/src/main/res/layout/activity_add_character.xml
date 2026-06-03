@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app"
+    android:clipChildren="false"
+    android:descendantFocusability="beforeDescendants"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.add_character.AddCharacterActivity">
+
+    <!--    flGetText-->
+    <FrameLayout
+        android:id="@+id/flGetText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:paddingHorizontal="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--        tvGetText-->
+        <TextView
+            android:id="@+id/tvGetText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:maxLength="30"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+    </FrameLayout>
+
+
+    <!--    flActionBar-->
+    <FrameLayout
+        android:id="@+id/flActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/actionBar"
+            layout="@layout/layout_actionbar" />
+    </FrameLayout>
+
+    <!--    flSave-->
+    <FrameLayout
+        android:id="@+id/flSave"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flActionBar">
+
+        <!--        imvBackground-->
+        <ImageView
+            android:id="@+id/imvBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+        <!--        drawView-->
+        <com.female.maker.oc.creator2.core.custom.drawview.DrawView
+            android:id="@+id/drawView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+
+    <!--    flFunction-->
+    <FrameLayout
+        android:id="@+id/flFunction"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:clipChildren="false"
+        app:layout_constraintBottom_toTopOf="@id/lnlBottom"
+        app:layout_constraintTop_toBottomOf="@id/flSave">
+
+        <ImageView
+            android:id="@+id/bg_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/bg_bg" />
+
+        <ImageView
+            android:id="@+id/bg_other"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/bg_bg"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/titleBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="@string/background"
+            android:visibility="gone"
+            android:textColor="#650016"
+            android:textSize="18sp" />
+
+
+        <LinearLayout
+            android:id="@+id/sectionTab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="17dp"
+            android:background="@color/transparent"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <!--                btnBackgroundImage-->
+            <FrameLayout
+                android:id="@+id/btnBackgroundImage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <!--                imvBgImage (nền)-->
+                <ImageView
+                    android:id="@+id/imvBgImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/subTabImage"
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:background="@drawable/un_selected_tab_sub"
+                    android:visibility="gone" />
+
+                <!--                imvFocusImage (nền khi chọn)-->
+                <ImageView
+                    android:id="@+id/imvFocusImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/selected_tab"
+                    android:visibility="visible" />
+
+                <!--                tvBackgroundImage-->
+                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                    android:id="@+id/tvBackgroundImage"
+                    style="@style/single_marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/copperplategothic_bold"
+                    android:gravity="center"
+                    android:text="@string/image"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </FrameLayout>
+
+            <Space
+                android:layout_width="27dp"
+                android:layout_height="match_parent" />
+            <!--                btnBackgroundColor-->
+            <FrameLayout
+                android:id="@+id/btnBackgroundColor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1">
+
+                <!--                imvBgColor (nền)-->
+                <ImageView
+                    android:id="@+id/imvBgColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/subTabColor"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:background="@drawable/un_selected_tab_sub"
+                    android:visibility="gone" />
+
+                <!--                imvFocusColor (nền xanh khi chọn)-->
+                <ImageView
+                    android:id="@+id/imvFocusColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:scaleX="1"
+                    android:src="@drawable/un_selected_tab"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <!--                tvBackgroundColor-->
+                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                    android:id="@+id/tvBackgroundColor"
+                    style="@style/single_marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/copperplategothic_bold"
+                    android:gravity="center"
+                    android:text="@string/color"
+                    android:textColor="#650016"
+                    android:textSize="14sp" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <!--        lnlBackground-->
+        <LinearLayout
+            android:id="@+id/lnlBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="66dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:visibility="gone">
+
+            <!--            rcvBackgroundImage-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvBackgroundImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4.5dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="7.5dp"
+                android:paddingBottom="25dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="5"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_background_image"
+                tools:visibility="visible" />
+
+            <!--            rcvBackgroundColor-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvBackgroundColor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4.5dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="7.5dp"
+                android:paddingBottom="25dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="5"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_background_color"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <!--        lnlSticker-->
+        <LinearLayout
+            android:id="@+id/lnlSticker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="gone">
+            <!-- Title: Sticker -->
+            <TextView
+                android:id="@+id/tvTitleSticker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+
+                android:clipToPadding="false"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="@string/sticker"
+                android:visibility="gone"
+
+                android:textColor="#650016"
+                android:textSize="18sp" />
+
+            <!--            rcvSticker-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvSticker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="11dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="7.5dp"
+
+                android:paddingBottom="22dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="5"
+                tools:listitem="@layout/item_sticker" />
+        </LinearLayout>
+
+        <!--        lnlSpeech-->
+        <LinearLayout
+            android:id="@+id/lnlSpeech"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <!-- Title: Speech Bubbles -->
+            <TextView
+                android:id="@+id/tvTitleSpeech"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/speech_bubbles"
+                android:textColor="#650016"
+                android:textSize="18sp" />
+
+            <!--            rcvSticker-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvSpeech"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="11dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="7.5dp"
+                android:paddingBottom="22dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="5"
+                tools:listitem="@layout/item_sticker" />
+        </LinearLayout>
+
+        <!--        lnlText: wrapper để show/hide cùng nhau -->
+        <FrameLayout
+            android:id="@+id/lnlText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+        <!--        scvText-->
+        <ScrollView
+            android:id="@+id/scvText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:isScrollContainer="true"
+            android:paddingTop="40dp"
+            android:scrollbars="none"
+            tools:visibility="visible"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:orientation="vertical">
+
+
+                <!--            edtText-->
+                <EditText
+                    android:id="@+id/edtText"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_8_solid_white"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/copperplategothic_bold"
+                    android:hint="@string/hello_world"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+
+                    android:maxLength="30"
+                    android:paddingHorizontal="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#868686"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:id="@+id/tvFont"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/fredoka"
+                    android:gravity="start"
+                    android:text="@string/font"
+                    android:textColor="#650016"
+                    android:textSize="16sp" />
+
+                <!--            rcvFont-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="true"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="0.5dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/titleFont"
+                    tools:listitem="@layout/item_font" />
+
+                <TextView
+                    android:id="@+id/tvColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="-16dp"
+                    android:fontFamily="@font/fredoka"
+                    android:gravity="start"
+                    android:text="@string/color"
+                    android:textColor="#650016"
+                    android:textSize="16sp" />
+
+                <!--            rcvTextColor-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvTextColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:clipToPadding="true"
+                    android:paddingHorizontal="0.5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/titleColor"
+                    tools:listitem="@layout/item_text_color" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Title: Text with Done Button – fixed, không cuộn theo scvText -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="top">
+
+            <TextView
+                android:id="@+id/tvText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/fredoka"
+                android:text="@string/text"
+                android:textColor="#650016"
+                android:textSize="16sp" />
+
+            <!--  btnDoneText -->
+            <ImageView
+                android:id="@+id/btnDoneText"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_done_background"
+                app:tint="#650016" />
+        </FrameLayout>
+
+        </FrameLayout>
+        <!-- end lnlText -->
+
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/lnlBottom"
+        app:layout_constraintEnd_toEndOf="@+id/lnlBottom"
+        app:layout_constraintStart_toStartOf="@+id/lnlBottom"
+        app:layout_constraintTop_toTopOf="@+id/lnlBottom" />
+
+    <!--    lnlBottom-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lnlBottom"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginHorizontal="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!--        btnBackground-->
+        <ImageView
+            android:id="@+id/btnBackground"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="63dp"
+            android:src="@drawable/ic_background_selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        btnSticker-->
+        <ImageView
+            android:id="@+id/btnSticker"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_sticker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnSpeech"
+            app:layout_constraintStart_toEndOf="@id/btnBackground"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        btnSpeech-->
+        <ImageView
+            android:id="@+id/btnSpeech"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_speech"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnText"
+            app:layout_constraintStart_toEndOf="@id/btnSticker"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        btnText-->
+        <ImageView
+            android:id="@+id/btnText"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="63dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/blue_app"
+        app:layout_constraintBottom_toTopOf="@id/lnlBottom"
+        app:layout_constraintTop_toBottomOf="@id/flFunction" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <!--    &lt;!&ndash;    flNativeCollab&ndash;&gt;-->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/flNativeCollab"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent">-->
+
+    <!--    </FrameLayout>-->
+
+    <!--    &lt;!&ndash; Custom Input View (1/4 screen height) &ndash;&gt;-->
+    <!--    <include-->
+    <!--        android:id="@+id/customInputLayout"-->
+    <!--        layout="@layout/layout_custom_input"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintHeight_percent="0.25" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
