@@ -79,6 +79,8 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         binding.actionBar.apply {
             setImageActionBar(btnActionBarLeft, R.drawable.ic_back)
             setTextActionBar(tvCenter, getString(R.string.settings))
+            binding.actionBar.spTvCenter.visible()
+
         }
     }
 

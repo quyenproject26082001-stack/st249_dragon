@@ -69,8 +69,8 @@
                     android:text="@string/share"
                     android:gravity="center"
                     app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
-                    android:textColor="@color/white"
+                    app:outerStrokeColor="@color/app1"
+                    android:textColor="@color/app"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -130,8 +130,8 @@
                     android:text="@string/download"
                     android:gravity="center"
                     app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
-                    android:textColor="@color/white"
+                    app:outerStrokeColor="@color/app1"
+                    android:textColor="@color/app"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>

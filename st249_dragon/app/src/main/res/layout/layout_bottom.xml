@@ -173,13 +173,13 @@
                 style="@style/single_marquee"
                 android:layout_gravity="center"
                 android:gravity="center"
-                app:outerStrokeColor="@color/app"
+                app:outerStrokeColor="@color/app1"
                 app:outerStrokeWidth="2dp"
                 android:layout_marginHorizontal="6dp"
                 android:layout_marginStart="14dp"
                 android:fontFamily="@font/copperplategothic_bold"
                 android:text="@string/download"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/app"
                 android:textSize="20sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -224,11 +224,11 @@
                 android:layout_marginStart="14dp"
                 android:fontFamily="@font/copperplategothic_bold"
                 android:text="@string/share"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/app"
                 android:gravity="center"
                 android:layout_gravity="center"
                 app:outerStrokeWidth="2dp"
-                app:outerStrokeColor="@color/app"
+                app:outerStrokeColor="@color/app1"
                 android:textSize="20sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

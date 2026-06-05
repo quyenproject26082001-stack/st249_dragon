@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_app1"
+        android:background="@drawable/bg_home"
         android:scaleType="centerCrop" />
 
     <!--    layoutActionBar-->
@@ -25,188 +25,141 @@
             layout="@layout/layout_actionbar" />
     </FrameLayout>
 
-    <!--    imvAppName-->
-    <ImageView
-        android:id="@+id/imvAppName"
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gLH"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="34dp"
-        android:layout_marginTop="0dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/img_app_name"
-        app:layout_constraintDimensionRatio="292:139"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutActionBar" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".54" />
 
     <!--    scvMain-->
     <ScrollView
         android:id="@+id/scvMain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-10dp"
         android:layout_marginBottom="0dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imvAppName">
+        app:layout_constraintTop_toBottomOf="@id/gLH">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="30dp">
 
-            <!--            glOverStart-->
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glOverStart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="33dp" />
-
-            <!--            glOverEnd-->
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glOverEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.91" />
-
-
-            <ImageView
+            <FrameLayout
                 android:id="@+id/btnMaker"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+                android:layout_height="80dp"
                 android:layout_marginHorizontal="16dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/img_home_1"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:background="@drawable/img_home_1"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!--            tv2-->
+                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                    android:id="@+id/tv1"
+                    style="@style/single_marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:fontFamily="@font/copperplategothic_bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="20dp"
+                    android:text="@string/dragon_custom"
+                    android:textColor="@color/app"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnMaker"
+                    app:layout_constraintEnd_toEndOf="@+id/btnMaker"
+                    app:layout_constraintStart_toStartOf="@id/btnMaker"
+                    app:layout_constraintTop_toTopOf="@+id/btnMaker"
+                    app:outerStrokeColor="@color/app1"
+                    android:shadowColor="@color/app2"
+                    app:outerStrokeWidth="1dp"
+                    android:shadowDy="3"
+                    android:shadowRadius=".1" />
+
+            </FrameLayout>
 
 
-            <ImageView
-                android:id="@+id/btnCustom"
+            <FrameLayout
+                android:id="@+id/btnRandom"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginHorizontal="16dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/img_home_1"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:background="@drawable/img_home_1"
+                app:layout_constraintTop_toBottomOf="@id/btnMaker"
+                >
+
+                <!--            tv2-->
+                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                    android:id="@+id/tv2"
+                    style="@style/single_marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:fontFamily="@font/copperplategothic_bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="20dp"
+                    android:text="@string/random_dragon"
+                    android:textColor="@color/app"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnMaker"
+                    app:layout_constraintEnd_toEndOf="@+id/btnMaker"
+                    app:layout_constraintStart_toStartOf="@id/btnMaker"
+                    app:layout_constraintTop_toTopOf="@+id/btnMaker"
+                    app:outerStrokeColor="@color/app1"
+                    android:shadowColor="@color/app2"
+                    app:outerStrokeWidth="1dp"
+                    android:shadowDy="3"
+                    android:shadowRadius=".1"/>
+
+            </FrameLayout>
 
 
-            <!--            tv2-->
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
-                android:id="@+id/tv1"
-                style="@style/single_marquee"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="80dp"
-                app:layout_constraintVertical_bias=".6"
-                android:fontFamily="@font/copperplategothic_bold"
-                android:gravity="center"
-                android:paddingHorizontal="20dp"
-                android:text="@string/school_girl_maker"
-                android:textColor="#ffffff"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@+id/btnMaker"
-                app:layout_constraintEnd_toEndOf="@+id/btnMaker"
-                app:layout_constraintStart_toStartOf="@id/btnMaker"
-                app:layout_constraintTop_toTopOf="@+id/btnMaker"
-                app:outerStrokeColor="@color/app"
-                app:outerStrokeWidth="2dp" />
-
-
-            <ImageView
-                android:id="@+id/btnQuickMaker"
+            <FrameLayout
+                android:id="@+id/btnMyCreation"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="24dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/img_home_2"
-                app:layout_constraintTop_toBottomOf="@id/btnMaker" />
+                android:background="@drawable/img_home_1"
+                app:layout_constraintTop_toBottomOf="@id/btnRandom"
+                >
 
+                <!--            tv2-->
+                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                    android:id="@+id/tv3"
+                    style="@style/single_marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:fontFamily="@font/copperplategothic_bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="20dp"
+                    android:text="@string/my_creation"
+                    android:textColor="@color/app"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnMaker"
+                    app:layout_constraintEnd_toEndOf="@+id/btnMaker"
+                    app:layout_constraintStart_toStartOf="@id/btnMaker"
+                    app:layout_constraintTop_toTopOf="@+id/btnMaker"
+                    app:outerStrokeColor="@color/app1"
+                    android:shadowColor="@color/app2"
+                    app:outerStrokeWidth="1dp"
+                    android:shadowDy="3"
+                    android:shadowRadius=".1" />
 
-            <!--            tv2-->
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
-                android:id="@+id/tvQuickMake"
-                style="@style/single_marquee"
-                android:layout_width="0dp"
-                app:layout_constraintVertical_bias=".6"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/copperplategothic_bold"
-                android:gravity="center"
-                android:paddingHorizontal="20dp"
-                android:text="@string/trending_school_girl"
-                android:textColor="#ffffff"
-                android:textSize="24sp"
-                app:outerStrokeColor="@color/app"
-                app:outerStrokeWidth="2dp"
-                app:layout_constraintBottom_toBottomOf="@id/btnQuickMaker"
-                app:layout_constraintEnd_toEndOf="@+id/btnQuickMaker"
-                app:layout_constraintStart_toStartOf="@id/btnQuickMaker"
-                app:layout_constraintTop_toTopOf="@id/btnQuickMaker" />
+            </FrameLayout>
 
-
-
-
-
-            <ImageView
-                android:id="@+id/btnMyWork"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="24dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/img_home_3"
-                app:layout_constraintDimensionRatio="328:112"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/glCenter"
-                app:layout_constraintTop_toBottomOf="@id/btnQuickMaker" />
-
-
-            <!--            tv2-->
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
-                android:id="@+id/tvMyWork"
-                style="@style/single_marquee"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                app:layout_constraintVertical_bias=".6"
-                android:layout_marginEnd="90dp"
-                android:fontFamily="@font/copperplategothic_bold"
-                android:gravity="center"
-                android:paddingHorizontal="20dp"
-                android:text="@string/my_work"
-                android:textColor="#ffffff"
-                android:textSize="24sp"
-                app:outerStrokeColor="@color/app"
-                app:outerStrokeWidth="2dp"
-                app:layout_constraintBottom_toBottomOf="@id/btnMyWork"
-                app:layout_constraintEnd_toEndOf="@+id/glOverEnd"
-                app:layout_constraintStart_toStartOf="@id/btnMyWork"
-                app:layout_constraintTop_toTopOf="@id/btnMyWork" />
-
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glCenter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glCenterRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.35" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

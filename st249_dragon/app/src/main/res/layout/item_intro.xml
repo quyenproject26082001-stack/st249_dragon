@@ -14,7 +14,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/img_intro_1" />
 
-    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvContent"
         android:layout_width="match_parent"
         android:layout_height="68sp"
@@ -24,7 +24,11 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:outerStrokeColor="@color/app"
-        app:outerStrokeWidth="2dp"
+        app:outerStrokeColor="@color/app1"
+        android:shadowColor="@color/app2"
+        app:outerStrokeWidth="1dp"
+        android:shadowDy="3"
+        android:shadowRadius=".1"
+
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

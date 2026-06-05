@@ -25,6 +25,7 @@ import com.female.maker.oc.creator2.core.extensions.setImageActionBar
 import com.female.maker.oc.creator2.core.extensions.setTextActionBar
 import com.female.maker.oc.creator2.core.extensions.showInterAll
 import com.female.maker.oc.creator2.core.extensions.tap
+import com.female.maker.oc.creator2.core.extensions.visible
 import com.female.maker.oc.creator2.core.helper.InternetHelper
 import com.female.maker.oc.creator2.core.helper.MediaHelper
 import com.female.maker.oc.creator2.core.utils.key.IntentKey
@@ -90,6 +91,8 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
             setImageActionBar(btnActionBarLeft, R.drawable.ic_back)
             setTextActionBar(tvCenter, getString(R.string.random_bag))
             tvCenter.isSelected = true
+            binding.actionBar.spTvCenter.visible()
+
 
 
         }

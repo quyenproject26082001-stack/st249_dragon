@@ -91,7 +91,7 @@
             <LinearLayout
                 android:id="@+id/btnLang"
                 android:layout_width="match_parent"
-                android:layout_height="59dp"
+                android:layout_height="64dp"
                 android:background="@drawable/bg_item_settings"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -119,9 +119,9 @@
                     android:fontFamily="@font/copperplategothic_bold"
                     android:gravity="center_vertical"
                     android:text="@string/language"
-                    android:textColor="@color/white"
+                    android:textColor="@color/app"
                     app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
+                    app:outerStrokeColor="@color/app1"
                     android:textSize="20sp" />
                 <TextView
                     android:layout_width="24dp"
@@ -139,7 +139,7 @@
             <LinearLayout
                 android:id="@+id/btnRate"
                 android:layout_width="match_parent"
-                android:layout_height="59dp"
+                android:layout_height="64dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_item_settings"
                 android:gravity="center_vertical"
@@ -168,9 +168,9 @@
                     android:fontFamily="@font/copperplategothic_bold"
                     android:gravity="center_vertical"
                     android:text="@string/rate_us"
-                    android:textColor="@color/white"
+                    android:textColor="@color/app"
                     app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
+                    app:outerStrokeColor="@color/app1"
                     android:textSize="20sp" />
                 <TextView
                     android:layout_width="24dp"
@@ -188,7 +188,7 @@
             <LinearLayout
                 android:id="@+id/btnShareApp"
                 android:layout_width="match_parent"
-                android:layout_height="59dp"
+                android:layout_height="64dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_item_settings"
                 android:gravity="center_vertical"
@@ -217,9 +217,9 @@
                     android:fontFamily="@font/copperplategothic_bold"
                     android:gravity="center_vertical"
                     android:text="@string/share_app"
-                    android:textColor="@color/white"
+                    android:textColor="@color/app"
                     app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
+                    app:outerStrokeColor="@color/app1"
                     android:textSize="20sp" />
                 <TextView
                     android:layout_width="24dp"
@@ -235,7 +235,7 @@
             <LinearLayout
                 android:id="@+id/btnPolicy"
                 android:layout_width="match_parent"
-                android:layout_height="59dp"
+                android:layout_height="64dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_item_settings"
                 android:gravity="center_vertical"
@@ -261,9 +261,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_weight="8"
-                    android:textColor="@color/white"
+                    android:textColor="@color/app"
                     app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
+                    app:outerStrokeColor="@color/app1"
                     android:textSize="20sp"
                     android:fontFamily="@font/copperplategothic_bold"
                     android:gravity="center_vertical"

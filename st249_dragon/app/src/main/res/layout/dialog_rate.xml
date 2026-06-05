@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:background="@drawable/bg_16_solid_white">
+            android:background="@drawable/bg_rate">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imvAvtRate"
@@ -32,7 +32,7 @@
                 android:freezesText="true"
                 android:gravity="center"
                 android:text="@string/zero_star_title"
-                android:textColor="@color/app"
+                android:textColor="#2B1A00"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btnVote"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="20dp"
                     app:cardCornerRadius="8dp"
                     app:cardBackgroundColor="@color/transparent"
@@ -118,7 +118,7 @@
                     android:text="@string/exit"
                     android:layout_marginTop="-5dp"
                     android:textAllCaps="false"
-                    android:textColor="@color/app"
+                    android:textColor="#2B1A00"
                     android:textSize="16sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

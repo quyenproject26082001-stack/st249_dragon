@@ -52,10 +52,13 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                         languageAdapter.isFirstLanguage = isFirst
                         if (isFirst) {
                             binding.actionBar.tvStart.visible()
+                            binding.actionBar.spTvStart.visible()
 
                         } else {
                             binding.actionBar.btnActionBarLeft.visible()
                             binding.actionBar.tvCenter.visible()
+                            binding.actionBar.spTvCenter.visible()
+
 
                         }
                     }

@@ -2,6 +2,8 @@
 <resources>
     <color name="white">#FFFFFFFF</color>
     <color name="app">#FFD700</color>
+    <color name="app1">#2B1A00</color>
+    <color name="app2">#5C2316</color>
     <color name="black">#000000</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="orange_F6">#F68300</color>

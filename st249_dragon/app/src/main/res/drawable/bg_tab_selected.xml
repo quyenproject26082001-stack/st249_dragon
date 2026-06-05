@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="true"
-        android:drawable="@drawable/ic_select_cus"/>
-    <item android:drawable="@color/transparent"/>
+    <item android:state_selected="true">
+        <layer-list>
+            <item
+                android:width="72dp"
+                android:height="62dp"
+                android:gravity="center"
+
+                android:drawable="@drawable/ic_select_cus"
+                />
+        </layer-list>
+    </item>
+    <item
+        android:drawable="@color/transparent"/>
 </selector>

@@ -10,9 +10,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
         android:background="@drawable/bg_app"
- />
+        android:scaleType="centerCrop" />
 
     <!-- layoutActionBar -->
     <FrameLayout
@@ -29,12 +28,13 @@
     <!-- imgPermission -->
     <ImageView
         android:id="@+id/imgPermission"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
-        android:layout_marginStart="0dp"
         android:src="@drawable/img_permission"
+        app:layout_constraintDimensionRatio="360:247"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutActionBar" />
@@ -45,15 +45,15 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginHorizontal="27dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="-5dp"
+        android:fontFamily="@font/londrina_solid_regular"
         android:gravity="center"
         android:orientation="vertical"
-        android:fontFamily="@font/londrina_solid_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgPermission">
 
-        <com.female.maker.oc.creator2.core.custom.text.StrokeTextView
+        <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
             android:id="@+id/txtPer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -61,14 +61,19 @@
             android:fontFamily="@font/copperplategothic_bold"
             android:gravity="center"
             android:paddingHorizontal="10dp"
-            tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            android:textSize="16sp"
             android:textColor="@android:color/white"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9"
+            app:outerStrokeColor="@color/app1"
+            android:shadowColor="@color/app2"
+            app:outerStrokeWidth="1dp"
+            android:shadowDy="3"
+            android:shadowRadius=".1"
+            tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- scvButton -->
@@ -88,41 +93,45 @@
             android:orientation="vertical">
 
             <!-- btnStorage-->
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btnStorage"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="64dp"
                 android:background="@drawable/bg_frame_per">
 
                 <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/copperplategothic_bold"
                     android:gravity="start"
                     android:text="@string/storage"
-                    android:textColor="@color/white"
-                    app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
-                    android:textSize="20sp" />
+                    android:textColor="@color/app"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:outerStrokeColor="@color/app1"
+                    app:outerStrokeWidth="2dp" />
 
                 <ImageView
                     android:id="@+id/swPermission"
-                    android:layout_width="52dp"
+                    android:layout_width="58dp"
                     android:layout_height="32dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginVertical="15dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/ic_sw_off" />
-            </RelativeLayout>
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/ic_sw_off"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- btnNotification-->
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btnNotification"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="64dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_frame_per">
 
@@ -131,55 +140,63 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:fontFamily="@font/copperplategothic_bold"
                     android:gravity="start"
                     android:text="@string/notification"
-                    android:textColor="@color/white"
-                    app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
-                    android:textSize="20sp" />
+                    android:textColor="@color/app"
+                    android:textSize="20sp"
+                    app:outerStrokeColor="@color/app1"
+                    app:outerStrokeWidth="2dp" />
 
                 <ImageView
                     android:id="@+id/swNotification"
                     android:layout_width="52dp"
                     android:layout_height="32dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginVertical="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginEnd="25dp"
                     android:src="@drawable/ic_sw_on" />
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
     <!-- tvContinue -->
-    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="190dp"
         android:fontFamily="@font/copperplategothic_bold"
         android:gravity="center"
         android:text="@string/continue_per"
-        android:textColor="#650016"
-        android:textSize="18sp"
-        app:outerStrokeColor="@color/white"
-        app:outerStrokeWidth="2dp"
-        android:layout_marginBottom="190dp"
+        android:textColor="@color/app"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:outerStrokeColor="@color/app1"
+        android:shadowColor="@color/app2"
+        app:outerStrokeWidth="1dp"
+        android:shadowDy="3"
+        android:shadowRadius=".1" />
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/native_ads"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent">-->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/native_ads"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent">-->
 
-<!--        <include layout="@layout/ads_native_big_btn_bottom_shimmer" />-->
+    <!--        <include layout="@layout/ads_native_big_btn_bottom_shimmer" />-->
 
-<!--    </FrameLayout>-->
+    <!--    </FrameLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

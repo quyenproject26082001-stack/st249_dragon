@@ -9,6 +9,22 @@
     </attr>
     <attr name="strokeMiter" format="dimension" />
 
+    <!-- ==================== OUTER STROKE TEXT VIEW ==================== -->
+    <declare-styleable name="OuterStrokeTextView" >
+        <attr name="outerStrokeColor" />
+        <attr name="outerStrokeWidth" />
+        <attr name="outerStrokeJoinStyle" />
+    </declare-styleable>
+
+    <!-- Outer stroke attributes -->
+    <attr name="outerStrokeColor" format="color" />
+    <attr name="outerStrokeWidth" format="dimension" />
+    <attr name="outerStrokeJoinStyle">
+        <enum name="miter" value="0" />
+        <enum name="bevel" value="1" />
+        <enum name="round" value="2" />
+    </attr>
+
     <!-- Single Stroke -->
     <declare-styleable name="StrokeTextView">
         <attr name="strokeWidth" format="dimension" />
@@ -27,8 +43,8 @@
 
     <!-- Double Stroke -->
     <declare-styleable name="DoubleStrokeTextView">
-        <attr name="outerStrokeColor" format="color" />
-        <attr name="outerStrokeWidth" format="dimension" />
+        <attr name="outerStrokeColor" />
+        <attr name="outerStrokeWidth" />
         <attr name="innerStrokeColor" format="color" />
         <attr name="innerStrokeWidth" format="dimension" />
         <attr name="strokeJoinStyle" />

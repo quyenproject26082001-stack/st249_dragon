@@ -51,21 +51,21 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         deleteTempFolder()
         binding.tv1.isSelected = true
       //  binding.tvTrending.isSelected = true
-        binding.tvMyWork.isSelected = true
-        binding.tvQuickMake.isSelected = true
+        binding.tv3.isSelected = true
+        binding.tv2.isSelected = true
 
-        // Apply elastic bounce animation to app name
-        val elasticBounce = AnimationUtils.loadAnimation(this, R.anim.elastic_bounce)
-        binding.imvAppName.startAnimation(elasticBounce)
+//        // Apply elastic bounce animation to app name
+//        val elasticBounce = AnimationUtils.loadAnimation(this, R.anim.elastic_bounce)
+//        binding.imvAppName.startAnimation(elasticBounce)
     }
 
     override fun viewListener() {
         binding.apply {
             actionBar.btnActionBarRight.tap(800) { startIntentRightToLeft(SettingsActivity::class.java) }
-            btnMaker.tap(800) { checkDataInternet(this@HomeActivity){ startIntentRightToLeft(ChooseCharacterActivity::class.java) }}
-            btnCustom.tap(2000){ startIntentRightToLeft(DragonWebViewActivity::class.java)}
-            btnMyWork.tap(800) { showInterAll { startIntentRightToLeft(MyCreationActivity::class.java) } }
-           btnQuickMaker.tap(800) { checkDataInternet(this@HomeActivity){showInterAll {startIntentRightToLeft(RandomCharacterActivity::class.java) }}}
+            //btnMaker.tap(800) { checkDataInternet(this@HomeActivity){ startIntentRightToLeft(ChooseCharacterActivity::class.java) }}
+            btnMaker.tap(2000){ startIntentRightToLeft(DragonWebViewActivity::class.java)}
+            btnMyCreation.tap(800) { showInterAll { startIntentRightToLeft(MyCreationActivity::class.java) } }
+           btnRandom.tap(800) { checkDataInternet(this@HomeActivity){showInterAll {startIntentRightToLeft(RandomCharacterActivity::class.java) }}}
 
         }
     }
@@ -117,9 +117,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     private fun updateText() {
         binding.apply {
-            tv1.text = strings(R.string.school_girl_maker)
-            tvMyWork.text = strings(R.string.my_work)
-            tvQuickMake.text = strings(R.string.trending_school_girl)
+            tv1.text = strings(R.string.dragon_custom)
+            tv3.text = strings(R.string.my_creation)
+            tv2.text = strings(R.string.random_dragon)
 
         }
     }
@@ -171,16 +171,16 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
         // Card 2: Slide from left (200ms delay)
         val slideFromLeft = AnimationUtils.loadAnimation(this, R.anim.slide_in_left_home)
-        binding.btnQuickMaker.postDelayed({
-            binding.btnQuickMaker.startAnimation(slideFromLeft)
-            binding.tvQuickMake.startAnimation(slideFromLeft)
+        binding.btnRandom.postDelayed({
+            binding.btnRandom.startAnimation(slideFromLeft)
+            binding.tv2.startAnimation(slideFromLeft)
         }, 200)
 
         // Card 3: Slide from right (400ms delay)
         val slideFromRight2 = AnimationUtils.loadAnimation(this, R.anim.slide_in_right_home)
-        binding.btnMyWork.postDelayed({
-            binding.btnMyWork.startAnimation(slideFromRight2)
-            binding.tvMyWork.startAnimation(slideFromRight2)
+        binding.btnMyCreation.postDelayed({
+            binding.btnMyCreation.startAnimation(slideFromRight2)
+            binding.tv3.startAnimation(slideFromRight2)
         }, 400)
 
     }

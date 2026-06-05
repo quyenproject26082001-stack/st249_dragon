@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        app:dotsColor="#FFFFFF"
+        app:dotsColor="#B0B5BD"
         app:dotsCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:dotsSize="10dp"
@@ -47,7 +47,7 @@
         app:selectedDotColor="@color/app" />
 
     <!--    btnNext-->
-    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,9 +56,12 @@
         android:padding="3dp"
         android:layout_marginBottom="150dp"
         android:text="@string/next"
-        android:textColor="#650016"
-        app:outerStrokeWidth="2dp"
-        app:outerStrokeColor="@color/white"
+        android:textColor="@color/app"
+        app:outerStrokeColor="@color/app1"
+        android:shadowColor="@color/app2"
+        app:outerStrokeWidth="1dp"
+        android:shadowDy="3"
+        android:shadowRadius=".1"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

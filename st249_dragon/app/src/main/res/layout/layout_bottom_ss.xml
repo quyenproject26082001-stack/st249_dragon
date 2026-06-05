@@ -65,10 +65,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="6dp"
                     android:fontFamily="@font/copperplategothic_bold"
-                    app:outerStrokeColor="@color/app"
+                    app:outerStrokeColor="@color/app1"
                     app:outerStrokeWidth="2dp"
-                    android:text="@string/my_work"
-                    android:textColor="@color/white"
+                    android:text="@string/my_creation"
+                    android:textColor="@color/app"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -126,8 +126,8 @@
                     android:fontFamily="@font/copperplategothic_bold"
                     android:text="@string/download"
                     app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
-                    android:textColor="@color/white"
+                    app:outerStrokeColor="@color/app1"
+                    android:textColor="@color/app"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>

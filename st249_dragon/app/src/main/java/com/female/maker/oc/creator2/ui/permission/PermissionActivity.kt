@@ -56,10 +56,12 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>() {
         binding.actionBar.tvCenter.select()
         val textRes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) R.string.to_access_13 else R.string.to_access
 
+        binding.actionBar.spTvStart.visible()
+
         binding.txtPer.text = "${getString(R.string.allow)} ${getString(R.string.app_name)} ${getString(textRes)}"
 
         val strokePx = resources.displayMetrics.density * 1f
-        binding.txtPer.setOuterStroke(strokePx, getColor(R.color.app))
+        //binding.txtPer.setDoubleStroke(R.color.app1, getColor(R.color.app))
     }
 
     override fun viewListener() {

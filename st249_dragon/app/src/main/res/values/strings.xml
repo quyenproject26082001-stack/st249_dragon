@@ -3,7 +3,6 @@
 
     <string name="app_name" translatable="false">School Girl Creator 2</string>
 
-
     <string name="go_to_setting_message">The app needs this permission</string>
     <string name="settings">Setting</string>
     <string name="this_action_can_contain_ads">This action can contain ads</string>
@@ -11,9 +10,9 @@
     <string name="next">Next</string>
     <string name="language">\u000aLanguage\u000a</string>
 
-    <string name="title_1">Create your perfect school girl!</string>
-    <string name="title_2">Cute outfits, endless styles!</string>
-    <string name="title_3">Endless fashion combinations await!</string>
+    <string name="title_1">Create Your Masterpiece Dragon OC</string>
+    <string name="title_2">Experiment With Rare \nColors &amp; Glows</string>
+    <string name="title_3">Personalize Every Detail From \nHorn To Tail</string>
 
     <string name="permission">Permission</string>
     <string name="storage">Storage</string>
@@ -187,4 +186,13 @@
     <string name="torso">TORSO</string>
     <string name="legs">LEGS</string>
     <string name="wings">WINGS</string>
+    <string name="dragon_custom">Dragon Custom</string>
+    <string name="random_dragon">Random Dragon</string>
+    <string name="my_dragon">My Dragon</string>
+    <string name="random_traits">Random Traits</string>
+    <string name="random_color">Random Color</string>
+    <string name="describe">Describe</string>
+    <string name="bg">BG</string>
+    <string name="power">Power</string>
+    <string name="name_tag">Name Tag</string>
 </resources>

@@ -183,4 +183,13 @@
     <string name="torso">TORSO</string>
     <string name="legs">LEGS</string>
     <string name="wings">WINGS</string>
+    <string name="dragon_custom">Dragon Custom</string>
+    <string name="random_dragon">Random Dragon</string>
+    <string name="my_dragon">My Dragon</string>
+    <string name="random_traits">Random Traits</string>
+    <string name="random_color">Random Color</string>
+    <string name="describe">Describe</string>
+    <string name="bg">BG</string>
+    <string name="power">Power</string>
+    <string name="name_tag">Name Tag</string>
 </resources>

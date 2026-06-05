@@ -117,6 +117,8 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding>() {
             setTextActionBar(tvCenter, getString(R.string.successfully))
             setImageActionBar(btnActionBarLeft, R.drawable.ic_back)
             tvCenter.visible()
+            binding.actionBar.spTvCenter.visible()
+
             imgCenter.gone()
                 setImageActionBar(btnActionBarNextRight, R.drawable.ic_home)
             setImageActionBar(btnActionBarRight,R.drawable.ic_share)

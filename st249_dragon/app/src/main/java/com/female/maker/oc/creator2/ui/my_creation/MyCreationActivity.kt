@@ -22,6 +22,7 @@ import com.lvt.ads.util.Admob
 import com.female.maker.oc.creator2.R
 import com.female.maker.oc.creator2.core.base.BaseActivity
 import com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+import com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
 import com.female.maker.oc.creator2.core.extensions.checkPermissions
 import com.female.maker.oc.creator2.core.extensions.goToSettings
 import com.female.maker.oc.creator2.core.extensions.gone
@@ -313,6 +314,8 @@ class MyCreationActivity : WhatsappSharingActivity<ActivityAlbumBinding>() {
             setImageActionBar(btnActionBarLeft, R.drawable.ic_back)
             setTextActionBar(tvCenter, getString(R.string.my_work))
             tvCenter.select()
+            binding.actionBar.spTvCenter.visible()
+
 
             // Select All button (btnActionBarRight) - resize to 24dp for select all icons
             val size24dp = (28 * resources.displayMetrics.density).toInt()
@@ -590,24 +593,26 @@ class MyCreationActivity : WhatsappSharingActivity<ActivityAlbumBinding>() {
         }
     }
 
-    private fun setupSelectedTab(textView: DoubleStrokeTextView) {
-        textView.setTextColor(Color.WHITE)
+    private fun setupSelectedTab(textView: OuterStrokeTextView) {
+        textView.setTextColor(getResources().getColor(R.color.app))
         textView.setDoubleStroke(
-            outerColor = getColor(R.color.app),
+            outerColor = getColor(R.color.app1),
             outerWidth = resources.displayMetrics.density,
             innerColor = Color.TRANSPARENT,
             innerWidth = 0f
         )
+        textView.setShadow(radius = 0.1f, dy = 3f, color = getColor(R.color.app2))
     }
 
-    private fun setupUnselectedTab(textView: DoubleStrokeTextView) {
-        textView.setTextColor(getColor(R.color.app))
+    private fun setupUnselectedTab(textView: OuterStrokeTextView) {
+        textView.setTextColor(getColor(R.color.white))
         textView.setDoubleStroke(
-            outerColor = Color.TRANSPARENT,
-            outerWidth = 0f,
+            outerColor = getColor(R.color.app1),
+            outerWidth = resources.displayMetrics.density,
             innerColor = Color.TRANSPARENT,
             innerWidth = 0f
         )
+        textView.setShadow(radius = 0.1f, dy = 3f, color = getColor(R.color.app2))
     }
 
     // Public method to update select all icon based on selection state
