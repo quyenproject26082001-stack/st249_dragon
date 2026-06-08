@@ -147,26 +147,19 @@
                 />
 
 
-            <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⚔️ ATK/ ?"
-                app:layout_constraintTop_toBottomOf="@id/icLine"
-                android:textColor="@color/white"
-                android:shadowRadius=".1"
-                android:shadowDy="3"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias=".3"
-                android:fontFamily="@font/copperplategothic_bold"
-                app:outerStrokeColor="@color/app1"
-                app:outerStrokeWidth=".5dp"/>
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_atk"
+                app:layout_constraintTop_toTopOf="@id/tvAtk"
+                app:layout_constraintBottom_toBottomOf="@id/tvAtk"
+                app:layout_constraintEnd_toStartOf="@+id/tvAtk"
+                />
 
             <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🛡 ATK/ ?"
+                android:text="ATK/ ?"
                 app:layout_constraintTop_toBottomOf="@id/icLine"
                 android:textColor="@color/white"
                 android:shadowRadius=".1"
@@ -177,7 +170,36 @@
                 app:layout_constraintHorizontal_bias=".3"
                 android:fontFamily="@font/copperplategothic_bold"
                 app:outerStrokeColor="@color/app1"
-                app:outerStrokeWidth=".5dp"/>
+                app:outerStrokeWidth=".5dp"
+                android:id="@+id/tvAtk"
+                />
+
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_def"
+                app:layout_constraintTop_toTopOf="@id/tvDef"
+                app:layout_constraintBottom_toBottomOf="@id/tvDef"
+                app:layout_constraintEnd_toStartOf="@+id/tvDef"
+                />
+            <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEF/ ?"
+                app:layout_constraintTop_toBottomOf="@id/icLine"
+                android:textColor="@color/white"
+                android:shadowRadius=".1"
+                android:shadowDy="3"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias=".8"
+                android:fontFamily="@font/copperplategothic_bold"
+                app:outerStrokeColor="@color/app1"
+                app:outerStrokeWidth=".5dp"
+                android:id="@+id/tvDef"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
