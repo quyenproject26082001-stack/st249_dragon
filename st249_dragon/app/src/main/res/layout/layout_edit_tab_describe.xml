@@ -2,14 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lnlText"
+    android:id="@+id/lnlDescribe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone"
+    android:background="@drawable/bg_layout_bottom"
     tools:visibility="visible">
 
     <ScrollView
-        android:id="@+id/scvText"
+        android:id="@+id/scvDescribe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
@@ -26,7 +27,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/edtText"
+                android:id="@+id/edtDescribe"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginHorizontal="16dp"
@@ -34,30 +35,33 @@
                 android:background="@drawable/bg_8_solid_white"
                 android:ellipsize="end"
                 android:fontFamily="@font/copperplategothic_bold"
-                android:hint="@string/hello_world"
+                android:hint="@string/type_your_content"
                 android:imeOptions="actionDone"
-                android:inputType="text"
-                android:maxLength="30"
+                android:inputType="textMultiLine"
+                android:maxLength="130"
                 android:paddingHorizontal="16dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#868686"
                 android:textSize="12sp" />
 
-            <TextView
+            <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                 android:id="@+id/tvFont"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/fredoka"
+                android:fontFamily="@font/copperplategothic_bold"
                 android:gravity="start"
                 android:text="@string/font"
-                android:textColor="#650016"
+                app:outerStrokeColor="@color/app1"
+                app:outerStrokeWidth=".6dp"
+                android:shadowColor="@color/app2"
+                android:textColor="@color/app"
                 android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcvFont"
+                android:id="@+id/rcvDescribeFont"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="10dp"
@@ -70,20 +74,25 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_font" />
 
-            <TextView
+            <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                 android:id="@+id/tvColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="-16dp"
-                android:fontFamily="@font/fredoka"
+                android:fontFamily="@font/copperplategothic_bold"
                 android:gravity="start"
-                android:text="@string/color"
-                android:textColor="#650016"
+                android:text="@string/choose_color"
+                app:outerStrokeColor="@color/app1"
+                app:outerStrokeWidth=".6dp"
+                android:shadowColor="@color/app2"
+                android:textColor="@color/app"
+                android:shadowDy="3"
+                android:shadowRadius=".1"
                 android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcvTextColor"
+                android:id="@+id/rcvDescribeTextColor"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:layout_marginVertical="10dp"
@@ -108,25 +117,32 @@
         android:layout_gravity="top"
         android:layout_marginTop="10dp">
 
-        <TextView
+        <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
             android:id="@+id/tvText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/fredoka"
-            android:text="@string/text"
-            android:textColor="#650016"
-            android:textSize="16sp" />
+            android:fontFamily="@font/copperplategothic_bold"
+            android:text="@string/describe"
+            app:outerStrokeColor="@color/app1"
+            app:outerStrokeWidth=".6dp"
+            android:shadowColor="@color/app2"
+            android:textColor="@color/app"
+            android:shadowDy="3"
+            android:shadowRadius=".1"
+            android:textSize="16sp"
+
+            />
 
         <ImageView
-            android:id="@+id/btnDoneText"
+            android:id="@+id/btnDoneDescribe"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_done_background"
-            app:tint="#650016" />
+            app:tint="@color/app" />
     </FrameLayout>
 
 </FrameLayout>

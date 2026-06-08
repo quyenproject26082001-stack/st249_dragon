@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_app_character_item"
     android:layout_margin="7.5dp"
     >
 
@@ -12,7 +13,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/bg_app_character_item"
         app:layout_constraintDimensionRatio="1:1"
 
         />
@@ -20,7 +20,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
+        android:layout_margin="15dp"
         android:translationY="-2dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="9dp"
@@ -47,23 +47,28 @@
             android:visibility="gone"
             />
 
-        <!--        btnDelete-->
-        <ImageView
-            android:id="@+id/btnDelete"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="end"
-            android:layout_margin="3dp"
-            android:src="@drawable/ic_delete_item" />
 
-        <!--        btnSelect-->
-        <ImageView
-            android:id="@+id/btnSelect"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="end"
-            android:layout_margin="3dp"
-            android:src="@drawable/ic_not_select" />
     </com.google.android.material.card.MaterialCardView>
 
+
+    <!--        btnDelete-->
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_delete_item" />
+
+    <!--        btnSelect-->
+    <ImageView
+        android:id="@+id/btnSelect"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="end"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_not_select" />
 </androidx.constraintlayout.widget.ConstraintLayout>

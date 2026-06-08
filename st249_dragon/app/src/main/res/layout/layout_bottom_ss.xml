@@ -69,7 +69,7 @@
                     app:outerStrokeWidth="2dp"
                     android:text="@string/my_creation"
                     android:textColor="@color/app"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -128,7 +128,7 @@
                     app:outerStrokeWidth="2dp"
                     app:outerStrokeColor="@color/app1"
                     android:textColor="@color/app"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

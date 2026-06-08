@@ -65,7 +65,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             //btnMaker.tap(800) { checkDataInternet(this@HomeActivity){ startIntentRightToLeft(ChooseCharacterActivity::class.java) }}
             btnMaker.tap(2000){ startIntentRightToLeft(DragonWebViewActivity::class.java)}
             btnMyCreation.tap(800) { showInterAll { startIntentRightToLeft(MyCreationActivity::class.java) } }
-           btnRandom.tap(800) { checkDataInternet(this@HomeActivity){showInterAll {startIntentRightToLeft(RandomCharacterActivity::class.java) }}}
+           btnRandom.tap(800) { checkDataInternet(this@HomeActivity){showInterAll {startIntentRightToLeft(
+               TrendingActivity::class.java) }}}
 
         }
     }

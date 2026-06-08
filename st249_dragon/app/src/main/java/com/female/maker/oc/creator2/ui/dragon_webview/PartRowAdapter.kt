@@ -45,6 +45,9 @@ class PartRowAdapter(
 
     override fun onBindViewHolder(holder: PartRowViewHolder, position: Int) {
         val row = getItem(position)
+        val selectedValue = selectedValues.getOrPut(row.partId) {
+            row.options.firstOrNull()?.value.orEmpty()
+        }
         holder.tvLabel.text = row.label
         holder.llOptions.removeAllViews()
 
@@ -53,7 +56,7 @@ class PartRowAdapter(
             val ctx = holder.itemView.context
             val img = LayoutInflater.from(ctx)
                 .inflate(R.layout.item_part_option, holder.llOptions, false) as ImageView
-            img.isSelected = (opt.value == selectedValues[row.partId])
+            img.isSelected = (opt.value == selectedValue)
             img.setOnClickListener {
                 selectedValues[row.partId] = opt.value
                 notifyItemChanged(holder.bindingAdapterPosition)
@@ -64,7 +67,7 @@ class PartRowAdapter(
                     .load("file:///android_asset/${opt.thumb}")
                     .into(img)
             } else {
-                img.setImageResource(R.drawable.ic_close_color)
+                img.setImageResource(R.drawable.ic_none)
             }
             holder.llOptions.addView(img)
         }
@@ -75,5 +78,17 @@ class PartRowAdapter(
         } else {
             holder.btnColor.visibility = View.GONE
         }
+    }
+
+    fun submitRows(rows: List<PartRow>) {
+        rows.forEach { row ->
+            selectedValues.putIfAbsent(row.partId, row.options.firstOrNull()?.value.orEmpty())
+        }
+        submitList(rows)
+    }
+
+    fun setSelectedValues(values: Map<String, String>) {
+        selectedValues.putAll(values)
+        notifyDataSetChanged()
     }
 }

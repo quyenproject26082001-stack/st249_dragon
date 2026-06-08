@@ -19,8 +19,10 @@ import android.util.Base64
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.view.MotionEvent
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
+import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +32,8 @@ import com.female.maker.oc.creator2.core.extensions.invisible
 import com.female.maker.oc.creator2.core.extensions.tap
 import com.female.maker.oc.creator2.core.extensions.tapAndHold
 import com.female.maker.oc.creator2.core.extensions.visible
+import com.female.maker.oc.creator2.core.utils.key.IntentKey
+import com.female.maker.oc.creator2.ui.edit.EditActivity
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
@@ -41,6 +45,8 @@ import java.util.Locale
 class DragonWebViewActivity : AppCompatActivity() {
 
     companion object {
+        const val EXTRA_AUTO_RANDOM = "extra_auto_random"
+        const val EXTRA_SELECTION_STATE = "extra_selection_state"
         private const val MIN_SCALE = 0.5f
         private const val MAX_SCALE = 1.5f
     }
@@ -117,6 +123,12 @@ class DragonWebViewActivity : AppCompatActivity() {
   document.querySelector('.panel-area').style.display='none';
           """.trimIndent(), null)
                 binding.webView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+                val selectionState = intent.getStringExtra(EXTRA_SELECTION_STATE)
+                if (!selectionState.isNullOrBlank()) {
+                    applySelectionStateWhenReady(selectionState)
+                } else if (intent.getBooleanExtra(EXTRA_AUTO_RANDOM, false)) {
+                    randomizeWhenReady()
+                }
             }
         }
 
@@ -130,6 +142,10 @@ class DragonWebViewActivity : AppCompatActivity() {
             btnActionBarCenter.visibility = android.view.View.VISIBLE
             btnActionBarCenter.setImageResource(R.drawable.ic_reset)
             btnActionBarCenter.setOnClickListener { dispatch("RESET") }
+
+            btnActionBarRightText.visible()
+            tvRightText.visible()
+            btnActionBarRightText.setOnClickListener { dispatch("CAPTURE_FOR_EDIT") }
         }
 
         binding.btnTabHead.setOnClickListener {
@@ -160,6 +176,7 @@ class DragonWebViewActivity : AppCompatActivity() {
 
         binding.rvPanel.layoutManager = LinearLayoutManager(this)
         binding.rvPanel.adapter = adapter
+        selectTab(binding.btnTabHead)
         loadTab("head")
 
         setupColorPicker()
@@ -184,39 +201,92 @@ class DragonWebViewActivity : AppCompatActivity() {
         }
     }
 
+    private fun randomizeWhenReady(attempt: Int = 0) {
+        binding.webView.evaluateJavascript(
+            "(function(){try{return typeof window.dispatch === 'function' && typeof STATE !== 'undefined' && !!STATE.data;}catch(e){return false;}})()"
+        ) { result ->
+            if (result == "true") {
+                dispatch("RANDOMIZE_ALL")
+            } else if (attempt < 20) {
+                binding.webView.postDelayed({ randomizeWhenReady(attempt + 1) }, 100)
+            }
+        }
+    }
+
+    private fun applySelectionStateWhenReady(stateJson: String, attempt: Int = 0) {
+        binding.webView.evaluateJavascript(
+            "(function(){try{return typeof window.dispatch === 'function' && typeof STATE !== 'undefined' && !!STATE.data;}catch(e){return false;}})()"
+        ) { result ->
+            if (result == "true") {
+                applySelectionState(stateJson)
+            } else if (attempt < 20) {
+                binding.webView.postDelayed({ applySelectionStateWhenReady(stateJson, attempt + 1) }, 100)
+            }
+        }
+    }
+
+    private fun applySelectionState(stateJson: String) {
+        try {
+            val root = JSONObject(stateJson)
+            val selectedStyles = mutableMapOf<String, String>()
+            root.keys().forEach { key ->
+                val item = root.optJSONObject(key) ?: return@forEach
+                if (item.has("style")) {
+                    val value = item.optString("style")
+                    selectedStyles[key] = value
+                    dispatch("SET_STYLE", "partId" to key, "value" to value)
+                }
+                if (item.has("color")) {
+                    dispatch("SET_COLOR", "colorId" to key, "hex" to item.optString("color"))
+                }
+            }
+            adapter.setSelectedValues(selectedStyles)
+        } catch (e: Exception) {
+            android.util.Log.e("DragonWebView", "applySelectionState:${e.message}")
+        }
+    }
+
     fun selectTab(selected: LinearLayout) {
-        listOf(
-            binding.btnTabHead,
-            binding.btnTabTorso,
-            binding.btnTabLegs,
-            binding.btnTabWings,
-            binding.btnTabTail
-        ).forEach { it.isSelected = false }
+        val tabs = listOf(
+            TabItem(binding.btnTabHead, binding.icHead, binding.tvHeadTab),
+            TabItem(binding.btnTabTorso, binding.icTorso, binding.tvTorsoTab),
+            TabItem(binding.btnTabLegs, binding.icLegs, binding.tvLegsTab),
+            TabItem(binding.btnTabWings, binding.icWings, binding.tvWingsTab),
+            TabItem(binding.btnTabTail, binding.icTail, binding.tvTailTab)
+        )
+        tabs.forEach { item ->
+            val tab = item.tab
+            tab.isSelected = false
+            item.icon.setImageResource(tabIcon(tab, false))
+            item.label.setTextColor(getColor(R.color.white))
+        }
         selected.isSelected = true
+        tabs.firstOrNull { it.tab == selected }?.let { item ->
+            item.icon.setImageResource(tabIcon(selected, true))
+            item.label.setTextColor(getColor(R.color.app))
+        }
+    }
+
+    private data class TabItem(
+        val tab: LinearLayout,
+        val icon: ImageView,
+        val label: TextView
+    )
+
+    private fun tabIcon(tab: LinearLayout, selected: Boolean): Int {
+        return when (tab) {
+            binding.btnTabHead -> if (selected) R.drawable.head_hover else R.drawable.head
+            binding.btnTabTorso -> if (selected) R.drawable.torso_hover else R.drawable.torso
+            binding.btnTabLegs -> if (selected) R.drawable.legs_hover else R.drawable.legs
+            binding.btnTabWings -> if (selected) R.drawable.wing_hover else R.drawable.wing
+            binding.btnTabTail -> if (selected) R.drawable.tail_hover else R.drawable.tail
+            else -> R.drawable.head
+        }
     }
 
     fun saveAndShare(dataUrl: String) {
         try {
-            val bytes =
-                Base64.decode(
-                    dataUrl.substringAfter("base64,"),
-                    Base64.DEFAULT
-                )
-            val bitmap = BitmapFactory.decodeByteArray(
-                bytes,
-                0, bytes.size
-            )
-            val ts = SimpleDateFormat(
-                "yyyyMMdd_HHmmss",
-                Locale.getDefault()
-            ).format(Date())
-            val dir = File(cacheDir, "dragons").also {
-                it.mkdirs()
-            }
-            val file = File(dir, "dragon_$ts.png")
-            FileOutputStream(file).use {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
-            }
+            val file = saveDragonPng(dataUrl)
             val uri = FileProvider.getUriForFile(
                 this,
                 "$packageName.provider", file
@@ -238,9 +308,37 @@ class DragonWebViewActivity : AppCompatActivity() {
         }
     }
 
+    fun openEdit(dataUrl: String) {
+        try {
+            val file = saveDragonPng(dataUrl)
+            runOnUiThread {
+                startActivity(
+                    Intent(this, EditActivity::class.java).apply {
+                        putExtra(IntentKey.EDIT_IMAGE_PATH, file.absolutePath)
+                    }
+                )
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right)
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("DragonWebView", "openEdit:${e.message}")
+        }
+    }
+
+    private fun saveDragonPng(dataUrl: String): File {
+        val bytes = Base64.decode(dataUrl.substringAfter("base64,"), Base64.DEFAULT)
+        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        val ts = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val dir = File(cacheDir, "dragons").also { it.mkdirs() }
+        val file = File(dir, "dragon_$ts.png")
+        FileOutputStream(file).use {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
+        }
+        return file
+    }
+
     fun loadTab(tab: String) {
         val rows = PartsConfigParser.load(assets, tab)
-        adapter.submitList(rows)
+        adapter.submitRows(rows)
     }
 
     private fun setupColorPicker() {

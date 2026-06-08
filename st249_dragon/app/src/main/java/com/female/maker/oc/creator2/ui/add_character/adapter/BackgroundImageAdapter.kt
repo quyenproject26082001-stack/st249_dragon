@@ -3,12 +3,12 @@ package com.female.maker.oc.creator2.ui.add_character.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.female.maker.oc.creator2.R
 import com.female.maker.oc.creator2.core.extensions.gone
 import com.female.maker.oc.creator2.core.extensions.tap
 import com.female.maker.oc.creator2.core.extensions.visible
@@ -20,6 +20,7 @@ class BackgroundImageAdapter :
 
     var onAddImageClick: (() -> Unit) = {}
     var onBackgroundImageClick: ((String, Int) -> Unit) = { _, _ -> }
+    var showAddItem: Boolean = true
 
     inner class ViewHolder(val binding: ItemBackgroundImageBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -34,9 +35,8 @@ class BackgroundImageAdapter :
         val item = getItem(position)
         Log.d("BgImageAdapter", "onBind pos=$position isSelected=${item.isSelected} path=${item.path}")
         holder.binding.apply {
-            vFocus.isVisible = item.isSelected
-            Log.d("BgImageAdapter", "vFocus.isVisible set to ${item.isSelected} at pos=$position")
-            if (position == 0) {
+            imvFrame.setImageResource(if (item.isSelected) R.drawable.item_slt_bg else R.drawable.item_uslt_bg)
+            if (showAddItem && position == 0) {
                 lnlAddItem.visible()
                 imvImage.gone()
                 tvAddImg.isSelected = true

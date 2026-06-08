@@ -106,7 +106,7 @@
     <string name="speech_bubbles">Speech Bubbles</string>
     <string name="text">Text</string>
     <string name="type_your_content">Type your content...</string>
-    <string name="font">Font</string>
+    <string name="font">Font Text</string>
     <string name="choose_color">Choose Color</string>
     <string name="done">Done</string>
     <string name="null_edt">Please enter text</string>
@@ -200,4 +200,5 @@
     <string name="star_rating">\u000aStar Rating\u000a</string>
     <string name="star_style">Star Style</string>
     <string name="satistics">Satistics</string>
+    <string name="random">Random</string>
 </resources>

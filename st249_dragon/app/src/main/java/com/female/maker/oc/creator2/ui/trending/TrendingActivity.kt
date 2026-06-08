@@ -9,9 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
 import androidx.activity.viewModels
 import androidx.core.graphics.createBitmap
 import androidx.lifecycle.lifecycleScope
+import androidx.webkit.WebViewAssetLoader
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -36,6 +40,7 @@ import com.female.maker.oc.creator2.databinding.ActivityTrendingBinding
 import com.female.maker.oc.creator2.dialog.YesNoDialog
 import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterActivity
 import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterViewModel
+import com.female.maker.oc.creator2.ui.dragon_webview.DragonWebViewActivity
 import com.female.maker.oc.creator2.ui.home.DataViewModel
 import com.female.maker.oc.creator2.ui.random_character.RandomCharacterViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -48,6 +53,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
+import org.json.JSONTokener
 
 class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
 
@@ -63,32 +69,28 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
     }
 
     override fun initView() {
-        lifecycleScope.launch { showLoading() }
-        dataViewModel.ensureData(this)
         binding.tvGenerate.isSelected = true
+        setupDragonWebView()
     }
 
     override fun dataObservable() {
-        lifecycleScope.launch {
-            dataViewModel.allData.collect { data ->
-                if (data.isNotEmpty()) {
-                    initData()
-                }
-            }
-        }
+        // Trending renders the dragon builder directly; customize data is not needed here.
     }
 
     override fun viewListener() {
         binding.apply {
             actionBar.btnActionBarLeft.tap { showInterAll { handleBackLeftToRight() } }
+            actionBar.btnActionBarRight.tap { openDragonEditorWithCurrentState() }
             btnGenerate.tap(0) { handleGenerate() }
-            btnEdit.tap { handleEdit() }
+            btnDownload.tap { handleEdit() }
         }
     }
 
     override fun initActionBar() {
         binding.actionBar.apply {
             setImageActionBar(btnActionBarLeft, R.drawable.ic_back)
+            setImageActionBar(btnActionBarRight, R.drawable.ic_edit)
+            btnActionBarRight.visible()
             setTextActionBar(tvCenter, getString(R.string.random_bag))
             tvCenter.isSelected = true
             binding.actionBar.spTvCenter.visible()
@@ -96,6 +98,103 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
 
 
         }
+    }
+
+    private fun setupDragonWebView() {
+        val assetLoader = WebViewAssetLoader.Builder()
+            .addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(this))
+            .build()
+
+        binding.dragonWebView.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            allowFileAccess = true
+            allowContentAccess = true
+            useWideViewPort = true
+            loadWithOverviewMode = true
+            setSupportZoom(false)
+            builtInZoomControls = false
+            displayZoomControls = false
+        }
+
+        binding.dragonWebView.webViewClient = object : android.webkit.WebViewClient() {
+            override fun shouldInterceptRequest(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): WebResourceResponse? {
+                return request?.url?.let { assetLoader.shouldInterceptRequest(it) }
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                hideDragonBuilderControls()
+                binding.dragonWebView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+            }
+        }
+
+        binding.dragonWebView.loadUrl("https://appassets.androidplatform.net/assets/index.html")
+    }
+
+    private fun hideDragonBuilderControls() {
+        binding.dragonWebView.evaluateJavascript(
+            """
+                document.querySelector('.bottom-tabs').style.display='none';
+                document.querySelector('.top-bar').style.display='none';
+                document.querySelector('.action-row').style.display='none';
+                document.querySelector('.panel-area').style.display='none';
+            """.trimIndent(),
+            null
+        )
+    }
+
+    private fun randomizeDragonWhenReady(attempt: Int = 0) {
+        binding.dragonWebView.evaluateJavascript(
+            "(function(){try{return typeof window.dispatch === 'function' && typeof STATE !== 'undefined' && !!STATE.data;}catch(e){return false;}})()"
+        ) { result ->
+            if (result == "true") {
+                hideDragonBuilderControls()
+                binding.dragonWebView.evaluateJavascript("""window.dispatch('{"type":"RANDOMIZE_ALL"}')""", null)
+            } else if (attempt < 20) {
+                binding.dragonWebView.postDelayed({ randomizeDragonWhenReady(attempt + 1) }, 100)
+            }
+        }
+    }
+
+    private fun openDragonEditorWithCurrentState(attempt: Int = 0) {
+        binding.dragonWebView.evaluateJavascript(
+            "(function(){try{return typeof window.dispatch === 'function' && typeof STATE !== 'undefined' && !!STATE.data;}catch(e){return false;}})()"
+        ) { result ->
+            if (result == "true") {
+                binding.dragonWebView.evaluateJavascript(
+                    """window.dispatch('{"type":"GET_STATE"}')"""
+                ) { rawState ->
+                    val stateJson = try {
+                        (JSONTokener(rawState).nextValue() as? String).orEmpty()
+                    } catch (e: Exception) {
+                        ""
+                    }
+                    launchDragonEditor(stateJson)
+                }
+            } else if (attempt < 20) {
+                binding.dragonWebView.postDelayed({ openDragonEditorWithCurrentState(attempt + 1) }, 100)
+            } else {
+                launchDragonEditor()
+            }
+        }
+    }
+
+    private fun launchDragonEditor(selectionState: String = "") {
+        val intent = Intent(this, DragonWebViewActivity::class.java).apply {
+            if (selectionState.isNotBlank()) {
+                putExtra(DragonWebViewActivity.EXTRA_SELECTION_STATE, selectionState)
+            }
+        }
+        val option = ActivityOptions.makeCustomAnimation(
+            this,
+            R.anim.slide_in_right,
+            R.anim.slide_out_left
+        )
+        showInterAll { startActivity(intent, option.toBundle()) }
     }
 
     private fun initData() {
@@ -170,17 +269,30 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
             onComplete?.invoke()
             return
         }
-        val model = viewModel.randomList.random()
+        val model = randomSuggestion(viewModel.randomList) ?: run {
+            onComplete?.invoke()
+            return
+        }
         currentSuggestion = model
         renderSuggestion(model, onComplete)
     }
 
+    private fun randomSuggestion(list: List<SuggestionModel>): SuggestionModel? {
+        val current = currentSuggestion
+        val candidates = if (current != null && list.size > 1) {
+            list.filter { it !== current }
+        } else {
+            list
+        }
+        return candidates.randomOrNull()
+    }
+
     private fun handleGenerate() {
-        if (viewModel.randomList.isEmpty()) return
         if (isAnimating) return
         isAnimating = true
         binding.btnGenerate.visibility = View.INVISIBLE
-        binding.btnEdit.visibility = View.INVISIBLE
+        binding.btnDownload.visibility = View.INVISIBLE
+        binding.imvImage.visibility = View.VISIBLE
 
         val totalDuration = 800L
 
@@ -201,34 +313,12 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
             binding.dices.rotation = 0f
 
             // Check internet sau khi delay xong, timeout 3s để tránh hang khi mất mạng
-            val hasInternet = withContext(Dispatchers.IO) {
-                try {
-                    withTimeout(3000) { InternetHelper.isInternetAvailable(this@TrendingActivity) }
-                } catch (e: TimeoutCancellationException) {
-                    false
-                }
-            }
-            val availableList = if (hasInternet) {
-                viewModel.randomList
-            } else {
-                viewModel.randomList.filter { model ->
-                    val character = dataViewModel.allData.value.firstOrNull { it.avatar == model.avatarPath }
-                    character?.isFromAPI != true
-                }
-            }
-            val finalModel = availableList.randomOrNull() ?: run {
-                isAnimating = false
-                binding.btnGenerate.visibility = View.VISIBLE
-                binding.btnEdit.visibility = View.VISIBLE
-                return@launch
-            }
+            isAnimating = false
+            binding.btnGenerate.visibility = View.VISIBLE
+            binding.btnDownload.visibility = View.VISIBLE
+            binding.imvImage.visibility = View.GONE
 
-            currentSuggestion = finalModel
-            renderSuggestion(finalModel) {
-                isAnimating = false
-                binding.btnGenerate.visibility = View.VISIBLE
-                binding.btnEdit.visibility = View.VISIBLE
-            }
+            randomizeDragonWhenReady()
         }
     }
 

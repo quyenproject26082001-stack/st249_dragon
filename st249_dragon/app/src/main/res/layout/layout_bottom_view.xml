@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="17dp"
             android:layout_weight="1"
-            android:padding="2dp">
+            android:padding="0dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
@@ -71,7 +71,7 @@
                     app:outerStrokeWidth="2dp"
                     app:outerStrokeColor="@color/app1"
                     android:textColor="@color/app"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:layout_weight="1"
-            android:padding="2dp">
+            android:padding="0dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
@@ -132,7 +132,7 @@
                     app:outerStrokeWidth="2dp"
                     app:outerStrokeColor="@color/app1"
                     android:textColor="@color/app"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

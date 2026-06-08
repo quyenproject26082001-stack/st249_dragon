@@ -61,16 +61,18 @@
                     android:src="@drawable/ic_whatsapp" />
 
                 <!--                        tvWhatsapp-->
-                <TextView
+                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvWhatsapp"
                     style="@style/single_marquee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:outerStrokeColor="@color/app1"
+                    app:outerStrokeWidth="1dp"
                     android:layout_marginHorizontal="6dp"
-                    android:fontFamily="@font/nunito_bold"
+                    android:fontFamily="@font/copperplategothic_bold"
                     android:text="@string/add_to_whatsapp"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -121,16 +123,18 @@
                     android:src="@drawable/ic_telegram" />
 
                 <!--                        tvTelegram-->
-                <TextView
+                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvTelegram"
                     style="@style/single_marquee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="6dp"
                     android:fontFamily="@font/nunito_bold"
+                    app:outerStrokeWidth="1dp"
+                    app:outerStrokeColor="@color/app1"
                     android:text="@string/add_to_telegram"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -175,12 +179,12 @@
                 android:gravity="center"
                 app:outerStrokeColor="@color/app1"
                 app:outerStrokeWidth="2dp"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginStart="14dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_marginStart="0dp"
                 android:fontFamily="@font/copperplategothic_bold"
                 android:text="@string/download"
                 android:textColor="@color/app"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -229,7 +233,7 @@
                 android:layout_gravity="center"
                 app:outerStrokeWidth="2dp"
                 app:outerStrokeColor="@color/app1"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

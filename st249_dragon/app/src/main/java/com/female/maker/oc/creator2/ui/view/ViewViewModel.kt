@@ -9,6 +9,7 @@ import com.female.maker.oc.creator2.core.extensions.shareImagesPaths
 import com.female.maker.oc.creator2.core.helper.MediaHelper
 import com.female.maker.oc.creator2.core.utils.key.ValueKey
 import com.female.maker.oc.creator2.core.utils.state.HandleState
+import com.female.maker.oc.creator2.data.model.custom.DragonCardEditModel
 import com.female.maker.oc.creator2.data.model.custom.SuggestionModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,12 +38,15 @@ class ViewViewModel : ViewModel() {
                 val originList = MediaHelper
                     .readListFromFile<SuggestionModel>(context, ValueKey.EDIT_FILE_INTERNAL)
                     .toCollection(ArrayList())
+                val dragonCardList = MediaHelper
+                    .readListFromFile<DragonCardEditModel>(context, ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL)
+                    .toCollection(ArrayList())
 
-                val editDelete = originList.first { it.pathInternalEdit == path }
-
-                originList.remove(editDelete)
+                originList.removeAll { it.pathInternalEdit == path }
+                dragonCardList.removeAll { it.previewPath == path }
 
                 MediaHelper.writeListToFile(context, ValueKey.EDIT_FILE_INTERNAL, originList)
+                MediaHelper.writeListToFile(context, ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL, dragonCardList)
 
                 emit(HandleState.SUCCESS)
             } catch (e: Exception) {

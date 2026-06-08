@@ -33,6 +33,7 @@ import com.female.maker.oc.creator2.core.utils.state.HandleState
 import com.female.maker.oc.creator2.databinding.FragmentMyAvatarBinding
 import com.female.maker.oc.creator2.dialog.YesNoDialog
 import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterActivity
+import com.female.maker.oc.creator2.ui.edit.EditActivity
 import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterViewModel
 import com.female.maker.oc.creator2.ui.home.DataViewModel
 import com.female.maker.oc.creator2.ui.my_creation.MyCreationActivity
@@ -186,6 +187,17 @@ class MyAvatarFragment : BaseFragment<FragmentMyAvatarBinding>() {
             viewModel.editItem(myAlbumActivity, pathInternal, dataViewModel.allData.value)
             withContext(Dispatchers.Main) {
                 myAlbumActivity.dismissLoading()
+                if (viewModel.positionCharacter < 0 || viewModel.editModel.itemNavList.isEmpty()) {
+                    val intent = Intent(myAlbumActivity, EditActivity::class.java).apply {
+                        putExtra(IntentKey.EDIT_IMAGE_PATH, pathInternal)
+                        putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
+                    }
+                    val option = ActivityOptions.makeCustomAnimation(
+                        myAlbumActivity, R.anim.slide_out_left, R.anim.slide_in_right
+                    )
+                    myAlbumActivity.showInterAll { startActivity(intent, option.toBundle()) }
+                    return@withContext
+                }
                 viewModel.checkDataInternet(myAlbumActivity) {
                     val intent = Intent(myAlbumActivity, CustomizeCharacterActivity::class.java)
                     intent.putExtra(IntentKey.INTENT_KEY, viewModel.positionCharacter)

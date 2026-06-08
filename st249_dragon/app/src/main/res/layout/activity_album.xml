@@ -92,7 +92,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/copperplategothic_bold"
                     android:gravity="center"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:text="@string/my_dragon"
                     android:layout_marginBottom="3dp"
                     android:textColor="@color/app"

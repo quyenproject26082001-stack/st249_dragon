@@ -12,6 +12,7 @@ import com.female.maker.oc.creator2.core.utils.key.ValueKey
 import com.female.maker.oc.creator2.core.utils.state.HandleState
 import com.female.maker.oc.creator2.data.model.MyAlbumModel
 import com.female.maker.oc.creator2.data.model.custom.CustomizeModel
+import com.female.maker.oc.creator2.data.model.custom.DragonCardEditModel
 import com.female.maker.oc.creator2.data.model.custom.SuggestionModel
 import com.female.maker.oc.creator2.ui.my_creation.MyCreationActivity
 import com.female.maker.oc.creator2.ui.random_character.RandomCharacterActivity
@@ -42,6 +43,10 @@ class MyAvatarViewModel : ViewModel() {
 
         try {
             val editList = MediaHelper.readListFromFile<SuggestionModel>(context, ValueKey.EDIT_FILE_INTERNAL)
+            val dragonCardList = MediaHelper.readListFromFile<DragonCardEditModel>(
+                context,
+                ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL
+            )
             android.util.Log.d("MyAvatarViewModel", "✅ Loaded ${editList.size} items from EDIT_FILE_INTERNAL")
 
             editList.forEachIndexed { index, suggestion ->
@@ -54,7 +59,11 @@ class MyAvatarViewModel : ViewModel() {
                 android.util.Log.d("MyAvatarViewModel", "  [$index] File exists: $exists, Size: $size bytes")
             }
 
-            val albumList = editList.map { MyAlbumModel(it.pathInternalEdit) }.toCollection(ArrayList())
+            val legacyEditList = editList.filter { it.avatarPath.isNotEmpty() || it.itemNavList.isNotEmpty() }
+            val albumList = (legacyEditList.map { MyAlbumModel(it.pathInternalEdit) } +
+                    dragonCardList.map { MyAlbumModel(it.previewPath) })
+                .distinctBy { it.path }
+                .toCollection(ArrayList())
             _myAvatarList.value = albumList
 
             android.util.Log.d("MyAvatarViewModel", "✅ Updated myAvatarList with ${albumList.size} items")
@@ -87,6 +96,11 @@ class MyAvatarViewModel : ViewModel() {
         }
         MediaHelper.writeListToFile(context, ValueKey.EDIT_FILE_INTERNAL, newOriginList)
 
+        val dragonCardList = MediaHelper
+            .readListFromFile<DragonCardEditModel>(context, ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL)
+            .filterNot { it.previewPath in pathList }
+        MediaHelper.writeListToFile(context, ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL, dragonCardList)
+
         // Update StateFlow properly (important!)
         val newAvatarList = ArrayList(_myAvatarList.value).apply {
             removeAll(myAvatarDeleteList)
@@ -100,7 +114,7 @@ class MyAvatarViewModel : ViewModel() {
             .readListFromFile<SuggestionModel>(context, ValueKey.EDIT_FILE_INTERNAL)
             .toCollection(ArrayList())
 
-        editModel = originList.first { it.pathInternalEdit == pathInternal }
+        editModel = originList.firstOrNull { it.pathInternalEdit == pathInternal } ?: SuggestionModel()
         positionCharacter = allData.indexOfFirst { it.avatar == editModel.avatarPath }
         // ✅ FIX: Use isFromAPI flag from character data instead of position
         isApi = if (positionCharacter >= 0) allData[positionCharacter].isFromAPI else false

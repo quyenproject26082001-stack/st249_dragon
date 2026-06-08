@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="gone"
+    android:background="@drawable/bg_layout_bottom"
     tools:visibility="visible">
 
     <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
@@ -25,65 +26,24 @@
         app:outerStrokeColor="@color/app1"
         app:outerStrokeWidth=".5dp" />
 
-    <LinearLayout
+    <com.willy.ratingbar.ScaleRatingBar
         android:id="@+id/btnRatingStar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="7"
-        app:layout_constraintTop_toBottomOf="@id/tvStar">
-
-        <ImageView
-            android:id="@+id/btnStar1"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_slt"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/btnStar2"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_slt"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/btnStar3"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/btnStar4"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/btnStar5"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/btnStar6"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/btnStar7"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
+        app:layout_constraintTop_toBottomOf="@id/tvStar"
+        app:srb_clearRatingEnabled="false"
+        app:srb_clickable="true"
+        app:srb_drawableEmpty="@drawable/ic_star_1_uslt"
+        app:srb_drawableFilled="@drawable/style1_small"
+        app:srb_isIndicator="false"
+        app:srb_minimumStars="0"
+        app:srb_numStars="7"
+        app:srb_rating="2"
+        app:srb_scrollable="true"
+        app:srb_starHeight="40dp"
+        app:srb_starPadding="4dp"
+        app:srb_starWidth="40dp"
+        app:srb_stepSize="1" />
 
     <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvStyle"
@@ -106,57 +66,98 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="7"
+        android:weightSum="6"
         app:layout_constraintTop_toBottomOf="@id/tvStyle">
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/btnStarStyle1"
             android:layout_width="0dp"
             android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_slt"
-            android:layout_weight="1" />
+            android:layout_margin="4dp"
+            android:background="@drawable/item_uslt_bg"
+            android:layout_weight="1">
 
-        <ImageView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/style1_small" />
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/btnStarStyle2"
             android:layout_width="0dp"
             android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_slt"
-            android:layout_weight="1" />
+            android:layout_margin="4dp"
+            android:background="@drawable/item_uslt_bg"
+            android:layout_weight="1">
 
-        <ImageView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/style2_small" />
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/btnStarStyle3"
             android:layout_width="0dp"
             android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
+            android:layout_margin="4dp"
+            android:background="@drawable/item_uslt_bg"
+            android:layout_weight="1">
 
-        <ImageView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/style3_small" />
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/btnStarStyle4"
             android:layout_width="0dp"
             android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
+            android:layout_margin="4dp"
+            android:background="@drawable/item_uslt_bg"
+            android:layout_weight="1">
 
-        <ImageView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/style4_small" />
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/btnStarStyle5"
             android:layout_width="0dp"
             android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
+            android:layout_margin="4dp"
+            android:background="@drawable/item_uslt_bg"
+            android:layout_weight="1">
 
-        <ImageView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/style5_small" />
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/btnStarStyle6"
             android:layout_width="0dp"
             android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
+            android:layout_margin="4dp"
+            android:background="@drawable/item_uslt_bg"
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/btnStarStyle7"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_star_1_uslt"
-            android:layout_weight="1" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/style6_small" />
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -171,6 +172,7 @@
         android:text="@string/satistics"
         android:textColor="@color/app"
         android:textSize="12sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnRatingStar"
         app:outerStrokeColor="@color/app1"
@@ -220,9 +222,6 @@
         android:id="@+id/tvAtk"
         />
 
-    <
-
-
     <ImageView
         android:layout_width="14dp"
         android:layout_height="14dp"
@@ -250,16 +249,44 @@
         />
     
     <EditText
+        android:id="@+id/edtAtk"
         android:layout_width="100dp"
         android:layout_height="40dp"
+        android:background="@drawable/bg_8_solid_white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:hint="ATK"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="4"
+        android:paddingHorizontal="8dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="#868686"
+        android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/tvAtk"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@id/tvAtk"
         app:layout_constraintEnd_toEndOf="@id/tvAtk"/>
 
     <EditText
+        android:id="@+id/edtDef"
         android:layout_width="100dp"
         android:layout_height="40dp"
+        android:background="@drawable/bg_8_solid_white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:hint="DEF"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="4"
+        android:paddingHorizontal="8dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="#868686"
+        android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/tvDef"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@id/tvDef"

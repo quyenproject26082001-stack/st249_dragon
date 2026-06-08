@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="7.5dp"
-    android:background="@drawable/frame_item_avatar"
+    android:background="@drawable/bg_app_character_item"
     android:clipChildren="false"
     android:clipToPadding="false">
 
@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/bg_app_character_item"
         app:layout_constraintDimensionRatio="1:1"
 
         />
@@ -25,7 +24,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
+        android:layout_margin="15dp"
         android:translationY="-2dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="9dp"
@@ -51,35 +50,42 @@
             android:background="#66000000"
              />
 
-            <!--btnDelete-->
-            <ImageView
-                android:id="@+id/btnDelete"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_margin="3dp"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_delete_item" />
-
-            <!--btnEdit-->
-            <ImageView
-                android:id="@+id/btnEdit"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="start"
-                android:layout_margin="3dp"
-                android:src="@drawable/ic_edit" />
-
-            <!--btnSelect-->
-            <ImageView
-                android:id="@+id/btnSelect"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="end"
-                android:layout_margin="3dp"
-                android:src="@drawable/ic_not_select"
-                android:visibility="gone"
-                tools:visibility="visible"
-                />
         </com.google.android.material.card.MaterialCardView>
+
+    <!--btnDelete-->
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_delete_item" />
+
+    <!--btnEdit-->
+    <ImageView
+        android:id="@+id/btnEdit"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="start"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_edit" />
+
+    <!--btnSelect-->
+    <ImageView
+        android:id="@+id/btnSelect"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="end"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_not_select"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

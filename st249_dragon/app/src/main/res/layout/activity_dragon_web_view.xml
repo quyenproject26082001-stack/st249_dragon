@@ -95,7 +95,7 @@
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@id/rvPanel"
-        tools:visibility="gone">
+        tools:visibility="visible">
         
         <ImageView
             android:layout_width="40dp"
@@ -114,6 +114,7 @@
             app:outerStrokeColor="@color/app1"
             android:shadowColor="@color/app2"
             android:shadowDy="3"
+            app:outerStrokeWidth=".6dp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="@id/btnBackColor"
             app:layout_constraintBottom_toBottomOf="@id/btnBackColor"
@@ -132,8 +133,8 @@
             android:id="@+id/colorPickerView"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginHorizontal="56dp"
+            android:layout_marginTop="36dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -380,6 +381,7 @@
                 android:id="@+id/icHead"
                 android:src="@drawable/head" />
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvHeadTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/head"
@@ -404,6 +406,7 @@
                 android:id="@+id/icTorso"
                 android:src="@drawable/torso" />
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvTorsoTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/copperplategothic_bold"
@@ -428,6 +431,7 @@
                 android:id="@+id/icLegs"
                 android:src="@drawable/legs" />
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvLegsTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/legs"
@@ -452,6 +456,7 @@
                 android:id="@+id/icWings"
                 android:src="@drawable/wing" />
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvWingsTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/wings"
@@ -476,6 +481,7 @@
                 android:id="@+id/icTail"
                 android:src="@drawable/tail" />
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvTailTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TAIL"

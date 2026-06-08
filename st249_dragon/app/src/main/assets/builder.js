@@ -653,6 +653,15 @@ function downloadPNG() {
     link.click();
 }
 
+function capturePNGForEdit() {
+    if (!window.AndroidBridge) return;
+    const dataUrl = UI.canvas.toDataURL('image/png');
+    AndroidBridge.onEvent(JSON.stringify({
+        type: 'EDIT_READY',
+        data: dataUrl
+    }));
+}
+
 // ============================================================
 //  ANDROID BRIDGE — dispatch(actionJson)
 //  Kotlin gọi: window.dispatch('{"type":"SET_STYLE",...}')
@@ -745,6 +754,10 @@ window.dispatch = function(actionJson) {
         // Download / share
         case 'DOWNLOAD':
             downloadPNG();
+            break;
+
+        case 'CAPTURE_FOR_EDIT':
+            capturePNGForEdit();
             break;
 
         // Switch active tab: { type, tab }

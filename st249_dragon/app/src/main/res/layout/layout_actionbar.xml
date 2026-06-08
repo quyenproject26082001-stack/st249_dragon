@@ -310,7 +310,7 @@
         android:layout_width="70dp"
         android:layout_height="39dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/ic_next_text"
+        android:background="@drawable/bg_btnactionbarrighttext"
         android:visibility="gone"
         tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/btnActionBarRight"
@@ -327,10 +327,10 @@
             android:fontFamily="@font/copperplategothic_bold"
             android:gravity="center"
             app:outerStrokeWidth="2dp"
-            app:outerStrokeColor="@color/app"
+            app:outerStrokeColor="@color/app1"
             android:text="@string/next"
             android:visibility="invisible"
-            android:textColor="@color/white"
+            android:textColor="@color/app"
             android:textSize="16sp" />
     </FrameLayout>
 

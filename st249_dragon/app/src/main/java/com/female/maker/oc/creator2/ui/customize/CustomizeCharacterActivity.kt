@@ -138,8 +138,16 @@ class CustomizeCharacterActivity : BaseActivity<ActivityCustomizeBinding>() {
                 viewModel.bottomNavigationList.collect { bottomNavigationList ->
                     if (bottomNavigationList.isNotEmpty()) {
                         bottomNavigationCustomizeAdapter.submitList(bottomNavigationList)
-                        layerCustomizeAdapter.submitList(viewModel.itemNavList[viewModel.positionNavSelected])
-                        colorLayerCustomizeAdapter.submitList(viewModel.colorItemNavList[viewModel.positionNavSelected])
+                        if (
+                            viewModel.positionNavSelected in viewModel.itemNavList.indices &&
+                            viewModel.positionNavSelected in viewModel.colorItemNavList.indices
+                        ) {
+                            layerCustomizeAdapter.submitList(viewModel.itemNavList[viewModel.positionNavSelected])
+                            colorLayerCustomizeAdapter.submitList(viewModel.colorItemNavList[viewModel.positionNavSelected])
+                        } else {
+                            layerCustomizeAdapter.submitList(emptyList())
+                            colorLayerCustomizeAdapter.submitList(emptyList())
+                        }
                         scrollSelectedColorIntoView()
                     }
                 }

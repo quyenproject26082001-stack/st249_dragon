@@ -69,18 +69,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/flActionBar">
 
+        <ImageView
+            android:id="@+id/imvBgTagAsset"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
         
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="horizontal"
+            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/bgImage">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_star_edit"/>
+
+            <com.willy.ratingbar.ScaleRatingBar
+                android:id="@+id/rbPreviewStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                app:srb_clearRatingEnabled="false"
+                app:srb_clickable="false"
+                app:srb_drawableEmpty="@drawable/ic_star_transparent"
+                app:srb_drawableFilled="@drawable/style1_small"
+                app:srb_isIndicator="true"
+                app:srb_minimumStars="0"
+                app:srb_numStars="7"
+                app:srb_rating="2"
+                app:srb_scrollable="false"
+                app:srb_starHeight="24dp"
+                app:srb_starPadding="2dp"
+                app:srb_starWidth="24dp"
+                app:srb_stepSize="1" />
             
         </LinearLayout>
         
@@ -94,6 +115,12 @@
         android:id="@+id/bgImage"
         app:layout_constraintDimensionRatio="1:1"
         android:layout_width="match_parent">
+
+        <ImageView
+            android:id="@+id/imvBgImageAsset"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -132,6 +159,7 @@
                 tools:text="Immerse yourself in a dark fantasy world where legend and technology intertwine, with this unique collection of six mesmerizing dragon part cards."
                 android:textColor="#2B1A00"
                 android:textSize="12sp"
+                android:maxLines="3"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/afacadflux"
@@ -141,7 +169,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:src="@drawable/ic_line_edit"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="25dp"
                 app:layout_constraintTop_toBottomOf="@id/tvDescrible"
                 android:id="@+id/icLine"
                 />
@@ -217,25 +245,22 @@
         app:layout_constraintBottom_toTopOf="@id/lnlBottom"
         app:layout_constraintTop_toBottomOf="@id/bgTag">
 
-        <include layout="@layout/layout_edit_tab_nametag" />
+        <include
+            android:id="@+id/tabNameTag"
+            layout="@layout/layout_edit_tab_nametag" />
 
-        <include layout="@layout/layout_edit_tab_power" />
+        <include
+            android:id="@+id/tabPower"
+            layout="@layout/layout_edit_tab_power" />
 
-        <include layout="@layout/layout_edit_tab_bg" />
+        <include
+            android:id="@+id/tabBg"
+            layout="@layout/layout_edit_tab_bg" />
 
-        <include layout="@layout/layout_edit_tab_describe" />
-
-
+        <include
+            android:id="@+id/tabDescribe"
+            layout="@layout/layout_edit_tab_describe" />
     </FrameLayout>
-
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/lnlBottom"
-        app:layout_constraintEnd_toEndOf="@+id/lnlBottom"
-        app:layout_constraintStart_toStartOf="@+id/lnlBottom"
-        app:layout_constraintTop_toTopOf="@+id/lnlBottom" />
 
     <!--    lnlBottom-->
     <LinearLayout
@@ -243,7 +268,9 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="#F1E2AF"
+        android:gravity="center"
         android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
@@ -251,19 +278,22 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_tab_selected"
+            android:background="@color/transparent"
             android:gravity="center"
             android:orientation="vertical">
+
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
                 android:id="@+id/icHead"
-                android:src="@drawable/head" />
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_nametag" />
+
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvNameTagTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_tag"
-                android:textColor="@color/app"
+                android:textColor="@color/white"
                 app:outerStrokeColor="#2B1A00"
                 app:outerStrokeWidth="1dp"
                 android:fontFamily="@font/copperplategothic_bold"
@@ -275,20 +305,23 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_tab_selected"
+            android:background="@color/transparent"
             android:gravity="center"
             android:orientation="vertical">
+
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
                 android:id="@+id/icTorso"
-                android:src="@drawable/torso" />
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_power" />
+
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvPowerTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/copperplategothic_bold"
                 android:text="@string/power"
-                android:textColor="@color/app"
+                android:textColor="@color/white"
                 app:outerStrokeColor="#2B1A00"
                 app:outerStrokeWidth="1dp"
                 android:textSize="14sp" />
@@ -299,19 +332,22 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_tab_selected"
+            android:background="@color/transparent"
             android:gravity="center"
             android:orientation="vertical">
+
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
                 android:id="@+id/icLegs"
-                android:src="@drawable/legs" />
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_bg" />
+
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvBgTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/bg"
-                android:textColor="@color/app"
+                android:textColor="@color/white"
                 app:outerStrokeColor="#2B1A00"
                 app:outerStrokeWidth="1dp"
                 android:fontFamily="@font/copperplategothic_bold"
@@ -323,19 +359,22 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_tab_selected"
+            android:background="@color/transparent"
             android:gravity="center"
             android:orientation="vertical">
+
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
                 android:id="@+id/icWings"
-                android:src="@drawable/wing" />
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_des" />
+
             <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvDescribeTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/describe"
-                android:textColor="@color/app"
+                android:textColor="@color/white"
                 app:outerStrokeColor="#2B1A00"
                 app:outerStrokeWidth="1dp"
                 android:fontFamily="@font/copperplategothic_bold"
