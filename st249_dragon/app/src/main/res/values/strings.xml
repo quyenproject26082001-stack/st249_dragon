@@ -195,4 +195,9 @@
     <string name="bg">BG</string>
     <string name="power">Power</string>
     <string name="name_tag">Name Tag</string>
+    <string name="bg_image">BG Image</string>
+    <string name="bg_tag">BG Tag</string>
+    <string name="star_rating">\u000aStar Rating\u000a</string>
+    <string name="star_style">Star Style</string>
+    <string name="satistics">Satistics</string>
 </resources>

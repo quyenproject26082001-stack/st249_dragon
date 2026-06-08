@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnlBg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible">
+
+
+    <LinearLayout
+        android:id="@+id/sectionTab"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/bg_select_tab_edit"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <FrameLayout
+            android:id="@+id/btnBackgroundImage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvBackgroundImage"
+                style="@style/single_marquee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/copperplategothic_bold"
+                android:gravity="center"
+                android:text="@string/bg_image"
+                android:textColor="@color/app"
+                app:outerStrokeColor="@color/app1"
+                app:outerStrokeWidth="2dp"
+                android:textSize="16sp" />
+        </FrameLayout>
+
+        <Space
+            android:layout_width="27dp"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/btnBackgroundTag"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1">
+
+
+            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                android:id="@+id/tvBackgroundColor"
+                style="@style/single_marquee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/copperplategothic_bold"
+                android:gravity="center"
+                android:text="@string/bg_tag"
+                app:outerStrokeColor="@color/app1"
+                app:outerStrokeWidth="2dp"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnlBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="66dp"
+        android:layout_marginBottom="0dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        tools:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvBackgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4.5dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="7.5dp"
+            android:paddingBottom="25dp"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="5"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_background_image"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvBackgroundTag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4.5dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="7.5dp"
+            android:paddingBottom="25dp"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="5"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_background_color"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+</FrameLayout>
