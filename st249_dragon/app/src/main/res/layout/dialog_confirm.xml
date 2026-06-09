@@ -32,7 +32,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
+                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                     android:id="@+id/tvTitle"
                     style="@style/single_marquee"
                     android:layout_width="0dp"
@@ -44,11 +44,17 @@
                     android:gravity="center"
                     android:paddingVertical="5dp"
                     android:text="@string/delete"
-                    android:textColor="@color/app"
                     android:textSize="28sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:outerStrokeWidth=".5dp"
+                    app:outerStrokeColor="@color/app1"
+                    android:shadowRadius=".1"
+                    android:shadowColor="@color/app2"
+                    android:shadowDy="3"
+                    android:textColor="@color/app"
+                    />
 
 
                 <!--            tvDescription-->
@@ -65,7 +71,7 @@
                     app:outerStrokeWidth="2dp"
                     android:gravity="center"
                     app:outerStrokeColor="@color/app"
-                    android:textColor="@color/white"
+                    android:textColor="#2B1A00"
                     app:layout_constraintTop_toBottomOf="@id/tvTitle"
                     tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
 

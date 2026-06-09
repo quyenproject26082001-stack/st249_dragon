@@ -17,5 +17,6 @@ data class DragonCardEditModel(
     var bgImageColor: Int = 0,
     var bgTagColor: Int = 0,
     var bgImagePath: String = "",
-    var bgTagPath: String = ""
+    var bgTagPath: String = "",
+    var selectionState: String = ""
 )

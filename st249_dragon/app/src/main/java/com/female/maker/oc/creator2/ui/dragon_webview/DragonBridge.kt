@@ -10,7 +10,12 @@ class DragonBridge(private val activity: DragonWebViewActivity) {
                 "DOWNLOAD_READY" ->
                     activity.saveAndShare(obj.getString("data"))
                 "EDIT_READY" ->
-                    activity.openEdit(obj.getString("data"))
+                    activity.openEdit(
+                        obj.getString("data"),
+                        obj.optString("selectionState")
+                    )
+                "SUCCESS_READY" ->
+                    activity.openSuccess(obj.getString("data"))
             }
         } catch (e: Exception){
             android.util.Log.e("DragonBridge","onEvent: ${e.message}")

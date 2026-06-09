@@ -33,7 +33,11 @@ import com.female.maker.oc.creator2.core.extensions.tap
 import com.female.maker.oc.creator2.core.extensions.tapAndHold
 import com.female.maker.oc.creator2.core.extensions.visible
 import com.female.maker.oc.creator2.core.utils.key.IntentKey
+import com.female.maker.oc.creator2.core.utils.key.ValueKey
+import com.female.maker.oc.creator2.dialog.DialogType
+import com.female.maker.oc.creator2.dialog.YesNoDialog
 import com.female.maker.oc.creator2.ui.edit.EditActivity
+import com.female.maker.oc.creator2.ui.success.SuccessActivity
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
@@ -53,6 +57,7 @@ class DragonWebViewActivity : AppCompatActivity() {
 
     private var currentColorId: String = ""
     private var pickedColor: Int = android.graphics.Color.WHITE
+    private var editSourcePath: String = ""
 
 
     private lateinit var binding: ActivityDragonWebViewBinding
@@ -77,6 +82,7 @@ class DragonWebViewActivity : AppCompatActivity() {
 
         binding = ActivityDragonWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        editSourcePath = intent.getStringExtra(IntentKey.EDIT_SOURCE_PATH).orEmpty()
 
         val assetLoader = WebViewAssetLoader.Builder()
             .addPathHandler(
@@ -112,16 +118,16 @@ class DragonWebViewActivity : AppCompatActivity() {
             }
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                binding.webView.evaluateJavascript("""
-   
-  document.querySelector('.bottom-tabs').style.display='none';
-   
-  document.querySelector('.top-bar').style.display='none';
-   
-  document.querySelector('.action-row').style.display='none';
-   
-  document.querySelector('.panel-area').style.display='none';
-          """.trimIndent(), null)
+                binding.webView.evaluateJavascript(
+                    """
+                    document.body.classList.add('native-transparent');
+                    document.querySelector('.bottom-tabs').style.display='none';
+                    document.querySelector('.top-bar').style.display='none';
+                    document.querySelector('.action-row').style.display='none';
+                    document.querySelector('.panel-area').style.display='none';
+                    """.trimIndent(),
+                    null
+                )
                 binding.webView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
                 val selectionState = intent.getStringExtra(EXTRA_SELECTION_STATE)
                 if (!selectionState.isNullOrBlank()) {
@@ -141,7 +147,7 @@ class DragonWebViewActivity : AppCompatActivity() {
 
             btnActionBarCenter.visibility = android.view.View.VISIBLE
             btnActionBarCenter.setImageResource(R.drawable.ic_reset)
-            btnActionBarCenter.setOnClickListener { dispatch("RESET") }
+            btnActionBarCenter.setOnClickListener { confirmResetDesign() }
 
             btnActionBarRightText.visible()
             tvRightText.visible()
@@ -198,6 +204,27 @@ class DragonWebViewActivity : AppCompatActivity() {
                 "window.dispatch('${json}')",
                 null
             )
+        }
+    }
+
+    private fun confirmResetDesign() {
+        val dialog = YesNoDialog(
+            this,
+            R.string.reset,
+            R.string.change_your_whole_design_are_you_sure,
+            dialogType = DialogType.RESET
+        )
+        dialog.show()
+
+        fun closeDialog() {
+            dialog.dismiss()
+            hideNavigation()
+        }
+
+        dialog.onNoClick = { closeDialog() }
+        dialog.onYesClick = {
+            closeDialog()
+            dispatch("RESET")
         }
     }
 
@@ -308,13 +335,17 @@ class DragonWebViewActivity : AppCompatActivity() {
         }
     }
 
-    fun openEdit(dataUrl: String) {
+    fun openEdit(dataUrl: String, selectionState: String = "") {
         try {
             val file = saveDragonPng(dataUrl)
             runOnUiThread {
                 startActivity(
                     Intent(this, EditActivity::class.java).apply {
                         putExtra(IntentKey.EDIT_IMAGE_PATH, file.absolutePath)
+                        putExtra(IntentKey.EDIT_SELECTION_STATE, selectionState)
+                        if (editSourcePath.isNotEmpty()) {
+                            putExtra(IntentKey.EDIT_SOURCE_PATH, editSourcePath)
+                        }
                     }
                 )
                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right)
@@ -324,11 +355,31 @@ class DragonWebViewActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveDragonPng(dataUrl: String): File {
+    fun openSuccess(dataUrl: String) {
+        try {
+            val file = saveDragonPng(dataUrl, persistToAlbum = true)
+            runOnUiThread {
+                startActivity(
+                    Intent(this, SuccessActivity::class.java).apply {
+                        putExtra(IntentKey.INTENT_KEY, file.absolutePath)
+                    }
+                )
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right)
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("DragonWebView", "openSuccess:${e.message}")
+        }
+    }
+
+    private fun saveDragonPng(dataUrl: String, persistToAlbum: Boolean = false): File {
         val bytes = Base64.decode(dataUrl.substringAfter("base64,"), Base64.DEFAULT)
         val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
         val ts = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val dir = File(cacheDir, "dragons").also { it.mkdirs() }
+        val dir = if (persistToAlbum) {
+            File(filesDir, ValueKey.DOWNLOAD_ALBUM)
+        } else {
+            File(cacheDir, "dragons")
+        }.also { it.mkdirs() }
         val file = File(dir, "dragon_$ts.png")
         FileOutputStream(file).use {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)

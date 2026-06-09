@@ -48,7 +48,6 @@ import com.female.maker.oc.creator2.databinding.ActivityAlbumBinding
 import com.female.maker.oc.creator2.dialog.YesNoDialog
 import com.female.maker.oc.creator2.ui.home.HomeActivity
 import com.female.maker.oc.creator2.ui.view.ViewActivity
-import com.female.maker.oc.creator2.databinding.PopupMyAlbumBinding
 import com.female.maker.oc.creator2.dialog.CreateNameDialog
 import com.female.maker.oc.creator2.ui.my_creation.adapter.MyAvatarAdapter
 import com.female.maker.oc.creator2.ui.my_creation.adapter.TypeAdapter

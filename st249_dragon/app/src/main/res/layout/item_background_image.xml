@@ -59,24 +59,29 @@
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.4" />
+                        android:layout_height="389dp"
+                        android:layout_weight="1.8" />
 
-                    <TextView
+                    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                         android:id="@+id/tvAddImg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/add_image"
-                        android:textColor="@color/app"
+                        android:textColor="@color/white"
                         android:gravity="center"
+                        app:outerStrokeWidth="1dp"
+                        android:shadowColor="@color/app2"
+                        android:shadowDy="3"
+                        android:shadowRadius=".1"
+                        app:outerStrokeColor="@color/app1"
                         style="@style/single_marquee"
                         android:fontFamily="@font/copperplategothic_bold"
-                        android:textSize="12sp" />
+                        android:textSize="10sp" />
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.35" />
+                        android:layout_weight="0." />
 
                 </LinearLayout>
 

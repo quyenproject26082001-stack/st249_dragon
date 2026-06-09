@@ -146,6 +146,19 @@ html, body {
     object-fit: contain;
 }
 
+body.native-transparent,
+body.native-transparent #app,
+body.native-transparent .preview-area,
+body.native-transparent #dragonCanvas {
+    background: transparent !important;
+}
+
+body.native-transparent .preview-area::before,
+body.native-transparent .preview-area::after,
+body.native-transparent #loadingOverlay {
+    display: none !important;
+}
+
 #loadingOverlay {
     position: absolute;
     inset: 0;

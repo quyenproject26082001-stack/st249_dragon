@@ -35,6 +35,8 @@ import com.female.maker.oc.creator2.data.model.SelectedModel
 import com.female.maker.oc.creator2.data.model.custom.DragonCardEditModel
 import com.female.maker.oc.creator2.databinding.ActivityEditBinding
 import com.female.maker.oc.creator2.dialog.ChooseColorDialog
+import com.female.maker.oc.creator2.dialog.DialogType
+import com.female.maker.oc.creator2.dialog.YesNoDialog
 import com.female.maker.oc.creator2.ui.add_character.adapter.BackgroundImageAdapter
 import com.female.maker.oc.creator2.ui.add_character.adapter.TextColorAdapter
 import com.female.maker.oc.creator2.ui.add_character.adapter.TextFontAdapter
@@ -69,6 +71,7 @@ class EditActivity : AppCompatActivity() {
     private var currentDescribeColor = 0
     private var currentBgImagePath = ""
     private var currentBgTagPath = ""
+    private var currentSelectionState = ""
     private var currentStarRating = 2
     private var currentStarStyle = 1
     private var currentAtk = ""
@@ -111,8 +114,10 @@ class EditActivity : AppCompatActivity() {
     private fun setupActionBar() {
         binding.actionBar.apply {
             setImageActionBar(btnActionBarLeft, R.drawable.ic_back)
+            setImageActionBar(btnActionBarCenter, R.drawable.ic_reset)
             btnActionBarLeft.tap { handleBackLeftToRight() }
-            btnActionBarCenter.gone()
+            btnActionBarCenter.visible()
+            btnActionBarCenter.tap { confirmReset() }
             btnActionBarRight.gone()
             btnActionBarRightText.visible()
             tvRightText.visible()
@@ -126,6 +131,65 @@ class EditActivity : AppCompatActivity() {
         binding.btnPower.tap { showTab(EditTab.POWER) }
         binding.btnBg.tap { showTab(EditTab.BG) }
         binding.btnDescrible.tap { showTab(EditTab.DESCRIBE) }
+    }
+
+    private fun confirmReset() {
+        val dialog = YesNoDialog(
+            this,
+            R.string.reset,
+            R.string.change_your_whole_design_are_you_sure,
+            dialogType = DialogType.RESET
+        )
+        dialog.show()
+
+        fun closeDialog() {
+            dialog.dismiss()
+            hideNavigation(true)
+        }
+
+        dialog.onNoClick = { closeDialog() }
+        dialog.onYesClick = {
+            closeDialog()
+            resetEditState()
+        }
+    }
+
+    private fun resetEditState() {
+        binding.tabNameTag.edtText.setText("")
+        binding.tabDescribe.edtDescribe.setText("")
+
+        nameFonts.selectItem(0)
+        nameColors.selectItem(1)
+        describeFonts.selectItem(0)
+        describeColors.selectItem(1)
+        applyNameFont(nameFonts[0].color)
+        applyNameColor(nameColors[1].color)
+        applyDescribeFont(describeFonts[0].color)
+        applyDescribeColor(describeColors[1].color)
+        nameFontAdapter.submitListReset(nameFonts)
+        nameColorAdapter.submitListReset(nameColors)
+        describeFontAdapter.submitListReset(describeFonts)
+        describeColorAdapter.submitListReset(describeColors)
+
+        applyStarRating(2)
+        applyStarStyle(1)
+        binding.tabPower.edtAtk.setText("")
+        binding.tabPower.edtDef.setText("")
+
+        currentBgImagePath = bgImageAssets.getOrNull(1)?.path.orEmpty()
+        currentBgTagPath = bgTagAssets.getOrNull(1)?.path.orEmpty()
+        if (currentBgImagePath.isNotEmpty()) {
+            bgImageAssets.selectItem(1)
+            applyBgImageAsset(currentBgImagePath)
+        }
+        if (currentBgTagPath.isNotEmpty()) {
+            bgTagAssets.selectItem(1)
+            applyBgTagAsset(currentBgTagPath)
+        }
+        bgImageAdapter.submitList(bgImageAssets.map { it.copy() })
+        bgTagAdapter.submitList(bgTagAssets.map { it.copy() })
+        showBackgroundList(isImageBackground = true)
+        showTab(EditTab.NAME_TAG)
     }
 
     private fun setupTextEditors() {
@@ -491,10 +555,12 @@ class EditActivity : AppCompatActivity() {
     private fun restoreState() {
         currentSourcePath = intent.getStringExtra(IntentKey.EDIT_SOURCE_PATH).orEmpty()
         val imagePathFromIntent = intent.getStringExtra(IntentKey.EDIT_IMAGE_PATH).orEmpty()
+        currentSelectionState = intent.getStringExtra(IntentKey.EDIT_SELECTION_STATE).orEmpty()
         val savedModel = findDragonCardModel(currentSourcePath)
 
         if (savedModel != null) {
             currentModelId = savedModel.id
+            currentSelectionState = savedModel.selectionState
             currentDragonImagePath = savedModel.dragonImagePath.ifEmpty { imagePathFromIntent }
             binding.tabNameTag.edtText.setText(savedModel.nameTag)
             binding.tabDescribe.edtDescribe.setText(savedModel.describe)
@@ -673,13 +739,14 @@ class EditActivity : AppCompatActivity() {
             atk = currentAtk,
             def = currentDef,
             bgImagePath = currentBgImagePath,
-            bgTagPath = currentBgTagPath
+            bgTagPath = currentBgTagPath,
+            selectionState = currentSelectionState
         )
 
         if (index >= 0) {
             list[index] = model
         } else {
-            list.add(model)
+            list.add(0, model)
         }
         MediaHelper.writeListToFile(this, ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL, list)
     }

@@ -22,21 +22,21 @@
     </FrameLayout>
 
     <!--    cvImage-->
-    <com.google.android.material.card.MaterialCardView
+    <FrameLayout
         android:id="@+id/cvImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="0dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="26dp"
         android:visibility="visible"
         app:strokeColor="@color/transparent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardBackgroundColor="@color/transparent"
-        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintDimensionRatio="3:4.1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:cardCornerRadius="12dp"
         >
 
         <!--        imvImage-->
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
-    </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
 
     <!--        tvSuccess-->
@@ -59,6 +59,7 @@
         android:text="@string/image_has_been_saved_successfully"
         android:textColor="#ffffff"
         android:textSize="16sp"
+        android:visibility="gone"
         app:outerStrokeWidth="2dp"
         app:outerStrokeColor="@color/app"
         android:layout_marginBottom="16dp"
@@ -75,7 +76,7 @@
         android:visibility="visible"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvImage"
         >
 
         <include

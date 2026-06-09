@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lnlPower"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
+    android:overScrollMode="never"
     android:visibility="gone"
+    android:clipToPadding="true"
+    android:paddingTop="2dp"
     android:background="@drawable/bg_layout_bottom"
     tools:visibility="visible">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
 
     <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvStar"
@@ -20,16 +28,21 @@
         android:shadowRadius=".1"
         android:text="@string/star_rating"
         android:textColor="@color/app"
-        android:textSize="12sp"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:outerStrokeColor="@color/app1"
-        app:outerStrokeWidth=".5dp" />
+        app:outerStrokeWidth=".6dp" />
 
     <com.willy.ratingbar.ScaleRatingBar
         android:id="@+id/btnRatingStar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvStar"
         app:srb_clearRatingEnabled="false"
         app:srb_clickable="true"
@@ -40,9 +53,9 @@
         app:srb_numStars="7"
         app:srb_rating="2"
         app:srb_scrollable="true"
-        app:srb_starHeight="40dp"
+        app:srb_starHeight="44dp"
         app:srb_starPadding="4dp"
-        app:srb_starWidth="40dp"
+        app:srb_starWidth="44dp"
         app:srb_stepSize="1" />
 
     <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
@@ -55,111 +68,146 @@
         android:shadowRadius=".1"
         android:text="@string/star_style"
         android:textColor="@color/app"
-        android:textSize="12sp"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnRatingStar"
         app:outerStrokeColor="@color/app1"
-        app:outerStrokeWidth=".5dp" />
+        app:outerStrokeWidth=".6dp" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="6"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvStyle">
 
         <FrameLayout
             android:id="@+id/btnStarStyle1"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="0dp"
             android:layout_margin="4dp"
             android:background="@drawable/item_uslt_bg"
-            android:layout_weight="1">
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/btnStarStyle2"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/style1_small" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/btnStarStyle2"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="0dp"
             android:layout_margin="4dp"
             android:background="@drawable/item_uslt_bg"
-            android:layout_weight="1">
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/btnStarStyle3"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/btnStarStyle1"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/style2_small" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/btnStarStyle3"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="0dp"
             android:layout_margin="4dp"
             android:background="@drawable/item_uslt_bg"
-            android:layout_weight="1">
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/btnStarStyle4"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/btnStarStyle2"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/style3_small" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/btnStarStyle4"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="0dp"
             android:layout_margin="4dp"
             android:background="@drawable/item_uslt_bg"
-            android:layout_weight="1">
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/btnStarStyle5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/btnStarStyle3"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/style4_small" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/btnStarStyle5"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="0dp"
             android:layout_margin="4dp"
             android:background="@drawable/item_uslt_bg"
-            android:layout_weight="1">
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/btnStarStyle6"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/btnStarStyle4"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/style5_small" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/btnStarStyle6"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="0dp"
             android:layout_margin="4dp"
             android:background="@drawable/item_uslt_bg"
-            android:layout_weight="1">
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/btnStarStyle5"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/style6_small" />
         </FrameLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvEditText"
@@ -189,11 +237,13 @@
         android:shadowRadius=".1"
         android:text="@string/satistics"
         android:textColor="@color/app"
-        android:textSize="12sp"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnStyle"
         app:outerStrokeColor="@color/app1"
-        app:outerStrokeWidth=".5dp" />
+        app:outerStrokeWidth=".6dp" />
 
     <ImageView
         android:layout_width="14dp"
@@ -293,4 +343,6 @@
         app:layout_constraintEnd_toEndOf="@id/tvDef"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

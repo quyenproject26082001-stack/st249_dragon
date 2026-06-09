@@ -34,29 +34,34 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
+                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                     android:id="@+id/tvTitle"
                     style="@style/single_marquee"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="70dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="17dp"
                     android:background="@color/transparent"
                     android:fontFamily="@font/copperplategothic_bold"
                     android:gravity="center"
                     android:text="@string/loadings"
-                    android:textColor="@color/app"
                     android:textSize="28sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:outerStrokeWidth=".5dp"
+                    app:outerStrokeColor="@color/app1"
+                    android:shadowRadius=".1"
+                    android:shadowColor="@color/app2"
+                    android:shadowDy="3"
+                    android:textColor="@color/app" />
 
                 <ImageView
                     android:id="@+id/Icspinning"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:src="@drawable/ic_loading_spinner"
-                    android:tint="@color/app"
+                    android:tint="#2B1A00"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -75,10 +80,14 @@
                     android:layout_marginBottom="25dp"
                     android:paddingHorizontal="24dp"
                     android:text="@string/please_wait"
-                    app:outerStrokeWidth="2dp"
-                    app:outerStrokeColor="@color/app"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    app:outerStrokeWidth=".5dp"
+                    app:outerStrokeColor="@color/app1"
+                    android:shadowRadius=".1"
+                    android:shadowColor="@color/app2"
+                    android:shadowDy="3"
+                    android:textColor="@color/app"
+                    />
 
                 
             </androidx.constraintlayout.widget.ConstraintLayout>

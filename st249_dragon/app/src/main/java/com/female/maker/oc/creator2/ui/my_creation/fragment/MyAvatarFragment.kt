@@ -31,8 +31,10 @@ import com.female.maker.oc.creator2.core.utils.key.IntentKey
 import com.female.maker.oc.creator2.core.utils.key.ValueKey
 import com.female.maker.oc.creator2.core.utils.state.HandleState
 import com.female.maker.oc.creator2.databinding.FragmentMyAvatarBinding
+import com.female.maker.oc.creator2.data.model.custom.DragonCardEditModel
 import com.female.maker.oc.creator2.dialog.YesNoDialog
 import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterActivity
+import com.female.maker.oc.creator2.ui.dragon_webview.DragonWebViewActivity
 import com.female.maker.oc.creator2.ui.edit.EditActivity
 import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterViewModel
 import com.female.maker.oc.creator2.ui.home.DataViewModel
@@ -188,9 +190,22 @@ class MyAvatarFragment : BaseFragment<FragmentMyAvatarBinding>() {
             withContext(Dispatchers.Main) {
                 myAlbumActivity.dismissLoading()
                 if (viewModel.positionCharacter < 0 || viewModel.editModel.itemNavList.isEmpty()) {
-                    val intent = Intent(myAlbumActivity, EditActivity::class.java).apply {
-                        putExtra(IntentKey.EDIT_IMAGE_PATH, pathInternal)
-                        putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
+                    val dragonCard = MediaHelper
+                        .readListFromFile<DragonCardEditModel>(
+                            myAlbumActivity,
+                            ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL
+                        )
+                        .firstOrNull { it.previewPath == pathInternal }
+                    val intent = if (!dragonCard?.selectionState.isNullOrBlank()) {
+                        Intent(myAlbumActivity, DragonWebViewActivity::class.java).apply {
+                            putExtra(DragonWebViewActivity.EXTRA_SELECTION_STATE, dragonCard?.selectionState)
+                            putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
+                        }
+                    } else {
+                        Intent(myAlbumActivity, EditActivity::class.java).apply {
+                            putExtra(IntentKey.EDIT_IMAGE_PATH, pathInternal)
+                            putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
+                        }
                     }
                     val option = ActivityOptions.makeCustomAnimation(
                         myAlbumActivity, R.anim.slide_out_left, R.anim.slide_in_right

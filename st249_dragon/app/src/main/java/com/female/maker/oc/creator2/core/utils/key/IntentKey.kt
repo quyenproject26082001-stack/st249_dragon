@@ -10,4 +10,5 @@ object IntentKey {
     const val TAB_KEY = "TAB_KEY"
     const val EDIT_IMAGE_PATH = "EDIT_IMAGE_PATH"
     const val EDIT_SOURCE_PATH = "EDIT_SOURCE_PATH"
+    const val EDIT_SELECTION_STATE = "EDIT_SELECTION_STATE"
 }

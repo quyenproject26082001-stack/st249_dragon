@@ -658,6 +658,16 @@ function capturePNGForEdit() {
     const dataUrl = UI.canvas.toDataURL('image/png');
     AndroidBridge.onEvent(JSON.stringify({
         type: 'EDIT_READY',
+        data: dataUrl,
+        selectionState: JSON.stringify(STATE.selections)
+    }));
+}
+
+function capturePNGForSuccess() {
+    if (!window.AndroidBridge) return;
+    const dataUrl = UI.canvas.toDataURL('image/png');
+    AndroidBridge.onEvent(JSON.stringify({
+        type: 'SUCCESS_READY',
         data: dataUrl
     }));
 }
@@ -758,6 +768,10 @@ window.dispatch = function(actionJson) {
 
         case 'CAPTURE_FOR_EDIT':
             capturePNGForEdit();
+            break;
+
+        case 'CAPTURE_FOR_SUCCESS':
+            capturePNGForSuccess();
             break;
 
         // Switch active tab: { type, tab }

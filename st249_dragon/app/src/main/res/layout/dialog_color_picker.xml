@@ -11,22 +11,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_16_solid_white_stroke_brown"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:paddingBottom="38dp">
 
-            <TextView
+            <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                 android:id="@+id/tvTitle"
                 style="@style/single_marquee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
+                app:outerStrokeWidth=".5dp"
+                app:outerStrokeColor="@color/app1"
+                android:shadowRadius=".1"
+                android:shadowColor="@color/app2"
+                android:shadowDy="3"
+                android:text="@string/choose_color"
+                android:textColor="@color/app"
                 android:fontFamily="@font/copperplategothic_bold"
                 android:gravity="center"
-                android:text="@string/choose_color"
-                android:textColor="#650016"
+
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="36dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/top"
@@ -82,7 +87,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="end"
                     android:layout_marginStart="26dp"
-                    android:layout_marginTop="46dp"
+                    android:layout_marginTop="56dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/frame_item"
                     app:layout_constraintEnd_toStartOf="@id/btnDone"
@@ -90,7 +95,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                         android:id="@+id/tvClose"
                         style="@style/single_marquee"
                         android:layout_width="match_parent"
@@ -100,10 +105,13 @@
                         android:fontFamily="@font/copperplategothic_bold"
                         android:gravity="center"
                         android:text="@string/cancel"
-                        android:textColor="#ffffff"
                         android:textSize="20sp"
-                        app:outerStrokeColor="@color/app"
-                        app:outerStrokeWidth="2dp" />
+                        app:outerStrokeWidth=".5dp"
+                        app:outerStrokeColor="@color/app1"
+                        android:shadowRadius=".1"
+                        android:shadowColor="@color/app2"
+                        android:shadowDy="3"
+                        android:textColor="@color/app" />
                 </RelativeLayout>
 
                 <!--                btnDone-->
@@ -113,7 +121,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="end"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="46dp"
+                    android:layout_marginTop="56dp"
                     android:layout_marginEnd="26dp"
                     android:background="@drawable/frame_item"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -130,10 +138,13 @@
                         android:fontFamily="@font/copperplategothic_bold"
                         android:gravity="center"
                         android:text="@string/done"
-                        android:textColor="#ffffff"
                         android:textSize="20sp"
-                        app:outerStrokeColor="@color/app"
-                        app:outerStrokeWidth="2dp" />
+                        app:outerStrokeWidth=".5dp"
+                        app:outerStrokeColor="@color/app1"
+                        android:shadowRadius=".1"
+                        android:shadowColor="@color/app2"
+                        android:shadowDy="3"
+                        android:textColor="@color/app"  />
                 </RelativeLayout>
 
                 <RelativeLayout

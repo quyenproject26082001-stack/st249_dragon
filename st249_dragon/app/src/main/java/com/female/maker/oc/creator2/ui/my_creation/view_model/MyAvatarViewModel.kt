@@ -63,6 +63,7 @@ class MyAvatarViewModel : ViewModel() {
             val albumList = (legacyEditList.map { MyAlbumModel(it.pathInternalEdit) } +
                     dragonCardList.map { MyAlbumModel(it.previewPath) })
                 .distinctBy { it.path }
+                .sortedByDescending { java.io.File(it.path).lastModified() }
                 .toCollection(ArrayList())
             _myAvatarList.value = albumList
 
