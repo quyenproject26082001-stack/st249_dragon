@@ -201,7 +201,7 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
         ) { result ->
             if (result == "true") {
                 binding.dragonWebView.evaluateJavascript(
-                    """window.dispatch('{"type":"GET_STATE"}')"""
+                    """window.dispatch('{"type":"GET_EDITABLE_STATE"}')"""
                 ) { rawState ->
                     val stateJson = try {
                         (JSONTokener(rawState).nextValue() as? String).orEmpty()

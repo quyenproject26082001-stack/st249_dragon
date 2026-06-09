@@ -285,14 +285,16 @@ class DragonWebViewActivity : AppCompatActivity() {
             root.keys().forEach { key ->
                 val item = root.optJSONObject(key) ?: return@forEach
                 if (item.has("style")) {
-                    val value = item.optString("style")
-                    selectedStyles[key] = value
-                    dispatch("SET_STYLE", "partId" to key, "value" to value)
-                }
-                if (item.has("color")) {
-                    dispatch("SET_COLOR", "colorId" to key, "hex" to item.optString("color"))
+                    selectedStyles[key] = item.optString("style")
                 }
             }
+            val action = JSONObject()
+                .put("type", "APPLY_STATE")
+                .put("state", root)
+            binding.webView.evaluateJavascript(
+                "window.dispatch(${JSONObject.quote(action.toString())})",
+                null
+            )
             adapter.setSelectedValues(selectedStyles)
         } catch (e: Exception) {
             android.util.Log.e("DragonWebView", "applySelectionState:${e.message}")

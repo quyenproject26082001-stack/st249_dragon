@@ -297,3 +297,45 @@ Lý do
 Kết quả mới
 - Luồng `random -> save -> edit lại` ổn định hơn.
 - Những gì bị random đều là những gì editor hiện tại có thể khôi phục và chỉnh tiếp.
+
+14. Bổ sung mới nhất: lọc state khi edit từ màn Trending
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/trending/TrendingActivity.kt`
+
+Những gì đã thay đổi
+- `builder.js` thêm `serializeEditableSelections()`.
+- `getEditablePartIds()` và `getEditableColorIds()` được chuẩn hóa bằng `Set` để bỏ trùng.
+- `dispatch('GET_EDITABLE_STATE')` trả về đúng phần state mà editor native đang hỗ trợ:
+  + các `partId` có `style`
+  + các `colorId` có `color`
+- `TrendingActivity.kt` không còn lấy `GET_STATE` đầy đủ khi bấm edit.
+- Thay vào đó, màn Trending lấy `GET_EDITABLE_STATE` rồi mới mở `DragonWebViewActivity`.
+
+Lý do
+- Màn Trending chỉ cần chuyển sang editor với phần state có thể edit lại được.
+- Việc truyền cả state full không giúp thêm gì cho luồng edit, nhưng tăng rủi ro mang theo dữ liệu thừa hoặc field không cần thiết.
+
+Kết quả mới
+- Luồng `Trending -> Edit` gọn hơn và ổn định hơn.
+- Khi random rồi bấm edit, state đưa sang `DragonWebViewActivity` khớp đúng với phạm vi editor hiện tại quản lý.
+15. Bổ sung mới nhất: apply state bằng batch khi mở editor
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+
+Những gì đã thay đổi
+- `builder.js` thêm action `APPLY_STATE`.
+- `DragonWebViewActivity.kt` không còn loop từng item để gọi `SET_STYLE` / `SET_COLOR`.
+- Khi nhận `selectionState`, native gửi một batch state duy nhất sang WebView.
+- WebView merge state, render panel, focus item đang chọn và `updatePreview()` một lần.
+
+Lý do
+- Với state từ màn Trending sau `RANDOMIZE_ALL`, số lượng trait và màu khá nhiều.
+- Gọi nhiều lệnh JS liên tiếp trong lúc editor mới load có thể làm WebView render chồng nhau, nặng và dễ gây thoát/crash trên máy yếu.
+
+Kết quả mới
+- Luồng `Trending -> random -> edit` nhẹ hơn khi mở `DragonWebViewActivity`.
+- State random all vẫn được giữ, nhưng editor không render lặp hàng chục lần khi vừa vào màn.

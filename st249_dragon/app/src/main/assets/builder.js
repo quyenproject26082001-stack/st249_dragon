@@ -267,17 +267,37 @@ function centerSelectedThumbsInCurrentTab() {
 }
 
 function getEditablePartIds() {
-    return Object.values(CONFIG.TAB_ROWS)
+    return [...new Set(Object.values(CONFIG.TAB_ROWS)
         .flat()
         .map(row => row.partId)
-        .filter(Boolean);
+        .filter(Boolean))];
 }
 
 function getEditableColorIds() {
-    return Object.values(CONFIG.TAB_ROWS)
+    return [...new Set(Object.values(CONFIG.TAB_ROWS)
         .flat()
         .map(row => row.colorId)
-        .filter(Boolean);
+        .filter(Boolean))];
+}
+
+function serializeEditableSelections() {
+    const editableState = {};
+
+    getEditablePartIds().forEach(partId => {
+        const sel = STATE.selections[partId];
+        if (sel?.style != null) {
+            editableState[partId] = { style: sel.style };
+        }
+    });
+
+    getEditableColorIds().forEach(colorId => {
+        const sel = STATE.selections[colorId];
+        if (sel?.color != null) {
+            editableState[colorId] = { color: sel.color };
+        }
+    });
+
+    return JSON.stringify(editableState);
 }
 
 // ---- Color wheel button ----
@@ -757,6 +777,25 @@ window.dispatch = function(actionJson) {
         // Override 1 layer bằng URL từ API/Kotlin
         // { type: "SET_LAYER", partId: "breath", url: "https://api.example.com/fire.png" }
         // Để xóa override: { type: "SET_LAYER", partId: "breath", url: "" }
+        case 'APPLY_STATE': {
+            const nextState = action.state || {};
+            Object.entries(nextState).forEach(([id, value]) => {
+                const sel = STATE.selections[id];
+                if (!sel || !value) return;
+                if (value.style != null && sel.style != null) {
+                    sel.style = value.style;
+                }
+                if (value.color != null && sel.color != null) {
+                    sel.color = value.color;
+                }
+            });
+            STATE.layers = {};
+            renderPanel();
+            centerSelectedThumbsInCurrentTab();
+            updatePreview();
+            break;
+        }
+
         case 'SET_LAYER': {
             const { partId, url } = action;
             if (!partId) { console.warn('[dispatch] SET_LAYER missing partId'); return; }
@@ -842,6 +881,9 @@ window.dispatch = function(actionJson) {
         // Kotlin: webView.evaluateJavascript("window.dispatch({type:'GET_STATE'})", { result -> })
         case 'GET_STATE':
             return JSON.stringify(STATE.selections);
+
+        case 'GET_EDITABLE_STATE':
+            return serializeEditableSelections();
 
         default:
             console.warn('[dispatch] Unknown action type:', action.type);
