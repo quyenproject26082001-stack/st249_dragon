@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.view.LayoutInflater
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Lifecycle
@@ -20,7 +19,6 @@ import com.female.maker.oc.creator2.core.extensions.handleBackLeftToRight
 import com.female.maker.oc.creator2.core.extensions.hideNavigation
 import com.female.maker.oc.creator2.core.extensions.invisible
 import com.female.maker.oc.creator2.core.extensions.loadImage
-import com.female.maker.oc.creator2.core.extensions.loadImageFromFile
 import com.female.maker.oc.creator2.core.extensions.loadNativeCollabAds
 import com.female.maker.oc.creator2.core.extensions.requestPermission
 import com.female.maker.oc.creator2.core.extensions.select
@@ -30,29 +28,28 @@ import com.female.maker.oc.creator2.core.extensions.showInterAll
 import com.female.maker.oc.creator2.core.extensions.strings
 import com.female.maker.oc.creator2.core.extensions.tap
 import com.female.maker.oc.creator2.core.helper.LanguageHelper
+import com.female.maker.oc.creator2.core.helper.MediaHelper
 import com.female.maker.oc.creator2.core.helper.UnitHelper
 import com.female.maker.oc.creator2.core.utils.key.IntentKey
 import com.female.maker.oc.creator2.core.utils.key.RequestKey
 import com.female.maker.oc.creator2.core.utils.key.ValueKey
 import com.female.maker.oc.creator2.core.utils.state.HandleState
+import com.female.maker.oc.creator2.data.model.custom.DragonCardEditModel
 import com.female.maker.oc.creator2.databinding.ActivityViewBinding
 import com.female.maker.oc.creator2.dialog.YesNoDialog
-import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterActivity
-import com.female.maker.oc.creator2.ui.home.DataViewModel
+import com.female.maker.oc.creator2.ui.dragon_webview.DragonWebViewActivity
+import com.female.maker.oc.creator2.ui.edit.EditActivity
 import com.female.maker.oc.creator2.ui.my_creation.fragment.MyAvatarFragment
 import com.female.maker.oc.creator2.ui.my_creation.MyCreationActivity
-import com.female.maker.oc.creator2.ui.my_creation.view_model.MyAvatarViewModel
 import com.female.maker.oc.creator2.ui.permission.PermissionViewModel
 import com.google.protobuf.value
+import java.io.File
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ViewActivity : BaseActivity<ActivityViewBinding>() {
     private val viewModel: ViewViewModel by viewModels()
-    private val myAvatarViewModel: MyAvatarViewModel by viewModels()
-    private val dataViewModel: DataViewModel by viewModels()
     private val permissionViewModel: PermissionViewModel by viewModels()
 
     override fun setViewBinding(): ActivityViewBinding {
@@ -60,13 +57,24 @@ class ViewActivity : BaseActivity<ActivityViewBinding>() {
     }
 
     override fun initView() {
-        dataViewModel.ensureData(this)
         viewModel.setPath(intent.getStringExtra(IntentKey.INTENT_KEY)!!)
         viewModel.updateStatusFrom(intent.getIntExtra(IntentKey.STATUS_KEY, ValueKey.AVATAR_TYPE))
+        resolveDisplayPath()
         binding.lnlBottom.isSelected = true
 
         setButtonBackgrounds()
         setupUI()
+    }
+
+    private fun resolveDisplayPath() {
+        if (viewModel.statusFrom != ValueKey.AVATAR_TYPE) return
+        val dragonCard = MediaHelper
+            .readListFromFile<DragonCardEditModel>(this, ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL)
+            .firstOrNull { it.previewPath == viewModel.pathInternal.value }
+        val dragonImagePath = dragonCard?.dragonImagePath.orEmpty()
+        if (dragonImagePath.isNotEmpty() && File(dragonImagePath).exists()) {
+            viewModel.setDisplayPath(dragonImagePath)
+        }
     }
 
     private fun setButtonBackgrounds() {
@@ -98,20 +106,10 @@ class ViewActivity : BaseActivity<ActivityViewBinding>() {
         }
     }
 
-    private val editLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val newPath =
-                    result.data?.getStringExtra("NEW_PATH") ?: return@registerForActivityResult
-                viewModel.setPath(newPath)
-                binding.imvImage.loadImageFromFile(newPath)
-            }
-        }
-
     override fun dataObservable() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.pathInternal.collect { path ->
+                viewModel.displayPath.collect { path ->
                     loadImage(this@ViewActivity, path, binding.imvImage)
                 }
             }
@@ -254,23 +252,27 @@ class ViewActivity : BaseActivity<ActivityViewBinding>() {
 
     private fun handleEditClick(pathInternal: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            showLoading()
-            myAvatarViewModel.editItem(this@ViewActivity, pathInternal, dataViewModel.allData.value)
+            val dragonCard = MediaHelper
+                .readListFromFile<DragonCardEditModel>(
+                    this@ViewActivity,
+                    ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL
+                )
+                .firstOrNull { it.previewPath == pathInternal }
 
             withContext(Dispatchers.Main) {
-                delay(300)
-                dismissLoading()
-
-                myAvatarViewModel.checkDataInternet(this@ViewActivity) {
-                    val intent =
-                        Intent(this@ViewActivity, CustomizeCharacterActivity::class.java).apply {
-                            putExtra(IntentKey.INTENT_KEY, myAvatarViewModel.positionCharacter)
-                            putExtra(IntentKey.STATUS_FROM_KEY, ValueKey.EDIT)
-                        }
-
-                    showInterAll { editLauncher.launch(intent) }
-                    overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right)
+                val intent = if (!dragonCard?.selectionState.isNullOrBlank()) {
+                    Intent(this@ViewActivity, DragonWebViewActivity::class.java).apply {
+                        putExtra(DragonWebViewActivity.EXTRA_SELECTION_STATE, dragonCard?.selectionState)
+                        putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
+                    }
+                } else {
+                    Intent(this@ViewActivity, EditActivity::class.java).apply {
+                        putExtra(IntentKey.EDIT_IMAGE_PATH, pathInternal)
+                        putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
+                    }
                 }
+                showInterAll { startActivity(intent) }
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right)
             }
         }
     }

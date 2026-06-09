@@ -27,7 +27,6 @@ import com.female.maker.oc.creator2.core.utils.key.ValueKey
 import com.female.maker.oc.creator2.core.utils.state.HandleState
 import com.female.maker.oc.creator2.databinding.FragmentMyDesignBinding
 import com.female.maker.oc.creator2.dialog.YesNoDialog
-import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterActivity
 import com.female.maker.oc.creator2.ui.home.DataViewModel
 import com.female.maker.oc.creator2.ui.my_creation.MyCreationActivity
 import com.female.maker.oc.creator2.ui.my_creation.view_model.MyCreationViewModel

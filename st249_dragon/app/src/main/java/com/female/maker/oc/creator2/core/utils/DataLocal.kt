@@ -85,11 +85,11 @@ object DataLocal {
             SelectedModel(color = R.font.aldrich),
             SelectedModel(color = R.font.brush_script),
             SelectedModel(color = R.font.nova_script),
-            SelectedModel(color = R.font.carattere),
+            SelectedModel(color = R.font.pixelifysans_regular),
             SelectedModel(color = R.font.digital_numbers),
-            SelectedModel(color = R.font.dynalight),
-            SelectedModel(color = R.font.edwardian_script_itc),
-            SelectedModel(color = R.font.vni_ongdo)
+            SelectedModel(color = R.font.copperplategothic_bold),
+            SelectedModel(color = R.font.cherry_bomb_regular),
+            SelectedModel(color = R.font.toruksc_regular)
         )
     }
 

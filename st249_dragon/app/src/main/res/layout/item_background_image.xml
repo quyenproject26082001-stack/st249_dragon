@@ -60,7 +60,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="389dp"
-                        android:layout_weight="1.8" />
+                        android:layout_weight="2.8" />
 
                     <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
                         android:id="@+id/tvAddImg"
@@ -78,10 +78,7 @@
                         android:fontFamily="@font/copperplategothic_bold"
                         android:textSize="10sp" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0." />
+
 
                 </LinearLayout>
 

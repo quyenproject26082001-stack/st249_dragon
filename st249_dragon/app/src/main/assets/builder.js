@@ -224,6 +224,7 @@ function renderPanel() {
 
         const section = document.createElement('div');
         section.className = 'trait-section';
+        section.dataset.partId = partId;
 
         // Label
         const lbl = document.createElement('div');
@@ -249,6 +250,34 @@ function renderPanel() {
         section.appendChild(row);
         UI.panelContent.appendChild(section);
     });
+}
+
+function centerSelectedThumbsInCurrentTab() {
+    requestAnimationFrame(() => {
+        UI.panelContent.querySelectorAll('.thumb-strip').forEach(strip => {
+            const selected = strip.querySelector('.thumb-card.selected');
+            if (!selected) return;
+            selected.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+        });
+    });
+}
+
+function getEditablePartIds() {
+    return Object.values(CONFIG.TAB_ROWS)
+        .flat()
+        .map(row => row.partId)
+        .filter(Boolean);
+}
+
+function getEditableColorIds() {
+    return Object.values(CONFIG.TAB_ROWS)
+        .flat()
+        .map(row => row.colorId)
+        .filter(Boolean);
 }
 
 // ---- Color wheel button ----
@@ -364,6 +393,15 @@ function appendThumbCanvas(cardEl, tc) {
 // ============================================================
 //  MAIN PREVIEW RENDERING
 // ============================================================
+function notifyRenderComplete() {
+    if (!window.AndroidBridge || typeof window.AndroidBridge.onEvent !== 'function') return;
+    try {
+        window.AndroidBridge.onEvent(JSON.stringify({ type: 'RENDER_COMPLETE' }));
+    } catch (e) {
+        console.warn('[render] notifyRenderComplete failed:', e);
+    }
+}
+
 async function updatePreview() {
     UI.loading.classList.remove('hidden');
 
@@ -378,7 +416,11 @@ async function updatePreview() {
     );
 
     const reference = layers.find(l => l.img);
-    if (!reference) { UI.loading.classList.add('hidden'); return; }
+    if (!reference) {
+        UI.loading.classList.add('hidden');
+        notifyRenderComplete();
+        return;
+    }
 
     const assetW = reference.img.width;
     const assetH = reference.img.height;
@@ -394,6 +436,7 @@ async function updatePreview() {
     UI.ctx.restore();
 
     UI.loading.classList.add('hidden');
+    notifyRenderComplete();
 }
 
 function getDrawOrder() {
@@ -610,18 +653,21 @@ function recolorImage(img, color) {
 //  RANDOMIZE
 // ============================================================
 function randomizeTraits() {
-    for (let id in STATE.data.selects) {
-        const opts = STATE.data.selects[id].options;
+    getEditablePartIds().forEach(id => {
+        const opts = STATE.data.selects[id]?.options;
+        if (!opts || opts.length === 0) return;
         STATE.selections[id].style = opts[Math.floor(Math.random() * opts.length)].value;
-    }
+    });
     STATE.layers = {};
     renderPanel();
+    centerSelectedThumbsInCurrentTab();
     updatePreview();
 }
 
 function randomizeColors() {
-    STATE.data.color_inputs.forEach(ci => {
-        STATE.selections[ci.id].color = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    getEditableColorIds().forEach(colorId => {
+        if (!STATE.selections[colorId]) return;
+        STATE.selections[colorId].color = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
     });
     STATE.layers = {};
     renderPanel();
@@ -668,7 +714,8 @@ function capturePNGForSuccess() {
     const dataUrl = UI.canvas.toDataURL('image/png');
     AndroidBridge.onEvent(JSON.stringify({
         type: 'SUCCESS_READY',
-        data: dataUrl
+        data: dataUrl,
+        selectionState: JSON.stringify(STATE.selections)
     }));
 }
 

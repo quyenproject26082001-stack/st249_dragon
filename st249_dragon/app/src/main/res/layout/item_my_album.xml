@@ -42,15 +42,17 @@
                 android:scaleType="centerCrop"
                 tools:src="@drawable/img_splash_bg" />
 
-        <ImageView
-            android:id="@+id/imvImageOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:background="#66000000"
-             />
+
 
         </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/imvImageOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="#66000000"
+        />
 
     <!--btnDelete-->
     <ImageView

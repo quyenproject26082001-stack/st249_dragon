@@ -58,19 +58,20 @@
                 app:outerStrokeWidth=".6dp"
                 android:shadowColor="@color/app2"
                 android:textColor="@color/app"
+                android:shadowDy="3"
+                android:shadowRadius=".1"
                 android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvDescribeFont"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="13dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="10dp"
                 android:clipChildren="false"
                 android:clipToPadding="true"
                 android:orientation="horizontal"
-                android:paddingHorizontal="0.5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_font" />
 
@@ -95,12 +96,11 @@
                 android:id="@+id/rcvDescribeTextColor"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
                 android:clipToPadding="true"
                 android:orientation="horizontal"
-                android:paddingHorizontal="0.5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_text_color" />
 

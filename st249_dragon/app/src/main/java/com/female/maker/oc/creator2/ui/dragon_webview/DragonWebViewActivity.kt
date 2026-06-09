@@ -32,8 +32,10 @@ import com.female.maker.oc.creator2.core.extensions.invisible
 import com.female.maker.oc.creator2.core.extensions.tap
 import com.female.maker.oc.creator2.core.extensions.tapAndHold
 import com.female.maker.oc.creator2.core.extensions.visible
+import com.female.maker.oc.creator2.core.helper.MediaHelper
 import com.female.maker.oc.creator2.core.utils.key.IntentKey
 import com.female.maker.oc.creator2.core.utils.key.ValueKey
+import com.female.maker.oc.creator2.data.model.custom.DragonCardEditModel
 import com.female.maker.oc.creator2.dialog.DialogType
 import com.female.maker.oc.creator2.dialog.YesNoDialog
 import com.female.maker.oc.creator2.ui.edit.EditActivity
@@ -106,6 +108,7 @@ class DragonWebViewActivity : AppCompatActivity() {
             builtInZoomControls = false
             displayZoomControls = false
         }
+        binding.webView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
 
         binding.webView.addJavascriptInterface(DragonBridge(this), "AndroidBridge")
 
@@ -120,6 +123,7 @@ class DragonWebViewActivity : AppCompatActivity() {
                 super.onPageFinished(view, url)
                 binding.webView.evaluateJavascript(
                     """
+                    document.documentElement.classList.add('native-transparent');
                     document.body.classList.add('native-transparent');
                     document.querySelector('.bottom-tabs').style.display='none';
                     document.querySelector('.top-bar').style.display='none';
@@ -143,7 +147,7 @@ class DragonWebViewActivity : AppCompatActivity() {
         binding.actionBar.apply {
             btnActionBarLeft.visibility = android.view.View.VISIBLE
             btnActionBarLeft.setImageResource(R.drawable.ic_back)
-            btnActionBarLeft.setOnClickListener { handleBackLeftToRight() }
+            btnActionBarLeft.setOnClickListener { confirmExit() }
 
             btnActionBarCenter.visibility = android.view.View.VISIBLE
             btnActionBarCenter.setImageResource(R.drawable.ic_reset)
@@ -225,6 +229,28 @@ class DragonWebViewActivity : AppCompatActivity() {
         dialog.onYesClick = {
             closeDialog()
             dispatch("RESET")
+        }
+    }
+
+    private fun confirmExit() {
+        val dialog = YesNoDialog(
+            this,
+            R.string.exit,
+            R.string.do_you_want_to_exit,
+            dialogType = DialogType.RESET
+        )
+        dialog.show()
+
+        fun closeDialog() {
+            dialog.dismiss()
+            hideNavigation()
+        }
+
+        dialog.onNoClick = { closeDialog() }
+        dialog.onYesClick = {
+            closeDialog()
+            finish()
+            handleBackLeftToRight()
         }
     }
 
@@ -355,9 +381,10 @@ class DragonWebViewActivity : AppCompatActivity() {
         }
     }
 
-    fun openSuccess(dataUrl: String) {
+    fun openSuccess(dataUrl: String, selectionState: String = "") {
         try {
             val file = saveDragonPng(dataUrl, persistToAlbum = true)
+            registerSavedDragon(file, selectionState)
             runOnUiThread {
                 startActivity(
                     Intent(this, SuccessActivity::class.java).apply {
@@ -369,6 +396,47 @@ class DragonWebViewActivity : AppCompatActivity() {
         } catch (e: Exception) {
             android.util.Log.e("DragonWebView", "openSuccess:${e.message}")
         }
+    }
+
+    private fun registerSavedDragon(file: File, selectionState: String) {
+        val list = MediaHelper
+            .readListFromFile<DragonCardEditModel>(this, ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL)
+            .toCollection(ArrayList())
+
+        val index = if (editSourcePath.isNotEmpty()) {
+            list.indexOfFirst { it.previewPath == editSourcePath }
+        } else {
+            -1
+        }
+
+        val existing = list.getOrNull(index)
+        val model = DragonCardEditModel(
+            id = existing?.id ?: "dragon_card_${System.currentTimeMillis()}",
+            previewPath = file.absolutePath,
+            dragonImagePath = file.absolutePath,
+            nameTag = existing?.nameTag.orEmpty(),
+            nameFont = existing?.nameFont ?: 0,
+            nameColor = existing?.nameColor ?: 0,
+            describe = existing?.describe.orEmpty(),
+            describeFont = existing?.describeFont ?: 0,
+            describeColor = existing?.describeColor ?: 0,
+            starRating = existing?.starRating ?: 2,
+            starStyle = existing?.starStyle ?: 1,
+            atk = existing?.atk.orEmpty(),
+            def = existing?.def.orEmpty(),
+            bgImageColor = existing?.bgImageColor ?: 0,
+            bgTagColor = existing?.bgTagColor ?: 0,
+            bgImagePath = existing?.bgImagePath.orEmpty(),
+            bgTagPath = existing?.bgTagPath.orEmpty(),
+            selectionState = selectionState.ifEmpty { existing?.selectionState.orEmpty() }
+        )
+
+        if (index >= 0) {
+            list[index] = model
+        } else {
+            list.add(0, model)
+        }
+        MediaHelper.writeListToFile(this, ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL, list)
     }
 
     private fun saveDragonPng(dataUrl: String, persistToAlbum: Boolean = false): File {

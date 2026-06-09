@@ -311,7 +311,7 @@ class MyCreationActivity : WhatsappSharingActivity<ActivityAlbumBinding>() {
     override fun initActionBar() {
         binding.actionBar.apply {
             setImageActionBar(btnActionBarLeft, R.drawable.ic_back)
-            setTextActionBar(tvCenter, getString(R.string.my_work))
+            setTextActionBar(tvCenter, getString(R.string.my_creation))
             tvCenter.select()
             binding.actionBar.spTvCenter.visible()
 

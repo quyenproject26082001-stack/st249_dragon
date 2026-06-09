@@ -43,7 +43,7 @@ class MyAvatarAdapter(val context: Context) :
     override fun onBind(binding: ItemMyAlbumBinding, item: MyAlbumModel, position: Int) {
         binding.apply {
             // Optimized Glide loading with thumbnail, size override, and caching
-            val file = File(item.path)
+            val file = File(item.displayPath)
             Glide.with(context)
                 .load(file)
                 .thumbnail(0.1f) // Load 10% quality thumbnail first

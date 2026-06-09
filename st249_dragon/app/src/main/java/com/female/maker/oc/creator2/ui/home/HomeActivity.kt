@@ -22,7 +22,6 @@ import com.female.maker.oc.creator2.core.utils.state.RateState
 import com.female.maker.oc.creator2.databinding.ActivityHomeBinding
 import com.female.maker.oc.creator2.ui.SettingsActivity
 import com.female.maker.oc.creator2.ui.my_creation.MyCreationActivity
-import com.female.maker.oc.creator2.ui.choose_character.ChooseCharacterActivity
 import com.female.maker.oc.creator2.core.extensions.tap
 import com.female.maker.oc.creator2.core.extensions.strings
 import com.female.maker.oc.creator2.core.helper.InternetHelper
@@ -31,7 +30,6 @@ import com.female.maker.oc.creator2.dialog.DialogType
 import com.female.maker.oc.creator2.dialog.YesNoDialog
 import com.female.maker.oc.creator2.ui.add_character.AddCharacterActivity
 import com.female.maker.oc.creator2.ui.dragon_webview.DragonWebViewActivity
-import com.female.maker.oc.creator2.ui.random_character.RandomCharacterActivity
 import com.female.maker.oc.creator2.ui.trending.TrendingActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -62,7 +60,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun viewListener() {
         binding.apply {
             actionBar.btnActionBarRight.tap(800) { startIntentRightToLeft(SettingsActivity::class.java) }
-            //btnMaker.tap(800) { checkDataInternet(this@HomeActivity){ startIntentRightToLeft(ChooseCharacterActivity::class.java) }}
             btnMaker.tap(2000){ startIntentRightToLeft(DragonWebViewActivity::class.java)}
             btnMyCreation.tap(800) { showInterAll { startIntentRightToLeft(MyCreationActivity::class.java) } }
            btnRandom.tap(800) { checkDataInternet(this@HomeActivity){showInterAll {startIntentRightToLeft(

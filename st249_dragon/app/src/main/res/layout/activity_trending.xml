@@ -61,7 +61,7 @@
 
     <FrameLayout
         android:id="@+id/btnDownload"
-        android:layout_width="133dp"
+        android:layout_width="153dp"
         android:layout_height="0dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
             android:id="@+id/tvDownloadTrending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/random"
+            android:text="@string/download"
             android:fontFamily="@font/copperplategothic_bold"
             android:textColor="@color/app"
             app:outerStrokeWidth=".5dp"
@@ -102,7 +102,7 @@
 
     <FrameLayout
         android:id="@+id/btnGenerate"
-        android:layout_width="133dp"
+        android:layout_width="153dp"
         android:layout_height="0dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintStart_toEndOf="@id/btnDownload"

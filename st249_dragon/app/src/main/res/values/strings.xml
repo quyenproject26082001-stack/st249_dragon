@@ -66,7 +66,7 @@
     <string name="an_error_occurred">An error occurred, please try again later.</string>
     <string name="image_has_been_saved_successfully">Image has been saved successfully!</string>
     <string name="save">Save</string>
-    <string name="are_you_sure_want_to_delete_this_item">Do you want to delete?</string>
+    <string name="are_you_sure_want_to_delete_this_item">Are you sure want to delete this item?</string>
     <string name="downloading">Downloading...</string>
     <string name="successfully">Successful</string>
     <string name="download_failed_please_try_again_later">Download failed, please try again later!</string>
@@ -75,7 +75,7 @@
     <string name="my_creation">My Creation</string>
     <string name="delete_your_customize">Delete your customize</string>
     <string name="are_you_sure_you_want_to_delete_the_image">Are you sure you want to delete the image?</string>
-    <string name="haven_t_saved_it_yet_do_you_want_to_exit">Haven’t saved it yet, are you sure to exit?</string>
+    <string name="haven_t_saved_it_yet_do_you_want_to_exit">Haven’t saved it yet, do you want to exit?</string>
     <string name="change_your_whole_design_are_you_sure">Do you want to reset all?</string>
     <string name="character_maker">Pixel Maker</string>
     <string name="no_current_history">No current history</string>
@@ -124,7 +124,7 @@
     <string name="bag_maker">Bag Maker</string>
     <string name="quickmaketitle">Quick Make</string>
     <string name="my_pony">My Pony</string>
-    <string name="do_you_want_to_exit">Haven’t saved it yet, \ndo you want to exit?</string>
+    <string name="do_you_want_to_exit">Haven’t saved it yet, do you want to exit?</string>
     <string name="pfp_random">Pride PFP Random</string>
     <string name="trending_tv">Pride PFP Trending</string>
     <string name="pride_pfp_overlay">Pride PFP Overlay</string>

@@ -40,6 +40,13 @@ html, body {
     position: relative;
 }
 
+body.native-preview .top-bar,
+body.native-preview .action-row,
+body.native-preview .panel-area,
+body.native-preview .bottom-tabs {
+    display: none !important;
+}
+
 /* ===== TOP BAR ===== */
 .top-bar {
     position: absolute;
@@ -146,6 +153,11 @@ html, body {
     object-fit: contain;
 }
 
+html.native-transparent,
+html.native-transparent body,
+html.native-transparent #app,
+html.native-transparent .preview-area,
+html.native-transparent #dragonCanvas,
 body.native-transparent,
 body.native-transparent #app,
 body.native-transparent .preview-area,
@@ -153,6 +165,9 @@ body.native-transparent #dragonCanvas {
     background: transparent !important;
 }
 
+html.native-transparent .preview-area::before,
+html.native-transparent .preview-area::after,
+html.native-transparent #loadingOverlay,
 body.native-transparent .preview-area::before,
 body.native-transparent .preview-area::after,
 body.native-transparent #loadingOverlay {

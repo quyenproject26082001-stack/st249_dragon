@@ -23,7 +23,9 @@
   <WebView
       android:layout_width="0dp"
       android:layout_height="0dp"
-      app:layout_constraintBottom_toTopOf="@id/rvPanel"
+      android:layout_marginBottom="30dp"
+      android:background="@android:color/transparent"
+      app:layout_constraintBottom_toTopOf="@id/btnRandomTraits"
       app:layout_constraintTop_toBottomOf="@id/layoutActionBar"
       android:id="@+id/webView"
       app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +102,7 @@
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@id/rvPanel"
-        tools:visibility="visible">
+        tools:visibility="gone">
         
         <ImageView
             android:layout_width="40dp"
@@ -139,7 +141,8 @@
             android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginHorizontal="56dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -346,7 +349,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPanel"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         tools:listitem="@layout/item_part_row"
         tools:itemCount="10"
         android:background="@drawable/bg_webview"
@@ -394,7 +397,7 @@
                 app:outerStrokeColor="#2B1A00"
                 app:outerStrokeWidth="1dp"
                 android:fontFamily="@font/copperplategothic_bold"
-                android:textSize="14sp" />
+                android:textSize="13.5sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -419,7 +422,8 @@
                 android:textColor="@color/app"
                 app:outerStrokeColor="#2B1A00"
                 app:outerStrokeWidth="1dp"
-                android:textSize="14sp" />
+                android:textSize="13.5sp"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -444,7 +448,7 @@
                 app:outerStrokeColor="#2B1A00"
                 app:outerStrokeWidth="1dp"
                 android:fontFamily="@font/copperplategothic_bold"
-                android:textSize="14sp" />
+                android:textSize="13.5sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -469,7 +473,7 @@
                 app:outerStrokeColor="#2B1A00"
                 app:outerStrokeWidth="1dp"
                 android:fontFamily="@font/copperplategothic_bold"
-                android:textSize="14sp" />
+                android:textSize="13.5sp"                />
         </LinearLayout>
 
         <LinearLayout

@@ -70,8 +70,10 @@
                     android:textSize="18sp"
                     app:outerStrokeWidth="2dp"
                     android:gravity="center"
-                    app:outerStrokeColor="@color/app"
-                    android:textColor="#2B1A00"
+                    app:outerStrokeColor="@color/app1"
+                    android:shadowColor="@color/app2"
+                    android:shadowRadius=".1"
+                    android:textColor="@color/white"
                     app:layout_constraintTop_toBottomOf="@id/tvTitle"
                     tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
 
@@ -99,6 +101,8 @@
                         android:layout_weight="1"
                         android:background="@drawable/frame_item"
                         android:text="@string/no"
+                        app:outerStrokeColor="@color/app1"
+                        android:textColor="@color/app"
                         android:textSize="20sp"
                         android:paddingVertical="6dp" />
 
@@ -112,6 +116,8 @@
                         android:background="@drawable/frame_item"
                         android:text="@string/yes"
                         android:textSize="20sp"
+                        app:outerStrokeColor="@color/app1"
+                        android:textColor="@color/app"
                         android:paddingVertical="9dp" />
                 </LinearLayout>
 

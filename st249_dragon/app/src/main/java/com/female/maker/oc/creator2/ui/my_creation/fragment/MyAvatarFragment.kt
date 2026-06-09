@@ -33,11 +33,8 @@ import com.female.maker.oc.creator2.core.utils.state.HandleState
 import com.female.maker.oc.creator2.databinding.FragmentMyAvatarBinding
 import com.female.maker.oc.creator2.data.model.custom.DragonCardEditModel
 import com.female.maker.oc.creator2.dialog.YesNoDialog
-import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterActivity
 import com.female.maker.oc.creator2.ui.dragon_webview.DragonWebViewActivity
 import com.female.maker.oc.creator2.ui.edit.EditActivity
-import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterViewModel
-import com.female.maker.oc.creator2.ui.home.DataViewModel
 import com.female.maker.oc.creator2.ui.my_creation.MyCreationActivity
 import com.female.maker.oc.creator2.ui.my_creation.view_model.MyCreationViewModel
 import com.female.maker.oc.creator2.ui.my_creation.adapter.MyAvatarAdapter
@@ -49,7 +46,6 @@ import kotlinx.coroutines.withContext
 
 class MyAvatarFragment : BaseFragment<FragmentMyAvatarBinding>() {
     private val viewModel: MyAvatarViewModel by viewModels()
-    private val dataViewModel: DataViewModel by viewModels()
     private val myCreationViewModel: MyCreationViewModel by activityViewModels()
     private val myAvatarAdapter by lazy { MyAvatarAdapter(requireActivity()) }
 
@@ -62,7 +58,6 @@ class MyAvatarFragment : BaseFragment<FragmentMyAvatarBinding>() {
 
     override fun initView() {
         initRcv()
-        dataViewModel.ensureData(myAlbumActivity)
         // ✅ FIX: Removed redundant loadMyAvatar() - onStart() will handle it
         android.util.Log.d("MyAvatarFragment", "initView() - NOT loading data (onStart will do it)")
     }
@@ -185,43 +180,28 @@ class MyAvatarFragment : BaseFragment<FragmentMyAvatarBinding>() {
 
     private fun handleEditClick(pathInternal: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            myAlbumActivity.showLoading()
-            viewModel.editItem(myAlbumActivity, pathInternal, dataViewModel.allData.value)
+            val dragonCard = MediaHelper
+                .readListFromFile<DragonCardEditModel>(
+                    myAlbumActivity,
+                    ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL
+                )
+                .firstOrNull { it.previewPath == pathInternal }
             withContext(Dispatchers.Main) {
-                myAlbumActivity.dismissLoading()
-                if (viewModel.positionCharacter < 0 || viewModel.editModel.itemNavList.isEmpty()) {
-                    val dragonCard = MediaHelper
-                        .readListFromFile<DragonCardEditModel>(
-                            myAlbumActivity,
-                            ValueKey.DRAGON_CARD_EDIT_FILE_INTERNAL
-                        )
-                        .firstOrNull { it.previewPath == pathInternal }
-                    val intent = if (!dragonCard?.selectionState.isNullOrBlank()) {
-                        Intent(myAlbumActivity, DragonWebViewActivity::class.java).apply {
-                            putExtra(DragonWebViewActivity.EXTRA_SELECTION_STATE, dragonCard?.selectionState)
-                            putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
-                        }
-                    } else {
-                        Intent(myAlbumActivity, EditActivity::class.java).apply {
-                            putExtra(IntentKey.EDIT_IMAGE_PATH, pathInternal)
-                            putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
-                        }
+                val intent = if (!dragonCard?.selectionState.isNullOrBlank()) {
+                    Intent(myAlbumActivity, DragonWebViewActivity::class.java).apply {
+                        putExtra(DragonWebViewActivity.EXTRA_SELECTION_STATE, dragonCard?.selectionState)
+                        putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
                     }
-                    val option = ActivityOptions.makeCustomAnimation(
-                        myAlbumActivity, R.anim.slide_out_left, R.anim.slide_in_right
-                    )
-                    myAlbumActivity.showInterAll { startActivity(intent, option.toBundle()) }
-                    return@withContext
+                } else {
+                    Intent(myAlbumActivity, EditActivity::class.java).apply {
+                        putExtra(IntentKey.EDIT_IMAGE_PATH, pathInternal)
+                        putExtra(IntentKey.EDIT_SOURCE_PATH, pathInternal)
+                    }
                 }
-                viewModel.checkDataInternet(myAlbumActivity) {
-                    val intent = Intent(myAlbumActivity, CustomizeCharacterActivity::class.java)
-                    intent.putExtra(IntentKey.INTENT_KEY, viewModel.positionCharacter)
-                    intent.putExtra(IntentKey.STATUS_FROM_KEY, ValueKey.EDIT)
-                    val option = ActivityOptions.makeCustomAnimation(
-                        myAlbumActivity, R.anim.slide_out_left, R.anim.slide_in_right
-                    )
-                    myAlbumActivity.showInterAll { startActivity(intent, option.toBundle()) }
-                }
+                val option = ActivityOptions.makeCustomAnimation(
+                    myAlbumActivity, R.anim.slide_out_left, R.anim.slide_in_right
+                )
+                myAlbumActivity.showInterAll { startActivity(intent, option.toBundle()) }
             }
         }
     }

@@ -1,0 +1,299 @@
+Tổng hợp thay đổi từ trước đến nay của cụm Dragon WebView / assets
+=================================================================
+
+Phạm vi tài liệu
+- Tài liệu này chỉ ghi lại các thay đổi liên quan đến WebView, JS, HTML, CSS và các file native bridge đi kèm.
+- Trọng tâm là luồng Dragon builder, preview, random, edit, download và đồng bộ state.
+
+
+1. Giai đoạn đầu: dựng Dragon builder bằng assets local
+
+Các file chính
+- `app/src/main/assets/index.html`
+- `app/src/main/assets/style.css`
+- `app/src/main/assets/builder.js`
+- `app/src/main/assets/parts_config.json`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+
+Những gì đã định hình
+- Dùng `index.html` làm giao diện chính cho Dragon builder trong WebView.
+- Giao diện ban đầu gồm:
+  + top bar
+  + preview area
+  + action row
+  + panel area
+  + bottom tabs
+- `style.css` phụ trách toàn bộ phần nhìn của WebView.
+- `builder.js` là logic chính:
+  + load dữ liệu
+  + render panel theo tab
+  + update preview
+  + đổi style / đổi màu / random / reset
+- `parts_config.json` chia part theo các tab `head`, `torso`, `legs`, `wings`, `tail`.
+- `DragonWebViewActivity` dùng asset loader để load toàn bộ nội dung từ assets local.
+
+
+2. Giai đoạn nối native Android với JS trong WebView
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonBridge.kt`
+
+Những gì đã thay đổi
+- Native Android điều khiển JS qua `window.dispatch(...)`.
+- JS hỗ trợ các action:
+  + `SET_STYLE`
+  + `SET_COLOR`
+  + `RANDOMIZE_TRAITS`
+  + `RANDOMIZE_COLORS`
+  + `RANDOMIZE_ALL`
+  + `SET_TAB`
+  + `RESET`
+  + `GET_STATE`
+  + `CAPTURE_FOR_EDIT`
+  + `CAPTURE_FOR_SUCCESS`
+  + `DOWNLOAD`
+- `DragonWebViewActivity.kt` gửi các action từ native sang JS.
+- `DragonBridge.kt` nhận event từ JS trả về Android.
+
+Các event JS -> Android đã dùng theo thời gian
+- `DOWNLOAD_READY`
+- `EDIT_READY`
+- `SUCCESS_READY`
+
+
+3. Giai đoạn lưu state để edit lại đúng Dragon
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonBridge.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/data/model/custom/DragonCardEditModel.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/edit/EditActivity.kt`
+
+Những gì đã thay đổi
+- `capturePNGForEdit()` trong `builder.js` gửi:
+  + ảnh PNG
+  + `selectionState = JSON.stringify(STATE.selections)`
+- `DragonBridge.kt` nhận `EDIT_READY` và truyền thêm `selectionState` về native.
+- `DragonWebViewActivity.kt` dùng `openEdit(dataUrl, selectionState)` để chuyển state sang màn edit.
+- `DragonCardEditModel.kt` được bổ sung:
+  + `selectionState: String = ""`
+- `EditActivity.kt` đọc `selectionState` khi mở lại item cũ.
+- Khi save lại item edit, `EditActivity.kt` cũng ghi ngược `selectionState` vào model.
+
+Kết quả
+- Dragon đã lưu có thể mở lại đúng part/màu trước đó.
+- Luồng edit lại không còn chỉ phụ thuộc vào ảnh preview.
+
+
+4. Giai đoạn save sang success và lưu file PNG chuẩn
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonBridge.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+
+Những gì đã thay đổi
+- `builder.js` có `capturePNGForSuccess()`.
+- `SUCCESS_READY` được gửi từ JS về native.
+- `DragonWebViewActivity.kt` có `openSuccess(dataUrl, selectionState)` để:
+  + giải mã PNG
+  + lưu file vào album nội bộ
+  + ghi model Dragon card khi cần
+  + mở `SuccessActivity`
+
+Kết quả
+- Từ Dragon WebView sang success vẫn dùng đúng ảnh vừa tạo.
+- Ảnh được lưu đúng file để dùng tiếp cho các flow sau.
+
+
+5. Giai đoạn làm preview WebView trong suốt
+
+Các file liên quan
+- `app/src/main/assets/style.css`
+- `app/src/main/res/layout/activity_dragon_web_view.xml`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/trending/TrendingActivity.kt`
+
+Những gì đã thay đổi
+- `style.css` được bổ sung nhóm selector:
+  + `html.native-transparent`
+  + `html.native-transparent body`
+  + `html.native-transparent #app`
+  + `html.native-transparent .preview-area`
+  + `html.native-transparent #dragonCanvas`
+  + các selector `body.native-transparent ...`
+- Các lớp phủ không cần thiết bị ẩn trong mode này:
+  + pseudo-element của `preview-area`
+  + `loadingOverlay`
+- `DragonWebViewActivity.kt` thêm class:
+  + `document.documentElement.classList.add('native-transparent')`
+  + `document.body.classList.add('native-transparent')`
+- `TrendingActivity.kt` cũng dùng cùng cơ chế này cho WebView của màn random.
+- `WebView` ở native được set nền transparent ngay trong layout và trong Kotlin.
+
+Kết quả
+- Phần nền của web builder không còn đè lên preview native.
+- Có thể chỉ giữ phần preview con rồng khi cần.
+
+
+6. Giai đoạn reset có xác nhận
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/edit/EditActivity.kt`
+
+Những gì đã thay đổi
+- Trong `builder.js`, action `RESET` vẫn chịu trách nhiệm:
+  + gọi `setupDefaultSelections()`
+  + xóa cache layer
+  + `renderPanel()`
+  + `updatePreview()`
+- Native không reset ngay.
+- `DragonWebViewActivity.kt` hiện dialog xác nhận trước khi `dispatch("RESET")`.
+- `EditActivity.kt` cũng có dialog reset để tránh bấm nhầm.
+
+Kết quả
+- Trải nghiệm reset an toàn hơn.
+
+
+7. Giai đoạn random traits nhưng vẫn focus trong tab hiện tại
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+
+Những gì đã thay đổi
+- `renderPanel()` được gắn thêm `data-part-id` cho từng section.
+- Thêm helper:
+  + `centerSelectedThumbsInCurrentTab()`
+- Sau khi `randomizeTraits()` chạy:
+  + `renderPanel()`
+  + `centerSelectedThumbsInCurrentTab()`
+  + `updatePreview()`
+- Helper này duyệt các `.thumb-strip` trong tab hiện tại, tìm `.thumb-card.selected`, rồi `scrollIntoView` theo chiều ngang để item selected nằm gần giữa.
+
+Kết quả
+- Random traits vẫn giữ nguyên tab hiện tại.
+- Item selected trong tab đó hiện ra rõ hơn.
+
+
+8. Giai đoạn chuyển assets sang chế độ “preview only” ngay từ lúc load
+
+Các file liên quan
+- `app/src/main/assets/index.html`
+- `app/src/main/assets/style.css`
+
+Những gì đã thay đổi
+- `index.html` được thêm:
+  + `<body class="native-preview">`
+- `style.css` được bổ sung nhóm selector:
+  + `body.native-preview .top-bar`
+  + `body.native-preview .action-row`
+  + `body.native-preview .panel-area`
+  + `body.native-preview .bottom-tabs`
+- Các phần trên bị `display:none !important` ngay từ khi HTML render.
+
+Kết quả
+- WebView không còn hiện các nút/top bar/panel/bottom tab một nhịp rồi mới bị native ẩn.
+- Khi dùng như preview, màn hình chỉ còn phần preview con rồng.
+
+
+9. Giai đoạn dùng tín hiệu render hoàn tất cho màn Trending
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/trending/TrendingActivity.kt`
+
+Những gì đã thay đổi
+- `builder.js` thêm helper:
+  + `notifyRenderComplete()`
+- Cuối `updatePreview()` sẽ gửi event:
+  + `RENDER_COMPLETE`
+- `TrendingActivity.kt` thêm `JavascriptInterface` riêng (`TrendingBridge`) để nhận `RENDER_COMPLETE`.
+- `dialog_loading` ở Trending được giữ cho tới khi JS báo render xong thật.
+
+Kết quả
+- Màn random của Trending không tắt loading quá sớm.
+- Dialog chỉ đóng khi canvas đã render hoàn toàn.
+
+
+10. Giai đoạn chỉnh lại nút Download của màn Trending
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/trending/TrendingActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/core/helper/MediaHelper.kt`
+
+Những gì đã thay đổi
+- Trước đó nút `Download` cạnh `Random` từng đi nhầm sang luồng edit/save.
+- Sau khi chỉnh lại:
+  + action bar bên phải vẫn là `Edit`
+  + nút `Download` cạnh `Random` chỉ làm đúng việc tải ảnh
+- `TrendingActivity.kt` dùng:
+  + `captureDownloadWhenReady()`
+  + JS action `DOWNLOAD`
+  + event `DOWNLOAD_READY`
+- Event `DOWNLOAD_READY` trả về PNG hiện tại, rồi native gọi `MediaHelper.saveBitmapToExternal(...)`.
+- Nút này không còn:
+  + mở `SuccessActivity`
+  + add vào `My Dragon`
+  + ghi model avatar
+
+Kết quả
+- Download ở Trending giờ đúng nghĩa là download ra máy.
+
+
+11. Trạng thái hiện tại của cụm WebView/assets
+
+Hiện tại cụm này đã hỗ trợ
+- Render Dragon builder bằng assets local.
+- Chuyển tab giữa `head / torso / legs / wings / tail`.
+- Random traits / random colors / random all.
+- Focus item selected trong tab hiện tại sau random traits.
+- Reset có xác nhận.
+- Capture PNG để edit tiếp.
+- Capture PNG để đi success ở luồng Dragon editor chính.
+- Download-only ở nút Download của màn Trending.
+- Truyền `selectionState` giữa JS và native.
+- Mở lại item đã lưu với đúng state cũ.
+- Chạy WebView ở chế độ nền trong suốt.
+- Chạy assets ở chế độ preview-only ngay từ lúc HTML load.
+- Giữ dialog loading đến khi render hoàn tất ở màn Trending.
+
+
+12. Ghi chú
+- File này phải được cập nhật mỗi khi sửa những phần liên quan đến:
+  + `index.html`
+  + `style.css`
+  + `builder.js`
+  + `DragonWebViewActivity.kt`
+  + `DragonBridge.kt`
+  + `TrendingActivity.kt`
+- Nếu cần, có thể tách tiếp thành 2 file:
+  + một file chỉ nói về `assets`
+  + một file chỉ nói về native bridge / flow edit / flow download
+
+
+13. Bổ sung mới nhất: khóa phạm vi random theo UI editor hiện có
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+
+Những gì đã thay đổi
+- `randomizeTraits()` không còn random toàn bộ `STATE.data.selects`.
+- `randomizeColors()` không còn random toàn bộ `STATE.data.color_inputs`.
+- Thay vào đó, `builder.js` lấy danh sách hợp lệ từ `CONFIG.TAB_ROWS`:
+  + `getEditablePartIds()`
+  + `getEditableColorIds()`
+- Chỉ những `partId` và `colorId` có mặt trong UI editor hiện tại mới được random.
+
+Lý do
+- Trước đó random có thể chạm vào các select ẩn hoặc các field không có UI edit ở native.
+- Kết quả là ảnh save ra vẫn đúng, nhưng khi mở lại để edit thì state có thể lệch hoặc gây lỗi vì editor không quản được hết các field đã bị random.
+
+Kết quả mới
+- Luồng `random -> save -> edit lại` ổn định hơn.
+- Những gì bị random đều là những gì editor hiện tại có thể khôi phục và chỉnh tiếp.

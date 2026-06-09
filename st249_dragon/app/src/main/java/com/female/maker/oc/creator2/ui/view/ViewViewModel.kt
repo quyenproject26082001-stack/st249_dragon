@@ -22,11 +22,18 @@ import kotlinx.coroutines.launch
 class ViewViewModel : ViewModel() {
     private val _pathInternal = MutableStateFlow<String>("")
     val pathInternal: StateFlow<String> = _pathInternal.asStateFlow()
+    private val _displayPath = MutableStateFlow<String>("")
+    val displayPath: StateFlow<String> = _displayPath.asStateFlow()
 
     var statusFrom = ValueKey.AVATAR_TYPE
 
     fun setPath(path: String) {
         _pathInternal.value = path
+        _displayPath.value = path
+    }
+
+    fun setDisplayPath(path: String) {
+        _displayPath.value = path
     }
 
     fun deleteFile(context: Context, path: String): Flow<HandleState> = flow {
@@ -58,14 +65,14 @@ class ViewViewModel : ViewModel() {
 
     fun shareFiles(context: Activity) {
         viewModelScope.launch {
-            context.shareImagesPaths(arrayListOf(_pathInternal.value))
+            context.shareImagesPaths(arrayListOf(_displayPath.value))
         }
     }
 
     fun downloadFiles(context: Activity): Flow<HandleState> = flow {
         emitAll(
             MediaHelper.downloadPartsToExternal(
-                context, arrayListOf(_pathInternal.value)
+                context, arrayListOf(_displayPath.value)
             )
         )
     }

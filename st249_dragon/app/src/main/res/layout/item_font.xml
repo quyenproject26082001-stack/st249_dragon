@@ -3,7 +3,7 @@
     android:id="@+id/cvMain"
     android:layout_width="37dp"
     android:layout_height="37dp"
-    android:layout_marginHorizontal="6dp"
+    android:layout_marginEnd="12dp"
     android:background="@drawable/bg_circle_white">
 
     <TextView

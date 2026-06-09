@@ -64,7 +64,7 @@
                 <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvWhatsapp"
                     style="@style/single_marquee"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:outerStrokeColor="@color/app1"
                     app:outerStrokeWidth="1dp"
@@ -126,10 +126,10 @@
                 <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvTelegram"
                     style="@style/single_marquee"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="6dp"
-                    android:fontFamily="@font/nunito_bold"
+                    android:fontFamily="@font/copperplategothic_bold"
                     app:outerStrokeWidth="1dp"
                     app:outerStrokeColor="@color/app1"
                     android:text="@string/add_to_telegram"

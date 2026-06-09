@@ -15,7 +15,10 @@ class DragonBridge(private val activity: DragonWebViewActivity) {
                         obj.optString("selectionState")
                     )
                 "SUCCESS_READY" ->
-                    activity.openSuccess(obj.getString("data"))
+                    activity.openSuccess(
+                        obj.getString("data"),
+                        obj.optString("selectionState")
+                    )
             }
         } catch (e: Exception){
             android.util.Log.e("DragonBridge","onEvent: ${e.message}")

@@ -61,7 +61,12 @@ class MyAvatarViewModel : ViewModel() {
 
             val legacyEditList = editList.filter { it.avatarPath.isNotEmpty() || it.itemNavList.isNotEmpty() }
             val albumList = (legacyEditList.map { MyAlbumModel(it.pathInternalEdit) } +
-                    dragonCardList.map { MyAlbumModel(it.previewPath) })
+                    dragonCardList.map {
+                        MyAlbumModel(
+                            path = it.previewPath,
+                            displayPath = it.dragonImagePath.ifEmpty { it.previewPath }
+                        )
+                    })
                 .distinctBy { it.path }
                 .sortedByDescending { java.io.File(it.path).lastModified() }
                 .toCollection(ArrayList())

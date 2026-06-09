@@ -5,6 +5,8 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -34,11 +36,11 @@ import com.female.maker.oc.creator2.core.helper.InternetHelper
 import com.female.maker.oc.creator2.core.helper.MediaHelper
 import com.female.maker.oc.creator2.core.utils.key.IntentKey
 import com.female.maker.oc.creator2.core.utils.key.ValueKey
+import com.female.maker.oc.creator2.core.utils.state.HandleState
 import com.female.maker.oc.creator2.core.utils.state.SaveState
 import com.female.maker.oc.creator2.data.model.custom.SuggestionModel
 import com.female.maker.oc.creator2.databinding.ActivityTrendingBinding
 import com.female.maker.oc.creator2.dialog.YesNoDialog
-import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterActivity
 import com.female.maker.oc.creator2.ui.customize.CustomizeCharacterViewModel
 import com.female.maker.oc.creator2.ui.dragon_webview.DragonWebViewActivity
 import com.female.maker.oc.creator2.ui.home.DataViewModel
@@ -63,6 +65,7 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
 
     private var currentSuggestion: SuggestionModel? = null
     private var isAnimating = false
+    private var isWaitingForRandomRender = false
 
     override fun setViewBinding(): ActivityTrendingBinding {
         return ActivityTrendingBinding.inflate(LayoutInflater.from(this))
@@ -82,7 +85,7 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
             actionBar.btnActionBarLeft.tap { showInterAll { handleBackLeftToRight() } }
             actionBar.btnActionBarRight.tap { openDragonEditorWithCurrentState() }
             btnGenerate.tap(0) { handleGenerate() }
-            btnDownload.tap { handleEdit() }
+            btnDownload.tap { handleDownloadDragon() }
         }
     }
 
@@ -91,7 +94,7 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
             setImageActionBar(btnActionBarLeft, R.drawable.ic_back)
             setImageActionBar(btnActionBarRight, R.drawable.ic_edit)
             btnActionBarRight.visible()
-            setTextActionBar(tvCenter, getString(R.string.random_bag))
+            setTextActionBar(tvCenter, getString(R.string.random))
             tvCenter.isSelected = true
             binding.actionBar.spTvCenter.visible()
 
@@ -116,6 +119,8 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
             builtInZoomControls = false
             displayZoomControls = false
         }
+        binding.dragonWebView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+        binding.dragonWebView.addJavascriptInterface(TrendingBridge(), "AndroidBridge")
 
         binding.dragonWebView.webViewClient = object : android.webkit.WebViewClient() {
             override fun shouldInterceptRequest(
@@ -138,6 +143,8 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
     private fun hideDragonBuilderControls() {
         binding.dragonWebView.evaluateJavascript(
             """
+                document.documentElement.classList.add('native-transparent');
+                document.body.classList.add('native-transparent');
                 document.querySelector('.bottom-tabs').style.display='none';
                 document.querySelector('.top-bar').style.display='none';
                 document.querySelector('.action-row').style.display='none';
@@ -147,7 +154,7 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
         )
     }
 
-    private fun randomizeDragonWhenReady(attempt: Int = 0) {
+    private fun randomizeDragonWhenReady(attempt: Int = 0, onDone: (() -> Unit)? = null) {
         binding.dragonWebView.evaluateJavascript(
             "(function(){try{return typeof window.dispatch === 'function' && typeof STATE !== 'undefined' && !!STATE.data;}catch(e){return false;}})()"
         ) { result ->
@@ -155,7 +162,35 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
                 hideDragonBuilderControls()
                 binding.dragonWebView.evaluateJavascript("""window.dispatch('{"type":"RANDOMIZE_ALL"}')""", null)
             } else if (attempt < 20) {
-                binding.dragonWebView.postDelayed({ randomizeDragonWhenReady(attempt + 1) }, 100)
+                binding.dragonWebView.postDelayed({ randomizeDragonWhenReady(attempt + 1, onDone) }, 100)
+            } else {
+                onDone?.invoke()
+            }
+        }
+    }
+
+    private inner class TrendingBridge {
+        @android.webkit.JavascriptInterface
+        fun onEvent(eventJson: String) {
+            try {
+                val obj = org.json.JSONObject(eventJson)
+                when (obj.optString("type")) {
+                    "RENDER_COMPLETE" -> {
+                        if (!isWaitingForRandomRender) return
+                        runOnUiThread {
+                            isWaitingForRandomRender = false
+                            isAnimating = false
+                            binding.btnGenerate.visibility = View.VISIBLE
+                            binding.btnDownload.visibility = View.VISIBLE
+                            lifecycleScope.launch { dismissLoading() }
+                        }
+                    }
+
+                    "DOWNLOAD_READY" -> {
+                        downloadDragonToGallery(obj.getString("data"))
+                    }
+                }
+            } catch (_: Exception) {
             }
         }
     }
@@ -292,12 +327,7 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
         isAnimating = true
         binding.btnGenerate.visibility = View.INVISIBLE
         binding.btnDownload.visibility = View.INVISIBLE
-        binding.imvImage.visibility = View.VISIBLE
-
         val totalDuration = 800L
-
-        // Show GIF while generating
-        Glide.with(this).asGif().load(R.drawable.gif).into(binding.imvImage)
 
         // Dice: spin 3 full rounds, decelerating like a real dice roll
         val diceAnim = ObjectAnimator.ofFloat(binding.dices, "rotation", 0f, 1080f).apply {
@@ -307,18 +337,24 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
         }
 
         lifecycleScope.launch {
+            showLoading()
             delay(totalDuration)
 
             diceAnim.cancel()
             binding.dices.rotation = 0f
 
             // Check internet sau khi delay xong, timeout 3s để tránh hang khi mất mạng
-            isAnimating = false
-            binding.btnGenerate.visibility = View.VISIBLE
-            binding.btnDownload.visibility = View.VISIBLE
-            binding.imvImage.visibility = View.GONE
-
-            randomizeDragonWhenReady()
+            isWaitingForRandomRender = true
+            randomizeDragonWhenReady(onDone = {
+                lifecycleScope.launch {
+                    if (!isWaitingForRandomRender) return@launch
+                    isWaitingForRandomRender = false
+                    isAnimating = false
+                    binding.btnGenerate.visibility = View.VISIBLE
+                    binding.btnDownload.visibility = View.VISIBLE
+                    dismissLoading()
+                }
+            })
         }
     }
 
@@ -411,33 +447,49 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
         }
     }
 
-    private fun handleEdit() {
-        val suggestion = currentSuggestion ?: return
-        customizeCharacterViewModel.positionSelected =
-            dataViewModel.allData.value.indexOfFirst { it.avatar == suggestion.avatarPath }
-        val selectedCharacter =
-            dataViewModel.allData.value.getOrNull(customizeCharacterViewModel.positionSelected)
-        viewModel.setIsDataAPI(selectedCharacter?.isFromAPI ?: false)
-        viewModel.checkDataInternet(this) {
-            lifecycleScope.launch {
-                showLoading()
-                withContext(Dispatchers.IO) {
-                    MediaHelper.writeModelToFile(
-                        this@TrendingActivity,
-                        ValueKey.SUGGESTION_FILE_INTERNAL,
-                        suggestion
-                    )
-                }
-                val intent = Intent(this@TrendingActivity, CustomizeCharacterActivity::class.java)
-                intent.putExtra(IntentKey.INTENT_KEY, customizeCharacterViewModel.positionSelected)
-                intent.putExtra(IntentKey.STATUS_FROM_KEY, ValueKey.SUGGESTION)
-                val option = ActivityOptions.makeCustomAnimation(
-                    this@TrendingActivity,
-                    R.anim.slide_out_left,
-                    R.anim.slide_in_right
+    private fun handleDownloadDragon() {
+        lifecycleScope.launch { showLoading() }
+        captureDownloadWhenReady()
+    }
+
+    private fun captureDownloadWhenReady(attempt: Int = 0) {
+        binding.dragonWebView.evaluateJavascript(
+            "(function(){try{return typeof window.dispatch === 'function' && typeof STATE !== 'undefined' && !!STATE.data;}catch(e){return false;}})()"
+        ) { result ->
+            if (result == "true") {
+                hideDragonBuilderControls()
+                binding.dragonWebView.evaluateJavascript(
+                    """window.dispatch('{"type":"DOWNLOAD"}')""",
+                    null
                 )
-                dismissLoading()
-                showInterAll { startActivity(intent, option.toBundle()) }
+            } else if (attempt < 20) {
+                binding.dragonWebView.postDelayed({ captureDownloadWhenReady(attempt + 1) }, 100)
+            } else {
+                lifecycleScope.launch {
+                    dismissLoading()
+                    showToast(R.string.an_error_occurred)
+                }
+            }
+        }
+    }
+
+    private fun downloadDragonToGallery(dataUrl: String) {
+        val bytes = Base64.decode(dataUrl.substringAfter("base64,"), Base64.DEFAULT)
+        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        lifecycleScope.launch {
+            MediaHelper.saveBitmapToExternal(this@TrendingActivity, bitmap).collect { state ->
+                when (state) {
+                    HandleState.LOADING -> Unit
+                    HandleState.SUCCESS -> {
+                        dismissLoading()
+                        showToast(R.string.download_success)
+                    }
+
+                    else -> {
+                        dismissLoading()
+                        showToast(R.string.download_failed_please_try_again_later)
+                    }
+                }
             }
         }
     }
