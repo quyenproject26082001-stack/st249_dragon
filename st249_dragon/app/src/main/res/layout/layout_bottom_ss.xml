@@ -58,7 +58,7 @@
 
 
                 <!--                        tvMyWork-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvMyWork"
                     style="@style/single_marquee"
                     android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
 
 
                 <!--                        tvDownload-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvDownload"
                     style="@style/single_marquee"
                     android:layout_width="wrap_content"

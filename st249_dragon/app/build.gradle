@@ -7,11 +7,11 @@ plugins {
 
 android {
 
-    namespace 'com.female.maker.oc.creator2'
+    namespace 'com.dragon.oc.avatar.creator'
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.female.maker.oc.creator2"
+        applicationId "com.dragon.oc.avatar.creator"
         minSdk 24
         targetSdk 36
         versionCode 1

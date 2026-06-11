@@ -59,7 +59,7 @@
 
 
                 <!--                        tvDelete-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvShare"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"
@@ -120,7 +120,7 @@
 
 
                 <!--                        tvDownload-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvDownload"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"

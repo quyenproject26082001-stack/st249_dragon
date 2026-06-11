@@ -74,7 +74,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
         <!--        drawView-->
-        <com.female.maker.oc.creator2.core.custom.drawview.DrawView
+        <com.dragon.oc.avatar.creator.core.custom.drawview.DrawView
             android:id="@+id/drawView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -165,7 +165,7 @@
                     android:visibility="visible" />
 
                 <!--                tvBackgroundImage-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvBackgroundImage"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"
@@ -216,7 +216,7 @@
                     tools:visibility="visible" />
 
                 <!--                tvBackgroundColor-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvBackgroundColor"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"

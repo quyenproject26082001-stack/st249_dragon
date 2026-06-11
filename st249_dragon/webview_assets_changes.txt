@@ -339,3 +339,117 @@ Lý do
 Kết quả mới
 - Luồng `Trending -> random -> edit` nhẹ hơn khi mở `DragonWebViewActivity`.
 - State random all vẫn được giữ, nhưng editor không render lặp hàng chục lần khi vừa vào màn.
+16. Bổ sung mới nhất: update đúng item My Dragon khi save lại từ Dragon editor
+
+Các file liên quan
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/my_creation/fragment/MyAvatarFragment.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/view/ViewActivity.kt`
+
+Những gì đã thay đổi
+- Thêm `DragonWebViewActivity.EXTRA_EDIT_MODEL_ID`.
+- Khi edit từ icon trong `item_my_album`, `MyAvatarFragment.kt` truyền thêm `DragonCardEditModel.id`.
+- Khi edit từ `ViewActivity`, cũng truyền thêm `DragonCardEditModel.id`.
+- `DragonWebViewActivity.registerSavedDragon()` ưu tiên tìm item cũ bằng `id`.
+- Nếu không có `id`, mới fallback về `previewPath` như trước.
+- Sau khi save, `DragonWebViewActivity` cập nhật lại `editModelId` và `editSourcePath` theo model mới.
+
+Lý do
+- `previewPath` là đường dẫn ảnh PNG và sẽ đổi sau mỗi lần save.
+- Dùng `previewPath` làm khóa update không đủ bền, nhất là khi màn editor cũ vẫn còn giữ path cũ.
+
+Kết quả mới
+- Edit item từ My Dragon rồi save sẽ replace đúng item cũ.
+- Không bị add nhầm thành item mới hoặc giữ item cũ không đổi do path đã thay đổi.
+17. Bổ sung mới nhất: giữ đúng con rồng khi đi từ Dragon editor sang EditActivity
+
+Các file liên quan
+- `app/src/main/java/com/female/maker/oc/creator2/core/utils/key/IntentKey.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/edit/EditActivity.kt`
+
+Những gì đã thay đổi
+- Thêm `IntentKey.EDIT_MODEL_ID`.
+- `DragonWebViewActivity.openEdit()` truyền `EDIT_MODEL_ID` sang `EditActivity` nếu đang edit một item My Dragon cũ.
+- `EditActivity.restoreState()` đọc `EDIT_MODEL_ID` và tìm model theo `id` trước, sau đó mới fallback theo `previewPath`.
+- Khi đi từ Dragon editor sang EditActivity, `EditActivity` ưu tiên ảnh rồng mới từ intent (`EDIT_IMAGE_PATH`) thay vì dùng lại `dragonImagePath` cũ trong model.
+- `selectionState` mới từ Dragon editor cũng được ưu tiên, chỉ dùng state cũ khi intent không có state mới.
+
+Lý do
+- Sau khi chỉnh trait/màu ở Dragon editor, ảnh rồng mới được truyền sang `EditActivity`.
+- Nếu `EditActivity` ưu tiên `savedModel.dragonImagePath` cũ thì card editor sẽ hiện lại con rồng cũ, dù user vừa sửa xong.
+
+Kết quả mới
+- Luồng `My Dragon -> Dragon editor -> Save/Edit card -> EditActivity` giữ đúng con rồng vừa chỉnh.
+- Khi save ở `EditActivity`, model cũ vẫn được replace đúng nhờ `id`, không tạo item sai.
+18. Bổ sung mới nhất: sửa trường hợp edit save nhưng nhìn như không đổi
+
+Các file liên quan
+- `app/src/main/java/com/female/maker/oc/creator2/ui/edit/EditActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/my_creation/fragment/MyAvatarFragment.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/view/ViewActivity.kt`
+
+Những gì đã thay đổi
+- `EditActivity.restoreState()` chỉ ưu tiên `EDIT_IMAGE_PATH` làm ảnh rồng mới khi có `EDIT_SELECTION_STATE` mới từ Dragon editor.
+- Nếu mở thẳng `EditActivity` từ My Dragon/View, ảnh rồng thuần vẫn lấy từ `savedModel.dragonImagePath`, không lấy nhầm ảnh card preview.
+- Nhánh mở thẳng `EditActivity` từ `MyAvatarFragment` và `ViewActivity` truyền thêm `EDIT_MODEL_ID` nếu item là Dragon card.
+- File PNG save từ `DragonWebViewActivity` và `EditActivity` dùng timestamp có millisecond để tránh ghi đè nếu save nhanh trong cùng một giây.
+
+Lý do
+- Có 2 loại ảnh khác nhau:
+  + ảnh rồng thuần từ Dragon editor
+  + ảnh card preview từ EditActivity
+- Nếu nhầm 2 ảnh này, màn edit có thể restore sai ảnh và khi save lại nhìn như không thay đổi.
+
+Kết quả mới
+- Edit từ My Dragon/View rồi save sẽ update đúng item cũ bằng `id`.
+- Đi từ Dragon editor sang EditActivity sẽ dùng đúng con rồng vừa chỉnh.
+- Mở thẳng EditActivity từ card cũ sẽ không lấy nhầm ảnh card làm ảnh rồng bên trong.
+19. Bổ sung mới nhất: bấm Save ở màn Dragon là update item ngay
+
+Các file liên quan
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+
+Những gì đã thay đổi
+- `DragonWebViewActivity.openEdit()` không còn chỉ lưu ảnh cache rồi mở `EditActivity`.
+- Khi bấm Save/Edit từ màn Dragon, app lưu ảnh rồng vào thư mục album và ghi/update `DragonCardEditModel` ngay lập tức.
+- Nếu đang edit item cũ:
+  + giữ nguyên `previewPath` card cũ
+  + cập nhật `dragonImagePath` bằng ảnh rồng mới
+  + cập nhật `selectionState` mới
+  + giữ lại name tag, describe, power, background cũ
+- Nếu là item mới:
+  + tạo model mới trong My Dragon ngay từ màn Dragon
+  + `previewPath` và `dragonImagePath` đều trỏ tới ảnh rồng mới ban đầu
+- Sau đó mới mở `EditActivity` với đúng `EDIT_MODEL_ID` và `EDIT_SOURCE_PATH`.
+
+Lý do
+- User mong muốn bấm Save ở màn Dragon là item My Dragon đã được sửa ngay.
+- Không cần chờ bấm Save ở `EditActivity` thì item mới cập nhật.
+
+Kết quả mới
+- Luồng `My Dragon -> Dragon editor -> Save` update con rồng trong item ngay.
+- `EditActivity` chỉ tiếp tục chỉnh phần card/text/bg/power, không còn là nơi đầu tiên ghi thay đổi con rồng.
+20. Bổ sung mới nhất: dialog loading chờ render hoàn tất ở Dragon và Trending
+
+Các file liên quan
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonWebViewActivity.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/dragon_webview/DragonBridge.kt`
+- `app/src/main/java/com/female/maker/oc/creator2/ui/trending/TrendingActivity.kt`
+- `app/src/main/assets/builder.js`
+
+Những gì đã thay đổi
+- `DragonBridge.kt` nhận thêm event `RENDER_COMPLETE` từ `builder.js`.
+- `DragonWebViewActivity.kt` dùng `WaitingDialog` trực tiếp cho màn Dragon.
+- Khi mới vào màn Dragon, dialog loading hiển thị cho tới khi canvas render xong.
+- Khi bấm `Random Traits`, `Random Colors`, auto random, reset hoặc chọn màu, dialog loading hiển thị cho tới khi `builder.js` báo `RENDER_COMPLETE`.
+- `TrendingActivity.kt` cũng hiện dialog loading ngay khi mới vào màn, không chỉ khi bấm Random.
+
+Lý do
+- WebView/canvas render bất đồng bộ, nếu tắt loading quá sớm sẽ thấy preview chưa hoàn thiện.
+- Event `RENDER_COMPLETE` là tín hiệu chính xác hơn vì nó được gửi sau `updatePreview()` trong `builder.js`.
+
+Kết quả mới
+- Màn Dragon và màn Trending đều giữ dialog loading cho tới khi preview con rồng render xong hoàn toàn.
+- Random traits/random colors không còn cảm giác bấm xong mà preview vẫn đang tải ngầm.

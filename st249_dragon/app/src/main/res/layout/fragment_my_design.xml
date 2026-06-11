@@ -41,7 +41,7 @@
             android:visibility="gone"
             android:src="@drawable/img_no_item" />
 
-        <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
             style="@style/single_marquee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

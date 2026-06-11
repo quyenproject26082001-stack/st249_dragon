@@ -62,7 +62,7 @@
                         android:layout_height="389dp"
                         android:layout_weight="2.8" />
 
-                    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                         android:id="@+id/tvAddImg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

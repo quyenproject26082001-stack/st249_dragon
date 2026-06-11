@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!--            tvLang-->
-            <com.female.maker.oc.creator2.core.custom.text.StrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.StrokeTextView
                 android:id="@+id/tvLang"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

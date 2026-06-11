@@ -49,7 +49,7 @@
 
 
     <!--        tvSuccess-->
-    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
         android:id="@+id/tvSuccess"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

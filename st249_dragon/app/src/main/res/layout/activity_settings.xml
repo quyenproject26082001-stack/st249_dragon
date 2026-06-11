@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.female.maker.oc.creator2.ui.SettingsActivity">
+    tools:context="com.dragon.oc.avatar.creator.ui.SettingsActivity">
 
     <ImageView
         android:id="@+id/imgBackground"
@@ -51,7 +51,6 @@
             android:layout_gravity="center|top"
             android:gravity="center"
             android:textSize="22sp"
-            android:text="@string/music"
             android:textColor="@color/app"
             android:fontFamily="@font/copperplategothic_bold"
             />
@@ -111,7 +110,7 @@
                         android:src="@drawable/ic_lang_set" />
                 </FrameLayout>
 
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -160,7 +159,7 @@
                         android:src="@drawable/ic_rate_set" />
                 </FrameLayout>
 
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -209,7 +208,7 @@
                         android:src="@drawable/ic_share_set" />
                 </FrameLayout>
 
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -256,7 +255,7 @@
                         android:src="@drawable/ic_policy_set" />
                 </FrameLayout>
 
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"

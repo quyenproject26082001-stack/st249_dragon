@@ -101,7 +101,8 @@
         <activity
             android:name=".ui.SettingsActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -114,9 +115,11 @@
         </provider>
         <provider
             android:name=".core.utils.share.whatsapp.StickerContentProvider"
-            android:authorities="com.female.maker.oc.creator2.core.utils.share.whatsapp.StickerContentProvider"
+            android:authorities="com.dragon.oc.avatar.creator.core.utils.share.whatsapp.StickerContentProvider"
             android:enabled="true"
             android:exported="true"
+            android:screenOrientation="portrait"
+
             android:readPermission="com.whatsapp.sticker.READ" />
 
         <service

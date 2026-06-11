@@ -204,7 +204,7 @@
         app:layout_constraintTop_toBottomOf="@id/gl056"
         tools:visibility="visible">
 
-        <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
             android:id="@+id/btnResetMove"
             style="@style/DialogConfirmStrokeText"
             android:layout_width="57dp"
@@ -259,7 +259,7 @@ app:layout_constraintTop_toTopOf="@id/btnMoveUp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/size"

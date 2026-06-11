@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="16dp">
 
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         app:srb_starWidth="44dp"
         app:srb_stepSize="1" />
 
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
         app:outerStrokeWidth=".5dp" />
 
 
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvSatistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tvAtk"
         />
 
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ATK/ ?"
@@ -280,7 +280,7 @@
         app:layout_constraintBottom_toBottomOf="@id/tvDef"
         app:layout_constraintEnd_toStartOf="@+id/tvDef"
         />
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DEF/ ?"

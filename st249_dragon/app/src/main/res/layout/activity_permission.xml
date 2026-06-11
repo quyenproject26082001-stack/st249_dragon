@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgPermission">
 
-        <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
             android:id="@+id/txtPer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -83,7 +83,6 @@
         android:layout_marginTop="0dp"
         android:layout_marginBottom="4dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@+id/tvContinue"
         app:layout_constraintTop_toBottomOf="@id/txtPermission">
 
         <LinearLayout
@@ -99,7 +98,7 @@
                 android:layout_height="64dp"
                 android:background="@drawable/bg_frame_per">
 
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -135,7 +134,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_frame_per">
 
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -168,7 +167,7 @@
     </ScrollView>
 
     <!-- tvContinue -->
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

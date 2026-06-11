@@ -1,7 +1,7 @@
 <resources>
 
 
-    <string name="app_name" translatable="false">School Girl Creator 2</string>
+    <string name="app_name" translatable="false">Dragon OC: Avatar Creator</string>
 
     <string name="go_to_setting_message">The app needs this permission</string>
     <string name="settings">Setting</string>
@@ -12,7 +12,7 @@
 
     <string name="title_1">Create Your Masterpiece Dragon OC</string>
     <string name="title_2">Experiment With Rare \nColors &amp; Glows</string>
-    <string name="title_3">Personalize Every Detail From \nHorn To Tail</string>
+    <string name="title_3">Personalize Every Detail From Horn To Tail</string>
 
     <string name="permission">Permission</string>
     <string name="storage">Storage</string>
@@ -59,7 +59,7 @@
     <string name="ok">Ok</string>
     <string name="wait_a_minute">Wait a minute</string>
     <string name="reset">Reset</string>
-    <string name="download_success">Download successful to the ST266_School Girl Creator</string>
+    <string name="download_success">Download successful to the Dragon OC: Avatar Creator</string>
     <string name="please_check_your_internet">Please check your internet</string>
     <string name="please_select_an_image">Please select an image</string>
     <string name="error">Error</string>
@@ -78,18 +78,11 @@
     <string name="haven_t_saved_it_yet_do_you_want_to_exit">Haven’t saved it yet, do you want to exit?</string>
     <string name="change_your_whole_design_are_you_sure">Do you want to reset all?</string>
     <string name="character_maker">Pixel Maker</string>
-    <string name="no_current_history">No current history</string>
-    <string name="quick_maker">Quick make</string>
-    <string name="my_character">My Pixel</string>
-    <string name="category">Pixel Maker</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="no_item_space">No current history</string>
     <string name="add_to_whatsapp">Add To WhatsApp</string>
     <string name="add_to_telegram">Add To Telegram</string>
     <string name="my_avatar">My Avatar</string>
     <string name="my_design">My Design</string>
-    <string name="my_album">My album</string>
     <string name="no_app_found_to_handle_this_action">No app found to handle this action</string>
     <string name="invalid_action_msg">Application not installed</string>
     <string name="invalid_action">Error</string>
@@ -112,75 +105,18 @@
     <string name="null_edt">Please enter text</string>
     <string name="input_text">Input text</string>
     <string name="hello_world">Type your content...</string>
-    <string name="no_item_desgin">No current history</string>
     <string name="my_character_in">My Work</string>
-    <string name="quick_maker_in">Quick mix</string>
-    <string name="exit_add">Exit your background</string>
-    <string name="exit_bg">Exit your background</string>
     <string name="loading">Loading</string>
     <string name="internet_required_for_more_characters">Internet on for more characters</string>
-    <string name="music">Music</string>
     <string name="my_work">My Work</string>
-    <string name="bag_maker">Bag Maker</string>
-    <string name="quickmaketitle">Quick Make</string>
-    <string name="my_pony">My Pony</string>
     <string name="do_you_want_to_exit">Haven’t saved it yet, do you want to exit?</string>
-    <string name="pfp_random">Pride PFP Random</string>
-    <string name="trending_tv">Pride PFP Trending</string>
-    <string name="pride_pfp_overlay">Pride PFP Overlay</string>
-    <string name="generate">Generate Random</string>
 
-    <!-- Pride PFP Overlay flow -->
-    <string name="pride_choose_image">Choose Image</string>
-    <string name="pride_crop_image">Crop Image</string>
-    <string name="pride_choose_flags">Choose Your Pride Flags</string>
-    <string name="pride_choose_layout">Choose Layout Style</string>
-    <string name="pride_choose_design">Choose Design Style</string>
-    <string name="pride_result_title">Your Pride Profile Picture Is Ready</string>
-    <string name="pride_result_subtitle">Show your Pride with your personalized profile picture</string>
-    <string name="pride_choose_image_hint">Choose an image to edit</string>
-    <string name="pride_no_image_uploaded">No image uploaded</string>
-    <string name="pride_click_to_select_different">Click to select a different image</string>
-    <string name="pride_select_up_to_4">Select up to 4 flags to add to your profile picture</string>
-    <string name="pride_selected_flags">Selected Flags</string>
-    <string name="pride_my_custom">My Custom Flag</string>
-    <string name="pride_flags_section">Pride\'s Flag</string>
-    <string name="pride_layout_subtitle">Select how the flags should be positioned on your image</string>
-    <string name="pride_layout_circle">Circle</string>
-    <string name="pride_layout_circle_desc">Apply flag as a circular border around the image</string>
-    <string name="pride_layout_square">Square</string>
-    <string name="pride_layout_square_desc">Apply flag as a square border around the image</string>
-    <string name="pride_layout_background">Background</string>
-    <string name="pride_layout_background_desc">Blend transparency in the original image with the flag</string>
-    <string name="pride_design_subtitle">Select the visual style for your Pride flags</string>
-    <string name="pride_image_zoom">Image Zoom</string>
-    <string name="image_scale">Image Scale</string>
-    <string name="pride_default_zoom">Default Image Zoom</string>
-    <string name="pride_default_ring">Default Image Scale</string>
-    <string name="pride_center_image">Center Image Position</string>
-    <string name="pride_flag_mode_ring">Flag Mode: Image</string>
-    <string name="pride_previous"> Previous</string>
-    <string name="pride_start_over">Start Over</string>
-    <string name="pride_continue">Continue</string>
-    <string name="pride_create_another">Create Another</string>
-    <string name="pride_my_work">My Work</string>
-    <string name="pride_center">Center</string>
-    <string name="pride_create_custom_flag">Create Custom Flag</string>
-    <string name="pride_flag_name">Flag Name</string>
-    <string name="pride_enter_name">Enter Name</string>
-    <string name="pride_colors">Colors</string>
-    <string name="pride_create">Create</string>
-    <string name="pride_select_at_least_one">Please select at least one flag</string>
-    <string name="pride_max_colors_reached">Maximum 10 colors allowed</string>
-    <string name="random_bag">Random Bag</string>
-    <string name="school_girl_maker">School Girl Maker</string>
-    <string name="trending_school_girl">Trending School Girl</string>
+
+
     <string name="no_item_here">\u000aNo item here\u000a</string>
     <string name="cancel">Cancel</string>
     <string name="loadings">Loading...</string>
     <string name="please_wait">Please wait...</string>
-    <string name="list_girl_school">List School Girl</string>
-    <string name="my_school_girl">My School Girl</string>
     <string name="size">Size</string>
     <string name="head">HEAD</string>
     <string name="torso">TORSO</string>

@@ -61,7 +61,7 @@
                     android:src="@drawable/ic_whatsapp" />
 
                 <!--                        tvWhatsapp-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvWhatsapp"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                     android:src="@drawable/ic_telegram" />
 
                 <!--                        tvTelegram-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvTelegram"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"
@@ -170,7 +170,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvDownload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -219,7 +219,7 @@
 
 
 
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvShare"
                 style="@style/single_marquee"
                 android:layout_width="match_parent"

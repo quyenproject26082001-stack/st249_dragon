@@ -32,7 +32,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                     android:id="@+id/tvTitle"
                     style="@style/single_marquee"
                     android:layout_width="0dp"
@@ -58,7 +58,7 @@
 
 
                 <!--            tvDescription-->
-                <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                     android:id="@+id/tvDescription"
                     android:maxLines="2"
                     android:layout_width="match_parent"
@@ -93,7 +93,7 @@
                     <!--                    btnNo-->
 
                     <!--                    btnYes-->
-                    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                    <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                         android:id="@+id/btnNo"
                         style="@style/DialogConfirmStrokeText"
                         android:layout_width="0dp"
@@ -106,7 +106,7 @@
                         android:textSize="20sp"
                         android:paddingVertical="6dp" />
 
-                    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                    <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                         android:id="@+id/btnYes"
                         style="@style/DialogConfirmStrokeText"
                         android:layout_width="0dp"

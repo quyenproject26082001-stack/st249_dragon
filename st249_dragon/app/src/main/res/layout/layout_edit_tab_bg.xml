@@ -27,7 +27,7 @@
             android:layout_weight="1">
 
 
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvBackgroundImage"
                 style="@style/single_marquee"
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:layout_weight="1">
 
 
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvBackgroundColor"
                 style="@style/single_marquee"
                 android:layout_width="match_parent"

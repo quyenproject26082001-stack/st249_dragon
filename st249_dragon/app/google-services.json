@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "246183030208",
-    "project_id": "st266-school-girl-creator-2",
-    "storage_bucket": "st266-school-girl-creator-2.firebasestorage.app"
+    "project_number": "662050064223",
+    "project_id": "st249-dragon-oc-creator",
+    "storage_bucket": "st249-dragon-oc-creator.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:246183030208:android:bc08daa390d7d28cd6ac25",
+        "mobilesdk_app_id": "1:662050064223:android:7b16eba6eafe44b553d8ea",
         "android_client_info": {
-          "package_name": "com.female.maker.oc.creator2"
+          "package_name": "com.dragon.oc.avatar.creator"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBOWw42yzGZ8vtM3q19aZAEgeW11WhJh24"
+          "current_key": "AIzaSyA1x33rEQURSBITaykEzgEB-JhUnfeG3fQ"
         }
       ],
       "services": {

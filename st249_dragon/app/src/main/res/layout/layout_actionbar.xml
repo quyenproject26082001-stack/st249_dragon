@@ -71,7 +71,7 @@
         />
 
     <!--    tvStart-->
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvStart"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
@@ -111,7 +111,7 @@
         />
 
     <!--    tvCenter-->
-    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
     android:id="@+id/tvCenter"
         style="@style/single_marquee"
         android:layout_width="match_parent"
@@ -135,7 +135,7 @@
 
 
     <!--    tvCenter-->
-    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
         android:id="@+id/tvCenter1"
         style="@style/single_marquee"
         android:layout_width="200dp"
@@ -317,7 +317,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnActionBarRight">
 
-        <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
             android:id="@+id/tvRightText"
             style="@style/single_marquee"
             android:layout_width="match_parent"

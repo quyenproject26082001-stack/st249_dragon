@@ -47,7 +47,7 @@
         app:selectedDotColor="@color/app" />
 
     <!--    btnNext-->
-    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

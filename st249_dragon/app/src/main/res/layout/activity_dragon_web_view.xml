@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toStartOf="@id/btnRandomColor"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@id/rvPanel">
-        <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/random_traits"
@@ -69,7 +69,7 @@
         app:layout_constraintStart_toEndOf="@id/btnRandomTraits"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@id/rvPanel">
-        <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/random_color"
@@ -112,7 +112,7 @@
         android:id="@+id/btnBackColor"
             android:src="@drawable/ic_back_webviewcolor"/>
 
-        <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/choose_color"
@@ -180,7 +180,7 @@
         app:layout_constraintTop_toTopOf="@id/rvPanel"
         tools:visibility="gone">
 
-        <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
             android:id="@+id/btnResetMove"
             style="@style/DialogConfirmStrokeText"
             android:layout_width="57dp"
@@ -235,7 +235,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/size"
@@ -388,7 +388,7 @@
                 android:layout_height="28dp"
                 android:id="@+id/icHead"
                 android:src="@drawable/head" />
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvHeadTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -413,7 +413,7 @@
                 android:layout_height="28dp"
                 android:id="@+id/icTorso"
                 android:src="@drawable/torso" />
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvTorsoTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -439,7 +439,7 @@
                 android:layout_height="28dp"
                 android:id="@+id/icLegs"
                 android:src="@drawable/legs" />
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvLegsTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -464,7 +464,7 @@
                 android:layout_height="28dp"
                 android:id="@+id/icWings"
                 android:src="@drawable/wing" />
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvWingsTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -489,7 +489,7 @@
                 android:layout_height="28dp"
                 android:id="@+id/icTail"
                 android:src="@drawable/tail" />
-            <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvTailTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -15,7 +15,7 @@
             android:clipToPadding="false"
             android:paddingBottom="38dp">
 
-            <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                 android:id="@+id/tvTitle"
                 style="@style/single_marquee"
                 android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                         android:id="@+id/tvClose"
                         style="@style/single_marquee"
                         android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                     app:layout_constraintStart_toEndOf="@id/btnClose"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+                    <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                         android:id="@+id/tvDone"
                         style="@style/single_marquee"
                         android:layout_width="match_parent"

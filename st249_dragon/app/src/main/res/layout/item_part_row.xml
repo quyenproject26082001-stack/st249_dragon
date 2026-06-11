@@ -8,7 +8,7 @@
     android:paddingHorizontal="12dp"
     android:paddingVertical="6dp">
 
-    <com.female.maker.oc.creator2.core.custom.text.DoubleStrokeTextView
+    <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
         android:id="@+id/tvPartLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

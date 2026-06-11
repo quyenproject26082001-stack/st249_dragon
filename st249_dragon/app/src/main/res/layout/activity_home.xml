@@ -59,7 +59,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <!--            tv2-->
-                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                     android:id="@+id/tv1"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                 >
 
                 <!--            tv2-->
-                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                     android:id="@+id/tv2"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"
@@ -135,7 +135,7 @@
                 >
 
                 <!--            tv2-->
-                <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+                <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                     android:id="@+id/tv3"
                     style="@style/single_marquee"
                     android:layout_width="match_parent"

@@ -45,7 +45,7 @@
                 android:textColorHint="#868686"
                 android:textSize="12sp" />
 
-            <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                 android:id="@+id/tvFont"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_font" />
 
-            <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                 android:id="@+id/tvColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
         android:layout_gravity="top"
         android:layout_marginTop="10dp">
 
-        <com.female.maker.oc.creator2.core.custom.text.OuterStrokeTextView
+        <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
             android:id="@+id/tvText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
