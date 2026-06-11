@@ -453,3 +453,20 @@ Lý do
 Kết quả mới
 - Màn Dragon và màn Trending đều giữ dialog loading cho tới khi preview con rồng render xong hoàn toàn.
 - Random traits/random colors không còn cảm giác bấm xong mà preview vẫn đang tải ngầm.
+21. Bổ sung mới nhất: Trending tự random khi vừa vào màn
+
+Các file liên quan
+- `app/src/main/java/com/dragon/oc/avatar/creator/ui/trending/TrendingActivity.kt`
+
+Những gì đã thay đổi
+- Khi vừa vào `TrendingActivity`, WebView vẫn render lần đầu để biết builder đã sẵn sàng.
+- Sau event `RENDER_COMPLETE` đầu tiên, màn Trending tự gọi `RANDOMIZE_ALL`.
+- Dialog loading chỉ tắt sau event `RENDER_COMPLETE` của lần random.
+
+Lý do
+- Trước đó màn Trending chỉ load con rồng default, chưa random ngay khi vào màn.
+- User cần vào màn là thấy dragon random sẵn, không phải bấm Random lần đầu.
+
+Kết quả mới
+- Vào Trending là tự random ngay.
+- Loading không tắt ở preview default, mà chờ tới khi dragon random render hoàn toàn.

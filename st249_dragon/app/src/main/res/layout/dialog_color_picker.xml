@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:clipChildren="false"
+            android:background="@drawable/bg_dialog_delete_exit"
             android:clipToPadding="false"
             android:paddingBottom="38dp">
 

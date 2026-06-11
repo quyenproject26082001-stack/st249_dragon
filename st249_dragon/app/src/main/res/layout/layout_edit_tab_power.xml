@@ -40,7 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="-15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvStar"
@@ -70,7 +70,7 @@
         android:textColor="@color/app"
         android:textSize="16sp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnRatingStar"
         app:outerStrokeColor="@color/app1"
@@ -81,7 +81,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvStyle">
@@ -239,7 +239,7 @@
         android:textColor="@color/app"
         android:textSize="16sp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnStyle"
         app:outerStrokeColor="@color/app1"
@@ -316,7 +316,7 @@
         android:textColorHint="#868686"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/tvAtk"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@id/tvAtk"
         app:layout_constraintEnd_toEndOf="@id/tvAtk"/>
 
@@ -338,7 +338,7 @@
         android:textColorHint="#868686"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/tvDef"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@id/tvDef"
         app:layout_constraintEnd_toEndOf="@id/tvDef"/>
 

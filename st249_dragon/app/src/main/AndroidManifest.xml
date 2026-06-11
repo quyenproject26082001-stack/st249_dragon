@@ -24,6 +24,7 @@
         tools:replace="android:fullBackupContent">
         <activity
             android:name=".ui.dragon_webview.DragonWebViewActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.edit.EditActivity"

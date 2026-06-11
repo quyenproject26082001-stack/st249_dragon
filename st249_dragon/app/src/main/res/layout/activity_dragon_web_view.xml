@@ -23,8 +23,9 @@
   <WebView
       android:layout_width="0dp"
       android:layout_height="0dp"
-      android:layout_marginBottom="30dp"
-      android:background="@android:color/transparent"
+      android:layout_marginBottom="50dp"
+      android:layout_marginTop="50dp"
+      android:background="@android:color/white"
       app:layout_constraintBottom_toTopOf="@id/btnRandomTraits"
       app:layout_constraintTop_toBottomOf="@id/layoutActionBar"
       android:id="@+id/webView"
@@ -34,11 +35,12 @@
     
     <FrameLayout
         android:id="@+id/btnRandomTraits"
-        android:layout_width="132dp"
+        android:layout_width="152dp"
+        android:layout_height="0dp"
         android:background="@drawable/frame_item"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="36dp"
         android:layout_marginStart="17dp"
+        app:layout_constraintDimensionRatio="132:36"
         android:layout_marginEnd="8dp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintEnd_toStartOf="@id/btnRandomColor"
@@ -52,7 +54,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             app:outerStrokeWidth=".5dp"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:fontFamily="@font/copperplategothic_bold"
             app:outerStrokeColor="@color/app1"
             android:shadowColor="@color/app2"/>
@@ -61,14 +63,16 @@
 
     <FrameLayout
         android:id="@+id/btnRandomColor"
-        android:layout_width="132dp"
-        android:layout_marginBottom="15dp"
+        android:layout_width="152dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/frame_item"
-        android:layout_height="36dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="132:36"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnRandomTraits"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@id/rvPanel">
+        app:layout_constraintTop_toTopOf="@id/btnRandomTraits"
+        >
         <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -77,7 +81,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             app:outerStrokeWidth=".5dp"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:fontFamily="@font/copperplategothic_bold"
             app:outerStrokeColor="@color/app1"
             android:shadowColor="@color/app2"/>

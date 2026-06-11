@@ -66,6 +66,7 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
     private var currentSuggestion: SuggestionModel? = null
     private var isAnimating = false
     private var isWaitingForRandomRender = false
+    private var isInitialRandomPending = false
 
     override fun setViewBinding(): ActivityTrendingBinding {
         return ActivityTrendingBinding.inflate(LayoutInflater.from(this))
@@ -73,6 +74,7 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
 
     override fun initView() {
         binding.tvGenerate.isSelected = true
+        isInitialRandomPending = true
         isWaitingForRandomRender = true
         lifecycleScope.launch { showLoading() }
         setupDragonWebView()
@@ -161,6 +163,8 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
             "(function(){try{return typeof window.dispatch === 'function' && typeof STATE !== 'undefined' && !!STATE.data;}catch(e){return false;}})()"
         ) { result ->
             if (result == "true") {
+                isWaitingForRandomRender = true
+                lifecycleScope.launch { showLoading() }
                 hideDragonBuilderControls()
                 binding.dragonWebView.evaluateJavascript("""window.dispatch('{"type":"RANDOMIZE_ALL"}')""", null)
             } else if (attempt < 20) {
@@ -178,6 +182,19 @@ class TrendingActivity : BaseActivity<ActivityTrendingBinding>() {
                 val obj = org.json.JSONObject(eventJson)
                 when (obj.optString("type")) {
                     "RENDER_COMPLETE" -> {
+                        if (isInitialRandomPending) {
+                            isInitialRandomPending = false
+                            runOnUiThread {
+                                randomizeDragonWhenReady(onDone = {
+                                    isWaitingForRandomRender = false
+                                    isAnimating = false
+                                    binding.btnGenerate.visibility = View.VISIBLE
+                                    binding.btnDownload.visibility = View.VISIBLE
+                                    lifecycleScope.launch { dismissLoading() }
+                                })
+                            }
+                            return
+                        }
                         if (!isWaitingForRandomRender) return
                         runOnUiThread {
                             isWaitingForRandomRender = false

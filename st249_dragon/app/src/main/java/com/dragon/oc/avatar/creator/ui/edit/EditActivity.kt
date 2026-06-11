@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.dragon.oc.avatar.creator.R
 import com.dragon.oc.avatar.creator.core.extensions.gone
@@ -495,9 +496,54 @@ class EditActivity : AppCompatActivity() {
 
     private fun applyBgTagAsset(path: String) {
         currentBgTagPath = path
+        applyBgTagLayoutConfig(path)
         Glide.with(this)
             .load(path)
             .into(binding.imvBgTagAsset)
+    }
+
+    private fun applyBgTagLayoutConfig(path: String) {
+        val config = bgTagLayoutConfigs[path.substringAfterLast("/")] ?: defaultBgTagLayoutConfig
+
+        binding.guideTitleStart.setGuidePercent(config.titleStart)
+        binding.guideTitleEnd.setGuidePercent(config.titleEnd)
+        binding.guideTitleTop.setGuidePercent(config.titleTop)
+
+        binding.guideDragonStart.setGuidePercent(config.dragonStart)
+        binding.guideDragonEnd.setGuidePercent(config.dragonEnd)
+        binding.guideDragonTop.setGuidePercent(config.dragonTop)
+        binding.guideDragonBottom.setGuidePercent(config.dragonBottom)
+
+        binding.guideDescStart.setGuidePercent(config.descStart)
+        binding.guideDescEnd.setGuidePercent(config.descEnd)
+        binding.guideDescTop.setGuidePercent(config.descTop)
+        binding.guideDescBottom.setGuidePercent(config.descBottom)
+        binding.guideStatLine.setGuidePercent(config.statLine)
+        binding.guideAtkY.setGuidePercent(config.atkY)
+        binding.guideDefY.setGuidePercent(config.defY)
+
+        binding.rbPreviewStars.setHorizontalBias(config.starX)
+        binding.rbPreviewStars.setVerticalBias(config.starY)
+        binding.tvAtk.setHorizontalBias(config.atkX)
+        binding.tvDef.setHorizontalBias(config.defX)
+    }
+
+    private fun View.setGuidePercent(percent: Float) {
+        val params = layoutParams as? ConstraintLayout.LayoutParams ?: return
+        params.guidePercent = percent.coerceIn(0f, 1f)
+        layoutParams = params
+    }
+
+    private fun View.setHorizontalBias(bias: Float) {
+        val params = layoutParams as? ConstraintLayout.LayoutParams ?: return
+        params.horizontalBias = bias.coerceIn(0f, 1f)
+        layoutParams = params
+    }
+
+    private fun View.setVerticalBias(bias: Float) {
+        val params = layoutParams as? ConstraintLayout.LayoutParams ?: return
+        params.verticalBias = bias.coerceIn(0f, 1f)
+        layoutParams = params
     }
 
     private fun applyStarRating(rating: Int) {
@@ -517,12 +563,12 @@ class EditActivity : AppCompatActivity() {
 
     private fun applyAtk(value: String) {
         currentAtk = value
-        binding.tvAtk.text = "ATK/ ${value.ifBlank { "?" }}"
+        binding.tvAtk.text = "${value.ifBlank { "?" }}"
     }
 
     private fun applyDef(value: String) {
         currentDef = value
-        binding.tvDef.text = "DEF/ ${value.ifBlank { "?" }}"
+        binding.tvDef.text = "${value.ifBlank { "?" }}"
     }
 
     private fun updateStarStyleSelection() {
@@ -689,6 +735,192 @@ class EditActivity : AppCompatActivity() {
         val selectedIcon: Int
     )
 
+    private data class BgTagLayoutConfig(
+        // Name tag left edge. Increase -> move right, decrease -> move left.
+        val titleStart: Float = 0.07f,
+        // Name tag right edge. Increase -> expand right, decrease -> shrink left.
+        val titleEnd: Float = 0.93f,
+        // Name tag top position. Increase -> move down, decrease -> move up.
+        val titleTop: Float = 0.05f,
+        // Dragon frame left edge. Increase -> move right/shrink, decrease -> move left/expand.
+        val dragonStart: Float = 0.105f,
+        // Dragon frame right edge. Increase -> expand right, decrease -> shrink left.
+        val dragonEnd: Float = 0.895f,
+        // Dragon frame top edge. Increase -> move down/shrink, decrease -> move up/expand.
+        val dragonTop: Float = 0.174f,
+        // Dragon frame bottom edge. Increase -> expand down, decrease -> move up/shrink.
+        val dragonBottom: Float = 0.713f,
+        // Description area left edge. Increase -> move right/shrink, decrease -> move left/expand.
+        val descStart: Float = 0.073f,
+        // Description area right edge. Increase -> expand right, decrease -> shrink left.
+        val descEnd: Float = 0.929f,
+        // Description area top edge. Increase -> move down/shrink, decrease -> move up/expand.
+        val descTop: Float = 0.748f,
+        // Description area bottom edge. Increase -> expand down, decrease -> move up/shrink.
+        val descBottom: Float = 0.948f,
+        // ATK/DEF line inside description area. Increase -> move down, decrease -> move up.
+        val statLine: Float = 0.78f,
+        // Star horizontal position inside top area. 0 = left, 1 = right.
+        val starX: Float = 0.15f,
+        // Star vertical position inside top area. 0 = top, 1 = bottom.
+        val starY: Float = 0.65f,
+        // ATK horizontal position inside description area. 0 = left, 1 = right.
+        val atkX: Float = 0.67f,
+        // ATK vertical position inside description area. 0 = top, 1 = bottom.
+        val atkY: Float = 0.8f,
+        // DEF horizontal position inside description area. 0 = left, 1 = right.
+        val defX: Float = 1f,
+        // DEF vertical position inside description area. 0 = top, 1 = bottom.
+        val defY: Float = 0.8f
+    )
+
+    private val defaultBgTagLayoutConfig = BgTagLayoutConfig()
+
+    private val bgTagLayoutConfigs = mapOf(
+        // All values are percentages from 0f..1f inside the selected bg_tag image.
+        // Adjust each row independently when a tag's printed zones do not line up.
+        "1.png" to BgTagLayoutConfig(
+            titleStart = 0.15f,
+            titleEnd = 0.93f,
+            titleTop = 0.06f,
+            dragonStart = 0.105f,
+            dragonEnd = 0.895f,
+            dragonTop = 0.174f,
+            dragonBottom = 0.713f,
+            descStart = 0.073f,
+            descEnd = 0.88f,
+            descTop = 0.771f,
+            descBottom = 0.948f,
+            statLine = 0.78f,
+            starX = 0.15f,
+            starY = 0.99f,
+            atkX = 0.67f,
+            atkY = 0.70f,
+            defX = 1f,
+            defY = 0.70f
+        ),
+        "2.png" to BgTagLayoutConfig(
+            titleStart = 0.15f,
+            titleEnd = 0.93f,
+            titleTop = 0.06f,
+            dragonStart = 0.105f,
+            dragonEnd = 0.895f,
+            dragonTop = 0.174f,
+            dragonBottom = 0.713f,
+            descStart = 0.073f,
+            descEnd = 0.88f,
+            descTop = 0.771f,
+            descBottom = 0.948f,
+            statLine = 0.78f,
+            starX = 0.15f,
+            starY = 0.99f,
+            atkX = 0.67f,
+            atkY = 0.70f,
+            defX = 1f,
+            defY = 0.70f
+        ),
+        "3.png" to BgTagLayoutConfig(
+            titleStart = 0.15f,
+            titleEnd = 0.93f,
+            titleTop = 0.05f,
+            dragonStart = 0.105f,
+            dragonEnd = 0.895f,
+            dragonTop = 0.174f,
+            dragonBottom = 0.713f,
+            descStart = 0.073f,
+            descEnd = 0.88f,
+            descTop = 0.798f,
+            descBottom = 0.948f,
+            statLine = 0.78f,
+            starX = 0.15f,
+            starY = 0.99f,
+            atkX = 0.65f,
+            atkY = 0.828f,
+            defX = 0.98f,
+            defY = 0.828f
+        ),
+        "4.png" to BgTagLayoutConfig(
+            titleStart = 0.15f,
+            titleEnd = 0.93f,
+            titleTop = 0.05f,
+            dragonStart = 0.105f,
+            dragonEnd = 0.895f,
+            dragonTop = 0.174f,
+            dragonBottom = 0.713f,
+            descStart = 0.073f,
+            descEnd = 0.92f,
+            descTop = 0.778f,
+            descBottom = 0.948f,
+            statLine = 0.78f,
+            starX = 0.15f,
+            starY = 0.99f,
+            atkX = 0.67f,
+            atkY = 0.90f,
+            defX = 1f,
+            defY = 0.90f
+        ),
+        "5.png" to BgTagLayoutConfig(
+            titleStart = 0.15f,
+            titleEnd = 0.93f,
+            titleTop = 0.05f,
+            dragonStart = 0.105f,
+            dragonEnd = 0.895f,
+            dragonTop = 0.174f,
+            dragonBottom = 0.713f,
+            descStart = 0.073f,
+            descEnd = 0.92f,
+            descTop = 0.778f,
+            descBottom = 0.948f,
+            statLine = 0.78f,
+            starX = 0.15f,
+            starY = 0.99f,
+            atkX = 0.65f,
+            atkY = 0.828f,
+            defX = 0.98f,
+            defY = 0.828f
+        ),
+        "6.png" to BgTagLayoutConfig(
+            titleStart = 0.15f,
+            titleEnd = 0.93f,
+            titleTop = 0.05f,
+            dragonStart = 0.105f,
+            dragonEnd = 0.895f,
+            dragonTop = 0.174f,
+            dragonBottom = 0.713f,
+            descStart = 0.073f,
+            descEnd = 0.92f,
+            descTop = 0.778f,
+            descBottom = 0.948f,
+            statLine = 0.78f,
+            starX = 0.15f,
+            starY = 0.99f,
+            atkX = 0.65f,
+            atkY = 0.828f,
+            defX = 0.98f,
+            defY = 0.828f
+        ),
+        "7.png" to BgTagLayoutConfig(
+            titleStart = 0.15f,
+            titleEnd = 0.93f,
+            titleTop = 0.05f,
+            dragonStart = 0.105f,
+            dragonEnd = 0.895f,
+            dragonTop = 0.174f,
+            dragonBottom = 0.713f,
+            descStart = 0.073f,
+            descEnd = 0.88f,
+            descTop = 0.778f,
+            descBottom = 0.948f,
+            statLine = 0.78f,
+            starX = 0.15f,
+            starY = 0.99f,
+            atkX = 0.62f,
+            atkY = 0.70f,
+            defX = 0.97f,
+            defY = 0.70f
+        )
+    )
+
     private fun handleDone() {
         try {
             val path = savePreviewToCreation()
@@ -709,10 +941,13 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun savePreviewToCreation(): String {
-        if (binding.bgTag.width <= 0 || binding.bgTag.height <= 0) {
-            throw IllegalStateException("bgTag is not laid out: ${binding.bgTag.width}x${binding.bgTag.height}")
+        val captureView = binding.cardCaptureContainer
+        if (captureView.width <= 0 || captureView.height <= 0) {
+            throw IllegalStateException(
+                "cardCaptureContainer is not laid out: ${captureView.width}x${captureView.height}"
+            )
         }
-        val bitmap = createBitmapFromView(binding.bgTag)
+        val bitmap = createBitmapFromView(captureView)
         val ts = SimpleDateFormat("yyyyMMdd_HHmmss_SSS", Locale.getDefault()).format(Date())
         val dir = File(filesDir, ValueKey.DOWNLOAD_ALBUM).also { it.mkdirs() }
         val file = File(dir, "edited_dragon_$ts.png")

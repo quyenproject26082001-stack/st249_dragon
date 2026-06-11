@@ -138,7 +138,7 @@ class DragonWebViewActivity : AppCompatActivity() {
                     """.trimIndent(),
                     null
                 )
-                binding.webView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+                binding.webView.setBackgroundColor(android.graphics.Color.WHITE)
                 val selectionState = intent.getStringExtra(EXTRA_SELECTION_STATE)
                 if (!selectionState.isNullOrBlank()) {
                     applySelectionStateWhenReady(selectionState)
@@ -193,6 +193,8 @@ class DragonWebViewActivity : AppCompatActivity() {
 
         binding.rvPanel.layoutManager = LinearLayoutManager(this)
         binding.rvPanel.adapter = adapter
+        binding.rvPanel.itemAnimator = null
+        binding.rvPanel.setHasFixedSize(true)
         selectTab(binding.btnTabHead)
         loadTab("head")
 

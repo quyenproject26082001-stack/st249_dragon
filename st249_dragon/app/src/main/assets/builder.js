@@ -444,7 +444,7 @@ async function updatePreview() {
 
     const assetW = reference.img.width;
     const assetH = reference.img.height;
-    const targetDim = UI.canvas.width * 0.78;
+    const targetDim = UI.canvas.width * 1;
     const scale = Math.min(targetDim / assetW, targetDim / assetH);
     const offsetW = (UI.canvas.width  - assetW * scale) / 2;
     const offsetH = (UI.canvas.height - assetH * scale) / 2;

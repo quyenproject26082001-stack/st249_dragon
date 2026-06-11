@@ -58,9 +58,19 @@ class PartRowAdapter(
                 .inflate(R.layout.item_part_option, holder.llOptions, false) as ImageView
             img.isSelected = (opt.value == selectedValue)
             img.setOnClickListener {
-                selectedValues[row.partId] = opt.value
-                notifyItemChanged(holder.bindingAdapterPosition)
-                onOptionClick(row.partId, opt.value)
+                selectedValues[row.partId] =
+                    opt.value
+
+                for (i in 0 until
+                        holder.llOptions.childCount) {
+                    val child =
+                        holder.llOptions.getChildAt(i)
+                    child.isSelected =
+                        row.options.getOrNull(i)?.value == opt.value
+                }
+
+                onOptionClick(row.partId,
+                    opt.value)
             }
             if (opt.thumb != null) {
                 Glide.with(ctx)

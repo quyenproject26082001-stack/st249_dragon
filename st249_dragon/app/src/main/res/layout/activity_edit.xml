@@ -55,34 +55,150 @@
             layout="@layout/layout_actionbar" />
     </FrameLayout>
 
-    <!--    flSave-->
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bgTag"
+        android:id="@+id/cardCaptureContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="29dp"
+        android:layout_marginHorizontal="39dp"
         android:layout_marginTop="0dp"
-        tools:visibility="visible"
-        app:layout_constraintDimensionRatio="3:4.1"
+        android:clipChildren="false"
+        android:clipToOutline="false"
+        app:layout_constraintDimensionRatio="735:1072"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:background="@color/app2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/flActionBar">
+        app:layout_constraintTop_toBottomOf="@id/flActionBar"
+        tools:background="@drawable/bg_tools"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideTitleStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.07" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideTitleEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.93" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideTitleTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideDragonStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.105" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideDragonEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.895" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideDragonTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.174" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideDragonBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.713" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideDescStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.073" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideDescEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.929" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideDescTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.748" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideDescBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.948" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bgImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToOutline="false"
+            android:elevation="0dp"
+            app:layout_constraintBottom_toTopOf="@id/guideDragonBottom"
+            app:layout_constraintEnd_toStartOf="@id/guideDragonEnd"
+            app:layout_constraintStart_toStartOf="@id/guideDragonStart"
+            app:layout_constraintTop_toTopOf="@id/guideDragonTop"
+            tools:background="@color/app1">
+
+            <ImageView
+                android:id="@+id/imvBgImageAsset"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/imvImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--    flSave-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bgTag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToOutline="false">
 
         <ImageView
             android:id="@+id/imvBgTagAsset"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitXY" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bgImage">
+            app:layout_constraintEnd_toEndOf="@id/bgTag"
+            app:layout_constraintStart_toStartOf="@id/bgTag"
+            app:layout_constraintTop_toTopOf="@id/bgTag"
+            app:layout_constraintBottom_toTopOf="@id/guideDragonTop">
 
             <com.willy.ratingbar.ScaleRatingBar
                 android:id="@+id/rbPreviewStars"
@@ -96,6 +212,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintVertical_bias="0.65"
                 app:srb_drawableEmpty="@drawable/ic_star_transparent"
                 app:srb_drawableFilled="@drawable/style1_small"
                 app:srb_isIndicator="true"
@@ -109,40 +226,26 @@
                 app:srb_stepSize="1" />
             
         </androidx.constraintlayout.widget.ConstraintLayout>
-        
-        
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_height="0dp"
-        tools:background="@color/app1"
-        android:layout_marginTop="36dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginHorizontal="25dp"
-        android:id="@+id/bgImage"
-        app:layout_constraintDimensionRatio="1:1"
-        android:layout_width="match_parent">
 
-        <ImageView
-            android:id="@+id/imvBgImageAsset"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imvImage"
+        <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvNameTag"
+            tools:text="Name Tag"
+            android:textColor="#2B1A00"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/guideTitleEnd"
+            app:layout_constraintStart_toStartOf="@id/guideTitleStart"
+            android:fontFamily="@font/copperplategothic_bold"
+            app:layout_constraintTop_toTopOf="@id/guideTitleTop"
             />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
             android:layout_width="0dp"
-            android:layout_marginBottom="30dp"
             app:layout_constraintTop_toTopOf="@id/bgImage"
-            android:layout_marginStart="-15dp"
-            android:layout_marginEnd="-15dp"
+            tools:visibility="gone"
             android:foreground="@drawable/ic_claws"
             app:layout_constraintEnd_toEndOf="@id/bgImage"
             app:layout_constraintStart_toStartOf="@id/bgImage"
@@ -151,27 +254,38 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/bgImage"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/frame_describle"
+            android:clipChildren="false"
+            android:clipToOutline="false"
+            app:layout_constraintTop_toTopOf="@id/guideDescTop"
+            app:layout_constraintBottom_toTopOf="@id/guideDescBottom"
+            app:layout_constraintEnd_toStartOf="@id/guideDescEnd"
+            app:layout_constraintStart_toStartOf="@id/guideDescStart"
+
             >
-            <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
-                android:layout_width="match_parent"
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideStatLine"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvNameTag"
-                tools:text="Name Tag"
-                android:textColor="#2B1A00"
-                android:textSize="16sp"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="1dp"
-                android:fontFamily="@font/copperplategothic_bold"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.78" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideAtkY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideDefY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8" />
+
             <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,17 +295,15 @@
                 android:textSize="12sp"
                 android:maxLines="3"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="-5dp"
                 android:fontFamily="@font/afacadflux"
-                app:layout_constraintTop_toBottomOf="@id/tvNameTag"
+                app:layout_constraintTop_toTopOf="parent"
                 />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:src="@drawable/ic_line_edit"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="@id/guideStatLine"
                 android:id="@+id/icLine"
                 />
 
@@ -200,33 +312,35 @@
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:src="@drawable/ic_atk"
+                android:visibility="invisible"
                 app:layout_constraintTop_toTopOf="@id/tvAtk"
                 app:layout_constraintBottom_toBottomOf="@id/tvAtk"
                 app:layout_constraintEnd_toStartOf="@+id/tvAtk"
                 />
 
             <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
+                android:id="@+id/tvAtk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ATK/ ?"
-                app:layout_constraintTop_toBottomOf="@id/icLine"
+                app:layout_constraintTop_toTopOf="@id/guideAtkY"
                 android:textColor="@color/white"
                 android:shadowRadius=".1"
                 android:shadowDy="3"
+                android:visibility="visible"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias=".45"
+                app:layout_constraintHorizontal_bias=".67"
                 android:fontFamily="@font/copperplategothic_bold"
                 app:outerStrokeColor="@color/app1"
-                app:outerStrokeWidth=".5dp"
-                android:id="@+id/tvAtk"
-                />
+                app:outerStrokeWidth=".5dp" />
 
 
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp"
+                android:visibility="invisible"
                 android:src="@drawable/ic_def"
                 app:layout_constraintTop_toTopOf="@id/tvDef"
                 app:layout_constraintBottom_toBottomOf="@id/tvDef"
@@ -236,14 +350,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DEF/ ?"
-                app:layout_constraintTop_toBottomOf="@id/icLine"
+                app:layout_constraintTop_toTopOf="@id/guideDefY"
                 android:textColor="@color/white"
                 android:shadowRadius=".1"
                 android:shadowDy="3"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias=".92"
+                app:layout_constraintHorizontal_bias="1"
                 android:fontFamily="@font/copperplategothic_bold"
                 app:outerStrokeColor="@color/app1"
                 app:outerStrokeWidth=".5dp"
@@ -251,7 +365,6 @@
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -264,7 +377,7 @@
         android:layout_marginTop="17dp"
         android:clipChildren="false"
         app:layout_constraintBottom_toTopOf="@id/lnlBottom"
-        app:layout_constraintTop_toBottomOf="@id/bgTag">
+        app:layout_constraintTop_toBottomOf="@id/cardCaptureContainer">
 
         <include
             android:id="@+id/tabNameTag"
@@ -287,7 +400,7 @@
     <LinearLayout
         android:id="@+id/lnlBottom"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="54dp"
         android:background="#F1E2AF"
         android:gravity="center"
         android:orientation="horizontal"

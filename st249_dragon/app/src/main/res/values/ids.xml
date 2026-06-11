@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="guideTitleStart" type="id" />
+    <item name="guideTitleEnd" type="id" />
+    <item name="guideTitleTop" type="id" />
+    <item name="guideDragonStart" type="id" />
+    <item name="guideDragonEnd" type="id" />
+    <item name="guideDragonTop" type="id" />
+    <item name="guideDragonBottom" type="id" />
+    <item name="guideDescStart" type="id" />
+    <item name="guideDescEnd" type="id" />
+    <item name="guideDescTop" type="id" />
+    <item name="guideDescBottom" type="id" />
+    <item name="guideStatLine" type="id" />
+    <item name="guideAtkY" type="id" />
+    <item name="guideDefY" type="id" />
+</resources>
