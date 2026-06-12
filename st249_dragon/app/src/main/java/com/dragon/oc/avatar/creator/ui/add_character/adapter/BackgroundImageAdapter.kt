@@ -35,14 +35,23 @@ class BackgroundImageAdapter :
         val item = getItem(position)
         Log.d("BgImageAdapter", "onBind pos=$position isSelected=${item.isSelected} path=${item.path}")
         holder.binding.apply {
-            imvFrame.setImageResource(if (item.isSelected) R.drawable.item_slt_bg else R.drawable.item_uslt_bg)
+            bgFrame.setBackgroundResource(
+                if (item.isSelected) {
+                    R.drawable.bg_background_image_selected
+                } else {
+                    R.drawable.bg_background_image_unselected
+                }
+            )
             if (showAddItem && position == 0) {
                 lnlAddItem.visible()
+                tvAddImg.visible()
                 imvImage.gone()
                 tvAddImg.isSelected = true
                 lnlAddItem.tap(500) { onAddImageClick.invoke() }
             } else {
                 lnlAddItem.gone()
+                tvAddImg.gone()
+                tvAddImg.isSelected = false
                 imvImage.visible()
                 val cornerRadiusPx = (4 * root.context.resources.displayMetrics.density).toInt()
                 Glide.with(root)

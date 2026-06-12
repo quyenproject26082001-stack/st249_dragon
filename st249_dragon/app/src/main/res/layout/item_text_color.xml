@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="37dp"
     android:layout_height="37dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginEnd="12dp">
 
     <FrameLayout
@@ -14,18 +15,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--        vFocus (stroke - renders BEHIND)-->
-        <View
-            android:id="@+id/vFocus"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:background="@drawable/bg_stroke_gradient_circle" />
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_margin="0dp"
             >
 
             <!--            imvColor-->
@@ -39,13 +32,24 @@
             <ImageView
                 android:id="@+id/btnAddColor"
                 android:layout_width="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="0dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/img0text_color"
                 android:layout_gravity="center"
                 android:visibility="visible" />
 
         </FrameLayout>
+
+        <!--        vFocus stroke renders above color/icon content-->
+        <View
+            android:id="@+id/vFocus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_stroke_gradient_circle_color_text"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="gone"
+            tools:visibility="visible" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

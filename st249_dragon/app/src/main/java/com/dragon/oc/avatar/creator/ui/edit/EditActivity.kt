@@ -380,26 +380,14 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun addCustomBgImage(path: String) {
-        val existingIndex = bgImageAssets.indexOfFirst { it.path == path }
-        val position = if (existingIndex >= 0) {
-            existingIndex
-        } else {
-            bgImageAssets.add(1, SelectedModel(path = path))
-            1
-        }
+        val position = bgImageAssets.indexOfFirst { it.path == path }.takeIf { it >= 0 } ?: 0
         selectColor(bgImageAssets, position)
         applyBgImageAsset(path)
         bgImageAdapter.submitItem(position, bgImageAssets)
     }
 
     private fun addCustomBgTag(path: String) {
-        val existingIndex = bgTagAssets.indexOfFirst { it.path == path }
-        val position = if (existingIndex >= 0) {
-            existingIndex
-        } else {
-            bgTagAssets.add(1, SelectedModel(path = path))
-            1
-        }
+        val position = bgTagAssets.indexOfFirst { it.path == path }.takeIf { it >= 0 } ?: 0
         selectColor(bgTagAssets, position)
         applyBgTagAsset(path)
         bgTagAdapter.submitItem(position, bgTagAssets)
@@ -670,17 +658,19 @@ class EditActivity : AppCompatActivity() {
 
     private fun restoreBackgroundStyle(bgImagePath: String, bgTagPath: String) {
         if (bgImagePath.isNotEmpty()) {
-            if (bgImageAssets.none { it.path == bgImagePath }) {
-                bgImageAssets.add(1, SelectedModel(path = bgImagePath))
+            if (bgImageAssets.any { it.path == bgImagePath }) {
+                bgImageAssets.selectPath(bgImagePath)
+            } else {
+                bgImageAssets.selectItem(0)
             }
-            bgImageAssets.selectPath(bgImagePath)
             applyBgImageAsset(bgImagePath)
         }
         if (bgTagPath.isNotEmpty()) {
-            if (bgTagAssets.none { it.path == bgTagPath }) {
-                bgTagAssets.add(1, SelectedModel(path = bgTagPath))
+            if (bgTagAssets.any { it.path == bgTagPath }) {
+                bgTagAssets.selectPath(bgTagPath)
+            } else {
+                bgTagAssets.selectItem(0)
             }
-            bgTagAssets.selectPath(bgTagPath)
             applyBgTagAsset(bgTagPath)
         }
         bgImageAdapter.submitList(bgImageAssets.map { it.copy() })
@@ -794,10 +784,10 @@ class EditActivity : AppCompatActivity() {
             statLine = 0.78f,
             starX = 0.15f,
             starY = 0.99f,
-            atkX = 0.67f,
-            atkY = 0.70f,
+            atkX = 0.685f,
+            atkY = 0.78f,
             defX = 1f,
-            defY = 0.70f
+            defY = 0.78f
         ),
         "2.png" to BgTagLayoutConfig(
             titleStart = 0.15f,
@@ -814,10 +804,10 @@ class EditActivity : AppCompatActivity() {
             statLine = 0.78f,
             starX = 0.15f,
             starY = 0.99f,
-            atkX = 0.67f,
-            atkY = 0.70f,
-            defX = 1f,
-            defY = 0.70f
+            atkX = 0.685f,
+            atkY = 0.78f,
+            defX = 1.05f,
+            defY = 0.78f
         ),
         "3.png" to BgTagLayoutConfig(
             titleStart = 0.15f,
@@ -834,10 +824,10 @@ class EditActivity : AppCompatActivity() {
             statLine = 0.78f,
             starX = 0.15f,
             starY = 0.99f,
-            atkX = 0.65f,
-            atkY = 0.828f,
-            defX = 0.98f,
-            defY = 0.828f
+            atkX = 0.68f,
+            atkY = 0.868f,
+            defX = 1f,
+            defY = 0.878f
         ),
         "4.png" to BgTagLayoutConfig(
             titleStart = 0.15f,
@@ -855,9 +845,9 @@ class EditActivity : AppCompatActivity() {
             starX = 0.15f,
             starY = 0.99f,
             atkX = 0.67f,
-            atkY = 0.90f,
+            atkY = 0.97f,
             defX = 1f,
-            defY = 0.90f
+            defY = 0.97f
         ),
         "5.png" to BgTagLayoutConfig(
             titleStart = 0.15f,
@@ -875,9 +865,9 @@ class EditActivity : AppCompatActivity() {
             starX = 0.15f,
             starY = 0.99f,
             atkX = 0.65f,
-            atkY = 0.828f,
+            atkY = 0.898f,
             defX = 0.98f,
-            defY = 0.828f
+            defY = 0.898f
         ),
         "6.png" to BgTagLayoutConfig(
             titleStart = 0.15f,
@@ -895,9 +885,9 @@ class EditActivity : AppCompatActivity() {
             starX = 0.15f,
             starY = 0.99f,
             atkX = 0.65f,
-            atkY = 0.828f,
+            atkY = 0.908f,
             defX = 0.98f,
-            defY = 0.828f
+            defY = 0.908f
         ),
         "7.png" to BgTagLayoutConfig(
             titleStart = 0.15f,
@@ -915,9 +905,9 @@ class EditActivity : AppCompatActivity() {
             starX = 0.15f,
             starY = 0.99f,
             atkX = 0.62f,
-            atkY = 0.70f,
+            atkY = 0.73f,
             defX = 0.97f,
-            defY = 0.70f
+            defY = 0.73f
         )
     )
 

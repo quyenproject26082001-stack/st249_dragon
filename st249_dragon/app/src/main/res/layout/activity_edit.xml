@@ -65,6 +65,8 @@
         android:layout_marginTop="0dp"
         android:clipChildren="false"
         android:clipToOutline="false"
+        app:layout_constraintBottom_toTopOf="@id/gl"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintDimensionRatio="735:1072"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -245,7 +247,9 @@
             android:layout_height="0dp"
             android:layout_width="0dp"
             app:layout_constraintTop_toTopOf="@id/bgImage"
-            tools:visibility="gone"
+            tools:visibility="visible"
+            android:layout_marginStart="-10dp"
+            android:layout_marginEnd="-13dp"
             android:foreground="@drawable/ic_claws"
             app:layout_constraintEnd_toEndOf="@id/bgImage"
             app:layout_constraintStart_toStartOf="@id/bgImage"
@@ -318,23 +322,21 @@
                 app:layout_constraintEnd_toStartOf="@+id/tvAtk"
                 />
 
-            <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:id="@+id/tvAtk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ATK/ ?"
                 app:layout_constraintTop_toTopOf="@id/guideAtkY"
-                android:textColor="@color/white"
-                android:shadowRadius=".1"
-                android:shadowDy="3"
+                android:textColor="@color/black"
                 android:visibility="visible"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias=".67"
                 android:fontFamily="@font/copperplategothic_bold"
-                app:outerStrokeColor="@color/app1"
-                app:outerStrokeWidth=".5dp" />
+                app:outerStrokeColor="@color/transparent"
+                />
 
 
             <ImageView
@@ -346,21 +348,17 @@
                 app:layout_constraintBottom_toBottomOf="@id/tvDef"
                 app:layout_constraintEnd_toStartOf="@+id/tvDef"
                 />
-            <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
+            <com.dragon.oc.avatar.creator.core.custom.text.DoubleStrokeTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DEF/ ?"
                 app:layout_constraintTop_toTopOf="@id/guideDefY"
-                android:textColor="@color/white"
-                android:shadowRadius=".1"
-                android:shadowDy="3"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias="1"
                 android:fontFamily="@font/copperplategothic_bold"
-                app:outerStrokeColor="@color/app1"
-                app:outerStrokeWidth=".5dp"
                 android:id="@+id/tvDef"
                 />
 
@@ -377,7 +375,7 @@
         android:layout_marginTop="17dp"
         android:clipChildren="false"
         app:layout_constraintBottom_toTopOf="@id/lnlBottom"
-        app:layout_constraintTop_toBottomOf="@id/cardCaptureContainer">
+        app:layout_constraintTop_toBottomOf="@id/gl">
 
         <include
             android:id="@+id/tabNameTag"
@@ -537,7 +535,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.63" />
 
     <!--    &lt;!&ndash;    flNativeCollab&ndash;&gt;-->
     <!--    <FrameLayout-->

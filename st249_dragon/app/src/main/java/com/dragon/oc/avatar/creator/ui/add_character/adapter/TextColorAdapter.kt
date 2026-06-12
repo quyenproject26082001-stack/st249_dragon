@@ -3,7 +3,6 @@ package com.dragon.oc.avatar.creator.ui.add_character.adapter
 import android.annotation.SuppressLint
 import android.graphics.drawable.GradientDrawable
 import android.util.Log
-import androidx.core.view.isVisible
 import com.dragon.oc.avatar.creator.R
 import com.dragon.oc.avatar.creator.core.base.BaseAdapter
 import com.dragon.oc.avatar.creator.core.extensions.gone
@@ -23,9 +22,14 @@ class TextColorAdapter : BaseAdapter<SelectedModel, ItemTextColorBinding>(ItemTe
         Log.d("TextColorAdapter", "onBind position=$position, color=${String.format("#%06X", 0xFFFFFF and item.color)}, isSelected=${item.isSelected}")
 
         binding.apply {
-            vFocus.isVisible = item.isSelected
-            // Ensure circular stroke for all positions (TextColorAdapter uses circles)
-            vFocus.setBackgroundResource(R.drawable.bg_stroke_gradient_circle_color_text)
+            vFocus.visible()
+            vFocus.setBackgroundResource(
+                if (item.isSelected) {
+                    R.drawable.bg_stroke_gradient_circle_color_text
+                } else {
+                    R.drawable.bg_text_color_unselected_stroke
+                }
+            )
 
             if (position == 0) {
                 Log.d("TextColorAdapter", "Position 0: Clearing and loading img0text_color")

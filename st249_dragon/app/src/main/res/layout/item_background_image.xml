@@ -7,8 +7,10 @@
     android:layout_margin="4dp">
 
     <FrameLayout
+        android:id="@+id/bgFrame"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/bg_background_image_unselected"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="60:60"
@@ -16,18 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imvFrame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/item_uslt_bg" />
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="7dp"
-            app:cardCornerRadius="5dp"
+            android:layout_margin="3dp"
+            app:cardCornerRadius="2dp"
             app:cardElevation="0dp"
             app:strokeColor="@color/transparent"
             app:cardBackgroundColor="@color/transparent">
@@ -52,40 +47,33 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_add_item" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="389dp"
-                        android:layout_weight="2.8" />
-
-                    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
-                        android:id="@+id/tvAddImg"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_image"
-                        android:textColor="@color/white"
-                        android:gravity="center"
-                        app:outerStrokeWidth="1dp"
-                        android:shadowColor="@color/app2"
-                        android:shadowDy="3"
-                        android:shadowRadius=".1"
-                        app:outerStrokeColor="@color/app1"
-                        style="@style/single_marquee"
-                        android:fontFamily="@font/copperplategothic_bold"
-                        android:textSize="10sp" />
-
-
-
-                </LinearLayout>
 
             </FrameLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
     </FrameLayout>
+
+    <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
+        android:id="@+id/tvAddImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/copperplategothic_bold"
+        android:gravity="center"
+        android:shadowColor="@color/app2"
+        android:shadowDy="3"
+        android:shadowRadius=".1"
+        android:text="@string/add_image"
+        android:textColor="@color/white"
+        android:textSize="9.5sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:outerStrokeColor="@color/app1"
+        app:outerStrokeWidth=".3dp"
+        style="@style/single_marquee" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

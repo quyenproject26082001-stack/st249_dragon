@@ -17,7 +17,7 @@
     <com.dragon.oc.avatar.creator.core.custom.text.OuterStrokeTextView
         android:id="@+id/tvContent"
         android:layout_width="match_parent"
-        android:layout_height="68sp"
+        android:layout_height="wrap_content"
         android:maxLines="2"
         android:layout_marginHorizontal="16dp"
         android:fontFamily="@font/copperplategothic_bold"
