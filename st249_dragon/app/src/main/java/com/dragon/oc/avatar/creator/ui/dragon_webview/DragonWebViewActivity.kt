@@ -13,6 +13,7 @@ import com.dragon.oc.avatar.creator.core.extensions.handleBackLeftToRight
 import com.dragon.oc.avatar.creator.databinding.ActivityDragonWebViewBinding
 
 import android.content.Intent
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -33,6 +34,7 @@ import com.dragon.oc.avatar.creator.core.extensions.tap
 import com.dragon.oc.avatar.creator.core.extensions.tapAndHold
 import com.dragon.oc.avatar.creator.core.extensions.visible
 import com.dragon.oc.avatar.creator.core.helper.MediaHelper
+import com.dragon.oc.avatar.creator.core.helper.LanguageHelper
 import com.dragon.oc.avatar.creator.core.utils.key.IntentKey
 import com.dragon.oc.avatar.creator.core.utils.key.ValueKey
 import com.dragon.oc.avatar.creator.data.model.custom.DragonCardEditModel
@@ -50,6 +52,10 @@ import java.util.Locale
 
 
 class DragonWebViewActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageHelper.wrapContext(newBase))
+    }
 
     companion object {
         const val EXTRA_AUTO_RANDOM = "extra_auto_random"
@@ -237,6 +243,7 @@ class DragonWebViewActivity : AppCompatActivity() {
         dialog.onNoClick = { closeDialog() }
         dialog.onYesClick = {
             closeDialog()
+            adapter.resetSelections()
             dispatchWithRenderLoading("RESET")
         }
     }

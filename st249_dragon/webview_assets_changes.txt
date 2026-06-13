@@ -470,3 +470,18 @@ Lý do
 Kết quả mới
 - Vào Trending là tự random ngay.
 - Loading không tắt ở preview default, mà chờ tới khi dragon random render hoàn toàn.
+22. Bổ sung mới nhất: reset đồng bộ focus item native về None
+
+Các file liên quan
+- `app/src/main/java/com/dragon/oc/avatar/creator/ui/dragon_webview/PartRowAdapter.kt`
+- `app/src/main/java/com/dragon/oc/avatar/creator/ui/dragon_webview/DragonWebViewActivity.kt`
+
+Những gì đã thay đổi
+- Thêm `PartRowAdapter.resetSelections()` để xóa selected state cũ và chọn option đầu của mỗi row.
+- Khi xác nhận Reset ở màn Dragon, native adapter được reset trước khi gửi action `RESET` sang `builder.js`.
+
+Lý do
+- `builder.js` đã reset `STATE.selections` về option đầu, nhưng map `selectedValues` của RecyclerView native vẫn giữ item cũ.
+
+Kết quả mới
+- Reset đồng bộ cả preview JS và focus/viền selected của item native về `None` hoặc option đầu.

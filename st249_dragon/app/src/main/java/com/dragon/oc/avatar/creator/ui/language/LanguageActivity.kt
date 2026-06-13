@@ -1,6 +1,7 @@
 package com.dragon.oc.avatar.creator.ui.language
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -136,7 +137,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             startIntentRightToLeft(IntroActivity::class.java)
             finishAffinity()
         } else {
-            startIntentWithClearTop(HomeActivity::class.java)
+            startActivity(
+                Intent(this, HomeActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                }
+            )
+            finish()
         }
     }
 

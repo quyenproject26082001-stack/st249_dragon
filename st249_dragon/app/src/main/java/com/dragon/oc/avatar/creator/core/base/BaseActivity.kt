@@ -1,6 +1,7 @@
 package com.dragon.oc.avatar.creator.core.base
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.Nullable
@@ -53,11 +54,13 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LanguageHelper.setLocale(this)
         _binding = setViewBinding()
         setContentView(binding.root)
         setUpUI()
+    }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageHelper.wrapContext(newBase))
     }
 
     private fun setUpUI() {

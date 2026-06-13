@@ -8,6 +8,18 @@ import java.util.Locale
 object LanguageHelper {
     private var myLocale: Locale? = null
 
+    fun wrapContext(context: Context): Context {
+        val language = SharePreferenceHelper(context).getPreLanguage()
+        if (language.isBlank()) return context
+
+        val locale = Locale.forLanguageTag(language)
+        Locale.setDefault(locale)
+
+        val configuration = Configuration(context.resources.configuration)
+        configuration.setLocale(locale)
+        return context.createConfigurationContext(configuration)
+    }
+
     fun setLocale(context: Context) {
         val language = SharePreferenceHelper(context).getPreLanguage()
         if (language.isEmpty()) {
@@ -23,7 +35,7 @@ object LanguageHelper {
 
     fun changeLang(lang: String, context: Context) {
         if (lang.equals("", ignoreCase = true)) return
-        myLocale = Locale(lang)
+        myLocale = Locale.forLanguageTag(lang)
         saveLocale(context, lang)
         Locale.setDefault(myLocale!!)
         val config = Configuration()

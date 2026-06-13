@@ -1,6 +1,7 @@
 package com.dragon.oc.avatar.creator.ui.edit
 
 import android.app.ActivityOptions
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -28,6 +29,7 @@ import com.dragon.oc.avatar.creator.core.extensions.setFont
 import com.dragon.oc.avatar.creator.core.extensions.tap
 import com.dragon.oc.avatar.creator.core.extensions.visible
 import com.dragon.oc.avatar.creator.core.helper.AssetHelper
+import com.dragon.oc.avatar.creator.core.helper.LanguageHelper
 import com.dragon.oc.avatar.creator.core.utils.DataLocal
 import com.dragon.oc.avatar.creator.core.helper.MediaHelper
 import com.dragon.oc.avatar.creator.core.utils.key.IntentKey
@@ -49,6 +51,10 @@ import java.util.Date
 import java.util.Locale
 
 class EditActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageHelper.wrapContext(newBase))
+    }
 
     private lateinit var binding: ActivityEditBinding
     private val bgImageAdapter by lazy { BackgroundImageAdapter().apply { showAddItem = false } }

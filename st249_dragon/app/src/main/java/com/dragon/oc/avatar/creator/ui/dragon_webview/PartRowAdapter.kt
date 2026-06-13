@@ -101,4 +101,12 @@ class PartRowAdapter(
         selectedValues.putAll(values)
         notifyDataSetChanged()
     }
+
+    fun resetSelections() {
+        selectedValues.clear()
+        currentList.forEach { row ->
+            selectedValues[row.partId] = row.options.firstOrNull()?.value.orEmpty()
+        }
+        notifyDataSetChanged()
+    }
 }
