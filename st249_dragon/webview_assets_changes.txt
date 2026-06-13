@@ -485,3 +485,18 @@ Lý do
 
 Kết quả mới
 - Reset đồng bộ cả preview JS và focus/viền selected của item native về `None` hoặc option đầu.
+23. Bổ sung mới nhất: Trending random trước lần render đầu
+
+Các file liên quan
+- `app/src/main/assets/builder.js`
+- `app/src/main/java/com/dragon/oc/avatar/creator/ui/trending/TrendingActivity.kt`
+
+Những gì đã thay đổi
+- Trending load WebView với query `?autoRandom=all`.
+- `builder.js` đọc query bằng `SHOULD_AUTO_RANDOM_ALL`.
+- Khi init, JS random trait và màu trực tiếp vào state trước `updatePreview()` đầu tiên.
+- `randomizeAll()` được tách thành thay đổi state trước rồi chỉ render một lần.
+
+Kết quả mới
+- Trending không còn render con rồng mặc định rồi mới random.
+- Vào màn chỉ cần một lần render con rồng random hoàn chỉnh.

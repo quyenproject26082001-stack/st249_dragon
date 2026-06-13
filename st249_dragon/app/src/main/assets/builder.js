@@ -2,6 +2,9 @@
 //  Dragon Builder — Game-style UI
 // ============================================================
 
+const SHOULD_AUTO_RANDOM_ALL =
+    new URLSearchParams(window.location.search).get('autoRandom') === 'all';
+
 const CONFIG = {
     BASE_URL: "assets/",
     CANVAS_SIZE: 1500,
@@ -167,6 +170,12 @@ async function init() {
         }
         STATE.data = data;
         setupDefaultSelections();
+
+        if (SHOULD_AUTO_RANDOM_ALL) {
+            randomizeTraitsStateOnly();
+            randomizeColorsStateOnly();
+        }
+
         setupTabs();
         setupButtons();
         renderPanel();
@@ -672,12 +681,29 @@ function recolorImage(img, color) {
 // ============================================================
 //  RANDOMIZE
 // ============================================================
-function randomizeTraits() {
+function randomizeTraitsStateOnly() {
     getEditablePartIds().forEach(id => {
         const opts = STATE.data.selects[id]?.options;
         if (!opts || opts.length === 0) return;
-        STATE.selections[id].style = opts[Math.floor(Math.random() * opts.length)].value;
+
+        STATE.selections[id].style =
+            opts[Math.floor(Math.random() * opts.length)].value;
     });
+}
+
+function randomizeColorsStateOnly() {
+    getEditableColorIds().forEach(colorId => {
+        if (!STATE.selections[colorId]) return;
+
+        STATE.selections[colorId].color =
+            '#' + Math.floor(Math.random() * 16777215)
+                .toString(16)
+                .padStart(6, '0');
+    });
+}
+
+function randomizeTraits() {
+    randomizeTraitsStateOnly();
     STATE.layers = {};
     renderPanel();
     centerSelectedThumbsInCurrentTab();
@@ -685,18 +711,19 @@ function randomizeTraits() {
 }
 
 function randomizeColors() {
-    getEditableColorIds().forEach(colorId => {
-        if (!STATE.selections[colorId]) return;
-        STATE.selections[colorId].color = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-    });
+    randomizeColorsStateOnly();
     STATE.layers = {};
     renderPanel();
     updatePreview();
 }
 
 function randomizeAll() {
-    randomizeTraits();
-    randomizeColors();
+    randomizeTraitsStateOnly();
+    randomizeColorsStateOnly();
+    STATE.layers = {};
+    renderPanel();
+    centerSelectedThumbsInCurrentTab();
+    updatePreview();
 }
 
 // ============================================================
