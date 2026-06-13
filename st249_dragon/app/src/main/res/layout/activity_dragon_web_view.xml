@@ -55,6 +55,8 @@
             android:gravity="center"
             app:outerStrokeWidth=".5dp"
             android:textSize="13sp"
+            android:id="@+id/tvRandomTraits"
+            style="@style/single_marquee"
             android:fontFamily="@font/copperplategothic_bold"
             app:outerStrokeColor="@color/app1"
             android:shadowColor="@color/app2"/>
@@ -81,7 +83,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             app:outerStrokeWidth=".5dp"
+            android:id="@+id/tvRandomColor"
             android:textSize="13sp"
+            style="@style/single_marquee"
             android:fontFamily="@font/copperplategothic_bold"
             app:outerStrokeColor="@color/app1"
             android:shadowColor="@color/app2"/>

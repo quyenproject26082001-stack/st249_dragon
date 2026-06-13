@@ -201,8 +201,8 @@ class DragonWebViewActivity : AppCompatActivity() {
         setupColorPicker()
         setupMoveControls()
         hideNavigation()
-
-
+        binding.tvRandomColor.isSelected = true
+        binding.tvRandomTraits.isSelected = true
     }
 
     fun dispatch(type: String, vararg params: Pair<String, String>) {

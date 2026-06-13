@@ -426,7 +426,6 @@ async function updatePreview() {
     UI.loading.classList.remove('hidden');
 
     const drawOrder = getDrawOrder();
-    UI.ctx.clearRect(0, 0, UI.canvas.width, UI.canvas.height);
 
     const layers = await Promise.all(
         drawOrder.map(async (l) => ({
@@ -449,6 +448,7 @@ async function updatePreview() {
     const offsetW = (UI.canvas.width  - assetW * scale) / 2;
     const offsetH = (UI.canvas.height - assetH * scale) / 2;
 
+    UI.ctx.clearRect(0, 0, UI.canvas.width, UI.canvas.height);
     UI.ctx.save();
     UI.ctx.translate(offsetW, offsetH);
     UI.ctx.scale(scale, scale);
