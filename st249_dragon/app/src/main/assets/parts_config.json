@@ -38,7 +38,7 @@
       {
         "partId": "snoutStyle",
         "label": "Snout Shape",
-        "colorId": "linesColor",
+        "colorId": "baseColor",
         "options": [
           { "value": "none", "label": "Short",       "thumb": null },
           { "value": "01",   "label": "Canine",      "thumb": "assets/Thumb/head/snouts/snout_01_lines.png" },
@@ -121,6 +121,7 @@
           { "value": "12",   "label": "Flappynubs",       "thumb": "assets/Thumb/head/ears/ear_12_front_lines.png" }
         ]
       },
+
       {
         "partId": "jawdecStyle",
         "label": "Jaw Decor",
@@ -329,7 +330,7 @@
       {
         "partId": "forelegStyleSelect",
         "label": "Forelegs",
-        "colorId": "linesColor",
+        "colorId": "baseColor",
         "options": [
           { "value": "none", "label": "No forelegs",         "thumb": null },
           { "value": "01",   "label": "Hand-paw",            "thumb": "assets/Thumb/legs/forelegs/foreleg_front_01_lines.png" },
@@ -343,7 +344,7 @@
       {
         "partId": "hindlegStyleSelect",
         "label": "Hindlegs",
-        "colorId": "linesColor",
+        "colorId": "baseColor",
         "options": [
           { "value": "none", "label": "No hindlegs",     "thumb": null },
           { "value": "01",   "label": "Toe-paw",         "thumb": "assets/Thumb/legs/hindlegs/hindleg_front_01_lines.png" },
